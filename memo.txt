@@ -1,0 +1,36 @@
+【ポートフォリオメモ】
+
+
+ $ cd OneDrive/デスクトップ/ポートフォリオ2023
+
+
+Sass ⇒CSSへの変換
+	$ sass --style expanded scss/test.scss:css/test.css
+	
+	※--style expandedを付けないと、読みにくいCSSになる。
+
+
+Scssに変更があったら、自動でCSSに反映させる
+	$ sass --style expanded --watch scss:css
+		
+		[Ctrl] + [C]で抜ける
+
+bashでCSSの中身を確認
+	$ less css/test.css
+
+
+デバッグ
+	例）@debug 変数名;
+		⇒コンパイル時に確認できる。
+			⇒こんな感じで表示される。scss/test.scss:7 DEBUG: 180px
+
+パーシャル
+	例）_setting.scss, _functions.scssなどのファイルに分け、
+		呼び出しは@import "settings";	   @import "functions";
+
+mixin
+	@mixinで定義し、@includeで呼び出し。引数を持たせられる。
+
+継承
+	@extend を使うと継承できる。
+	

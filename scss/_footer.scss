@@ -1,0 +1,71 @@
+.footer {
+    position: relative;
+    margin-top: min(110px, 6vw);
+    .circle_wrap {
+        width: $c_wrap + 5vw;
+        height: $c_wrap - 10vw;
+        max-width: 500px;
+        max-height: 500px;
+        position: absolute;
+        right: 0vw - 0vw;
+        top: -1 * $c_wrap + 10vw;
+        overflow: hidden;
+        .circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            border-radius: 50%;
+            opacity: .7;
+        }
+        .circle1{
+            width: $c_size;
+            height: $c_size;
+            border-top: $c_line_w1 solid $c_color_1;
+            border-left: $c_line_w1 solid $c_color_1;
+            position: absolute;
+            .circle2{
+                width: $c_size - $c_tline_w1;
+                height: $c_size - $c_tline_w1;
+                border-right: $c_line_w2 solid $c_color_2;
+                border-left: $c_line_w2 solid $c_color_2;
+                .circle3{
+                    width: $c_size - $c_tline_w2;
+                    height: $c_size - $c_tline_w2;
+                    border-left: $c_line_w3 solid $c_color_3;
+                    border-top: $c_line_w3 solid $c_color_3;
+                    border-bottom: $c_line_w3 solid $c_color_3;
+                    .circle4{
+                        width: $c_size - $c_tline_w3;
+                        height: $c_size - $c_tline_w3;
+                        border-top: $c_line_w4 solid $c_color_4;
+                        border-right: $c_line_w4 solid $c_color_4;
+                        border-bottom: $c_line_w4 solid $c_color_4;
+                        .circle5{
+                            width: $c_size - $c_tline_w4;
+                            height: $c_size - $c_tline_w4;
+                            border-left: $c_line_w5 solid $c_color_5;
+                            border-bottom: $c_line_w5 solid $c_color_5;
+                            .circle6{
+                                width: $c_size - $c_tline_w5;
+                                height: $c_size - $c_tline_w5;
+                                border-top: $c_line_w6 solid $c_color_6;
+                                border-right: $c_line_w6 solid $c_color_6;
+                                border-bottom: $c_line_w6 solid $c_color_6;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .copylight {
+        padding: 10px;
+        text-align: center;
+        font-size: 12px;
+        color: $second_color;
+        background-color: $second_bgcolor;
+    }
+}

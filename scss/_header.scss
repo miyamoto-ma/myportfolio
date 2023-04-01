@@ -1,0 +1,55 @@
+@import "settings";
+@import "functions";
+@import "animations";
+
+body {
+    font-family: $font1;
+}
+
+.header {
+    background-color: $main_bgcolor;
+    border-bottom: 4px solid $point_color1;
+    .header_wrap {
+        height: $h_btn_height;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 20px;
+        .h_title{
+            a{
+                display: flex;
+                align-items: center;
+                font-size: $h1_fs;
+                height: 100%;
+                transition: $normail_transition;
+                &:hover {
+                    opacity: $action_opa;
+                }
+                .icon {
+                    height: $h_btn_height * 0.8;
+                }
+                h1 {
+                    margin-left: 15px;
+                    font-family: $font1;
+                    font-style: italic;
+                }
+            }
+        }
+        .h_nav {
+            ul {
+                display: flex;
+                align-items: center;
+                gap: 0.5px;
+                justify-content: space-around;
+                li {
+                    display: block;
+                    height: $h_btn_height;
+                    line-height: $h_btn_height;
+                    font-size: $h_btn_fs;
+                    @extend .h_btn;
+                }
+            }
+        }
+    }
+}

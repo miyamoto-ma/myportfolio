@@ -1,0 +1,5 @@
+【後ですること】
+
+
+・ヘッダー、フッターをPHPで、別ファイルに切り出す
+	<?php include ( dirname(__FILE__).'/header.php'); ?>

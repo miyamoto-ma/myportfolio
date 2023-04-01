@@ -1,0 +1,56 @@
+@import "settings";
+
+// ヘッダーボタンとそのアニメ(transform)
+.h_btn {
+    a {
+        display: block;
+        height: $h_btn_height;
+        line-height: $h_btn_height;
+        padding: 0px 12px;
+        position: relative;
+        transition: all $h_btn_transition;
+        overflow: hidden;
+        z-index: 1;
+        &::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 200%;
+            background-color: $second_bgcolor;
+            border-radius: 100% 100% 0 0;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all $h_btn_transition;
+            z-index: -1;
+        }
+        &:hover,
+        &.active {
+            color: $second_color;
+        }
+        &:hover::before,
+        &.active::before {
+            top: -100%;
+        }
+        &:active {
+            opacity: $action_opa;
+        }
+    }
+}
+
+// サークルアニメーション
+@keyframes circle_anime {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.circle1, .circle3, .circle5 {
+    animation: circle_anime 20s linear infinite reverse;
+}
+.circle2, .circle4, .circle6 {
+    animation: circle_anime 30s linear infinite;
+}

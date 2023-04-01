@@ -1,0 +1,116 @@
+// フォントサイズ
+$h1_fs: 35px;
+$h2_fs: 40px;
+
+$fs_l: 25px;
+$fs_m: 20px;
+$fs_s: 15px;
+
+// フォント種類
+$font1: "Merriweather",
+        "Sawarabi Gothic",
+        "Noto Sans JP",
+        "Source Sans Pro",
+        sans-serif,
+        serif;
+
+// スライダーボタン
+$s_btn_size: 30px;
+
+
+
+// 幅・高さ
+$swrap_max_w: 1100px;
+
+$action_opa: .7;
+$normail_transition: .3s;
+
+// スペース
+$space_150: 150px;
+$space_100: 100px;
+$space_80: 80px;
+$space_50: 50px;
+
+// 背景色と文字色
+$main_bgcolor: #e2faf6;
+$main_color: #555;
+
+$second_bgcolor: #555;
+$second_color: white;
+
+$third_bgcolor: #ddd;
+
+// ポイントカラー
+$point_color1: #b6f9ee;
+$point_color2: #e2faf6;
+$point_color3: #88bcb3;
+$point_color4: #adeae0;
+
+$h_btn_height: 50px;
+$h_btn_fs: 20px;
+$h_btn_transition: .5s;
+
+// サークル用
+$c_wrap: 35vw;     // circle_wrapのサイズ
+$c_size: 60vw;    // 一番大きい円のサイズ
+$c_line_w: 3vw;     // ライン幅の基準
+$c_space_w: 5vw;    // スペース
+$c_line_w1: $c_line_w/4.5;
+$c_line_w2: $c_line_w/2;
+$c_line_w3: $c_line_w/6;
+$c_line_w4: $c_line_w/3;
+$c_line_w5: $c_line_w/1.5;
+$c_line_w6: $c_line_w/5;
+// ライン幅の合計値（外側から）
+$c_tline_w1: $c_line_w1 + $c_space_w/3;
+$c_tline_w2: $c_tline_w1 + $c_line_w2 + $c_space_w/2;
+$c_tline_w3: $c_tline_w2 + $c_line_w3 + $c_space_w/2;
+$c_tline_w4: $c_tline_w3 + $c_line_w4 + $c_space_w/1.5;
+$c_tline_w5: $c_tline_w4 + $c_line_w5 + $c_space_w/1.5;
+// $c_tline_w6: $c_tline_w5 + $c_line_w6 +$c_space_w/5;
+// ラインの色
+$c_color_1: #999;
+$c_color_2: #222;
+$c_color_3: #555;
+$c_color_4: #777;
+$c_color_5: #333;
+$c_color_6: #666;
+
+
+
+
+// 共通パーツ
+body {
+    color: $main_color;
+}
+// h2タイトル
+.section_title {
+    margin: $space_80 auto;
+    font-size: $h2_fs;
+    text-align: center;
+
+    p {
+        display: inline-block;
+        padding: 0 50px;
+        position: relative;
+        z-index: 1;
+
+        &::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 11px;
+            border-radius: 3px;
+            background-color: $point_color1;
+            position: absolute;
+            left: 50%;
+            bottom: -6px;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+    }
+}
+.wrap {
+    max-width: $swrap_max_w;
+    margin: 0 auto;
+}
