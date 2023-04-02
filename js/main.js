@@ -16,7 +16,7 @@ $(function () {
         prevArrow: '<button class="slick-prev"></button>',
         nextArrow: '<button class="slick-next"></button>',
         dots: true, // ドットインジケーター
-        slidesToShow: 3, // スライドの表示数
+        slidesToShow: 5, // スライドの表示数
         slidesToScroll: 1, // 一度にスライドする数
         centerMode: true, // センターモード
     });

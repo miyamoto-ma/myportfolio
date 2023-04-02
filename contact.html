@@ -33,11 +33,11 @@
     </header>
 
     <main class="main">
-        <section class="wrap">
+        <section class="wrap section">
 
             <h2 class="section_title"><p>Contact</p></h2>
-            <form action="#" method="post">
-                <div class="f_name">
+            <form class="c_form" action="#" method="post">
+                <div class="f_name f_item">
                     <label for="name">
                         お名前
                         <span class="required">必須</span>
@@ -45,7 +45,7 @@
                     <input type="text" class="name" name="name" maxlength="100" required>
                 </div>
 
-                <div class="f_kana">
+                <div class="f_kana f_item">
                     <label for="kana">
                         お名前(フリガナ)
                         <span class="required">必須</span>
@@ -53,14 +53,14 @@
                     <input type="text" class="kana" name="kana" maxlength="100" required>
                 </div>
 
-                <div class="f_company">
+                <div class="f_company f_item">
                     <label for="company">
                         貴社名
                     </label>
                     <input type="text" class="company" name="company" maxlength="100">
                 </div>
 
-                <div class="f_mail">
+                <div class="f_mail f_item">
                     <label for="mail">
                         メールアドレス
                         <span class="required">必須</span>
@@ -68,7 +68,7 @@
                     <input type="email" class="mail" name="mail" maxlength="100" required>
                 </div>
 
-                <div class="f_tel">
+                <div class="f_tel f_item">
                     <label for="tel">
                         電話番号
                         <span class="required">必須</span>
@@ -76,15 +76,18 @@
                     <input type="tel" class="tel" name="tel" maxlength="30" required>
                 </div>
 
-                <div class="f_contents">
+                <div class="f_contents f_item">
                     <label for="contents">
                         ご質問内容をご記入下さい(500文字以内)
                     </label>
                     <textarea name="contents" id="contents" cols="30" rows="10" maxlength="500"></textarea>
                 </div>
 
-                <button type="submit">送信</button>
-                <input type="reset" value="クリア">
+                <div class="btns">
+                    <button class="btn1 btn_anime_inout" type="submit">送信</button>
+                    <button class="btn1 btn_anime_inout" type="reset">クリア</button>
+                </div>
+
             </form>
         </section>
     </main>

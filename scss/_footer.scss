@@ -10,6 +10,7 @@
         right: 0vw - 0vw;
         top: -1 * $c_wrap + 10vw;
         overflow: hidden;
+        z-index: -1;
         .circle {
             display: flex;
             justify-content: center;

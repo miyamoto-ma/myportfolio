@@ -8,34 +8,40 @@
 .cube_img {
     width: 100%;
 }
-.section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+.over_text {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10%;
+        background-color: $forth_bgcolor;
+        color: $forth_color;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        opacity: 0;
+        p {
+            font-size: $fs_s;
+            line-height: $fs_s + 5px;
+        }
+    }
 }
 
-
-// Moreボタン
-.more_btn {
-    display: block;
-    width: 130px;
-    height: 50px;
-    line-height: 30px;
-    margin: 0 auto $space_50;
-    padding: 10px 20px;
-    box-shadow: 0 2px 1px 1.5px #88bcb3, inset 0 0 1px 0.5px #f4f9f8, inset 0 0 4px 2px #adeae0, inset 0 0 2px #88bcb3, inset 0 0 0.5px 1px #38524d;
-    border-radius: 5px;
-    font-size: $fs_m;
-    text-align: center;
-    background-color: $point_color1;
-    transition: opacity .3s;
-    &:hover {
-        opacity: .8;
+.h_btn{
+    margin: 0 auto 80px !important;
+    background-color: $point_color8 !important;
+    &::before,
+    &::after {
+        background-color: $point_color8 !important;
+        box-shadow: inset 0 0 $btn_w1/2 5px $point_color1, inset 0 0 $btn_w1/4 1px $point_color1, inset 0 0 $btn_w1/8 0px $point_color1;
     }
-    &:active {
-        box-shadow: 0 1px 0.5px 1px #88bcb3, inset 0 0 1px 0.5px #f4f9f8, inset 0 0 4px 2px #adeae0, inset 0 0 0.5px 1px #38524d;
-        transform: translateY(-1px);
-    }
-    text-shadow: -0.5px -0.5px 2px white, 0.5px 0.5px 2px #5a837c;
 }
 
 
@@ -113,6 +119,7 @@
     // blog
     .home_blog {
         .home_blog_wrap {
+            max-width: 100%;
             .home_blog {
                 margin: 0 auto $space_150;
                 position: relative;

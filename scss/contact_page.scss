@@ -1,2 +1,45 @@
 @import "header";
 @import "footer";
+
+.main {
+    .wrap{
+        .c_form {
+            padding: 80px 10%;
+            margin-bottom: 100px;
+            border-radius: 5px;
+            background-color: $point_color6;
+            color: $main_color;
+            box-sizing: border-box;
+            box-shadow: 0 0 5px 0px $point_color3, 0 0 10px 0 $point_color6;
+
+            .f_item {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+                label {
+                    margin-bottom: 10px;
+                    .required {
+                        margin-left: 10px;
+                        color: $point_color5;
+                    }
+                }
+                input, textarea {
+                    width: 70%;
+                    padding: 10px 15px;
+                    box-shadow: 0 0 4px 0px $point_color3, 0 0 10px 0 $point_color6;
+                    background-color: rgba(255,255,255,.7);
+                }
+                textarea {
+                    width: 100%;
+                }
+            }
+            .f_contents {
+                margin-top: 20px;
+            }
+            .btns{
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}

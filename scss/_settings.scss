@@ -32,7 +32,7 @@ $space_80: 80px;
 $space_50: 50px;
 
 // 背景色と文字色
-$main_bgcolor: #e2faf6;
+$main_bgcolor: rgba(226, 250, 246, .7);
 $main_color: #555;
 
 $second_bgcolor: #555;
@@ -40,11 +40,18 @@ $second_color: white;
 
 $third_bgcolor: #ddd;
 
+$forth_bgcolor: rgba(136, 188, 179, .85);
+$forth_color: #f0fcfa;
+
 // ポイントカラー
 $point_color1: #b6f9ee;
 $point_color2: #e2faf6;
 $point_color3: #88bcb3;
 $point_color4: #adeae0;
+$point_color5: #ee8383;
+$point_color6: rgba(226, 250, 246, .4);
+$point_color7: #38524d;
+$point_color8: rgba(226, 250, 246, .7);
 
 $h_btn_height: 50px;
 $h_btn_fs: 20px;
@@ -75,6 +82,11 @@ $c_color_3: #555;
 $c_color_4: #777;
 $c_color_5: #333;
 $c_color_6: #666;
+
+// ボタン
+$btn_w1: 130px;
+$btn_h1: 50px;
+
 
 
 
@@ -110,7 +122,70 @@ body {
         }
     }
 }
+.section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
 .wrap {
     max-width: $swrap_max_w;
     margin: 0 auto;
 }
+.btn {
+    display: block;
+    width: $btn_w1;
+    height: $btn_h1;
+    line-height: 30px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: $fs_m;
+    text-align: center;
+    user-select: none;
+    &:hover {
+        opacity: .8;
+    }
+    &:active {
+        transform: translateY(-1px);
+    }
+}
+.btn1 {
+    margin: $space_50 10px;
+    box-shadow: 0 0 8px 0 $point_color3;
+    background-color: $point_color1;
+    transition: opacity .3s;
+    text-shadow: -0.5px -0.5px 2px white,
+            0.5px 0.5px 2px $point_color3;
+    &:active {
+        box-shadow: 0 0 3px 0 $point_color3;
+    }
+}
+
+
+
+
+// // Moreボタン ボツ
+// .more_btn {
+//     display: block;
+//     width: 130px;
+//     height: 50px;
+//     line-height: 30px;
+//     margin: 0 auto $space_50;
+//     padding: 10px 20px;
+//     box-shadow: 0 2px 1px 1.5px #88bcb3, inset 0 0 1px 0.5px #f4f9f8, inset 0 0 4px 2px #adeae0, inset 0 0 2px #88bcb3, inset 0 0 0.5px 1px #38524d;
+//     border-radius: 5px;
+//     font-size: $fs_m;
+//     text-align: center;
+//     background-color: $point_color1;
+//     transition: opacity .3s;
+
+//     &:hover {
+//         opacity: .8;
+//     }
+
+//     &:active {
+//         box-shadow: 0 1px 0.5px 1px #88bcb3, inset 0 0 1px 0.5px #f4f9f8, inset 0 0 4px 2px #adeae0, inset 0 0 0.5px 1px #38524d;
+//         transform: translateY(-1px);
+//     }
+
+//     text-shadow: -0.5px -0.5px 2px white,
+//     0.5px 0.5px 2px #5a837c;
+// }
