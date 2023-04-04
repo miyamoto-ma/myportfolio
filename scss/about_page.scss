@@ -1,2 +1,47 @@
 @import "header";
 @import "footer";
+
+.about_content {
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.main {
+    font-size: $fs_m;
+    // 自己紹介
+    .about_1_wrap {
+        .about_1_content {
+            @extend .about_content;
+            .shadow{
+                width: 25%;
+                position: relative;
+                &::before {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    position: absolute;
+                    top:0;
+                    bottom:0;
+                    left:0;
+                    right:0;
+                    box-shadow: inset 0 0 5px 5px white;
+                }
+                img{
+                    width: 100%;
+                    border-radius: 50%;
+                }
+            }
+            p {
+                display: block;
+                width: 50%;
+                padding: 3%;
+                margin-left: 3%;
+                box-sizing: border-box;
+            }
+        }
+    }
+}
