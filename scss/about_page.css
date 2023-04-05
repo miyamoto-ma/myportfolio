@@ -311,7 +311,7 @@ body {
   background-color: #555;
 }
 
-.about_content, .main .about_1_wrap .about_1_content {
+.about_content, .main .about_2_wrap .about_2_content, .main .about_1_wrap .about_1_content {
   margin-bottom: 80px;
   display: flex;
   justify-content: center;
@@ -320,6 +320,9 @@ body {
 
 .main {
   font-size: 20px;
+}
+.main .about:last-child {
+  margin-bottom: 15vw;
 }
 .main .about_1_wrap .about_1_content .shadow {
   width: 25%;
@@ -348,5 +351,25 @@ body {
   padding: 3%;
   margin-left: 3%;
   box-sizing: border-box;
+}
+.main .about_2_wrap .about_2_content .skills {
+  display: block;
+  width: 45%;
+  margin-right: 3%;
+  box-sizing: border-box;
+}
+.main .about_2_wrap .about_2_content .skills li {
+  margin-bottom: 0.8em;
+}
+.main .about_2_wrap .about_2_content .skills li h3 {
+  font-size: 22px;
+  margin-bottom: 0.3em;
+}
+.main .about_2_wrap .about_2_content .skills li p {
+  margin-left: 1em;
+}
+.main .about_2_wrap .about_2_content .chart {
+  display: block;
+  width: 35%;
 }
 /*# sourceMappingURL=about_page.css.map */

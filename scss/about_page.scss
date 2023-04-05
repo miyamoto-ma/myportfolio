@@ -10,6 +10,9 @@
 
 .main {
     font-size: $fs_m;
+    .about:last-child{
+        margin-bottom: 15vw;
+    }
     // 自己紹介
     .about_1_wrap {
         .about_1_content {
@@ -44,4 +47,33 @@
             }
         }
     }
+
+    // スキル
+    .about_2_wrap {
+        .about_2_content {
+            @extend .about_content;
+            .skills {
+                display: block;
+                width: 45%;
+                // padding: 3%;
+                margin-right: 3%;
+                box-sizing: border-box;
+                li {
+                    margin-bottom: .8em;
+                    h3 {
+                        font-size: $fs_m + 2px;
+                        margin-bottom: .3em;
+                    }
+                    p {
+                        margin-left: 1em;
+                    }
+                }
+            }
+            .chart {
+                display: block;
+                width: 35%;
+            }
+        }
+    }
+
 }

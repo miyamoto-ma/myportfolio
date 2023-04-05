@@ -1,0 +1,29 @@
+@import "header";
+@import "footer";
+
+
+.main {
+    .works_section {
+        margin-bottom: 22vw;
+    }
+    .works_wrap {
+        .works {
+            display: flex;
+            flex-wrap: wrap;
+            .work{
+                width: 30%;
+                margin-bottom: min(55px, 4vw);
+                padding: 1%;
+                box-sizing: border-box;
+
+                &:nth-child(3n-1),
+                &:nth-child(3n) {
+                    margin-left: 5%;
+                }
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

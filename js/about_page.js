@@ -5,20 +5,20 @@ let myChart = new Chart(ctx, {
     type: 'radar',
     data: {
         //データの各項目のラベル(上から時計回り)
-        labels: ["国語", "数学", "英語", "理科", "社会"],
+        labels: ["HTML5 & CSS3", "JavaScript", "PHP", "Ruby", "Java", "SQL"],
         //データ設定
         datasets: [
             {
                 //グラフのデータ(上から時計回り)
-                data: [1,2,3,4,5],
+                data: [3.5,4,3.5,3,2.5,3],
                 //グラフ全体のラベル
-                label: "科目",
+                label: "Skills",
                 //背景色
-                backgroundColor: "rgba(255,0,0,0.5)",
+                backgroundColor: "rgba(247,249,182,0.5)",
                 //線の終端を四角にするか丸めるかの設定。デフォルトは四角(butt)。
                 borderCapStyle: "butt",
                 //線の色
-                borderColor: "rgba(255,255,0,1)",
+                borderColor: "rgba(200,200, 0,0.7)",
                 //線を破線にする
                 borderDash: [],
                 //破線のオフセット(基準点からの距離)
@@ -26,7 +26,7 @@ let myChart = new Chart(ctx, {
                 //線と線が交わる箇所のスタイル。初期値は'miter'
                 borderJoinStyle: 'miter',
                 //線の幅。ピクセル単位で指定。初期値は3。
-                borderWidth: 3,
+                borderWidth: 1,
                 //グラフを塗りつぶすかどうか。初期値はtrue。falseにすると枠線だけのグラフになります。
                 fill: true,
                 //複数のグラフを重ねて描画する際の重なりを設定する。z-indexみたいなもの。初期値は0。
@@ -41,20 +41,23 @@ let myChart = new Chart(ctx, {
             r: {
                 //グラフの最小値・最大値
                 min: 0,
-                max: 100,
+                max: 5,
+                ticks: {
+                    stepSize: 1
+                },
                 //背景色
-                backgroundColor: 'snow',
+                backgroundColor: 'rgba(226, 250, 246, 0.5)',
                 //グリッドライン
                 grid: {
-                color: 'pink',
+                    color: '#b6f9ee',
                 },
                 //アングルライン
                 angleLines: {
-                color: 'green',
+                    color: '#93c7be',
                 },
                 //各項目のラベル
                 pointLabels: {
-                color: 'blue',
+                    color: '#5d847d',
                 },
             },
         },
