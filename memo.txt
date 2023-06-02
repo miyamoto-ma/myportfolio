@@ -1,7 +1,21 @@
 【ポートフォリオメモ】
 
 
- $ cd OneDrive/デスクトップ/ポートフォリオ2023
+
+※現在、function.phpのデータベースの定数は以下のようになっている
+	define('DSN', 'mysql:host=' . $_SERVER['HTTP_HOST'] . ';dbname=myblog;charset=utf8mb4');
+		※$_SERVER['HTTP_HOST']は、ローカル環境では「localhost」が入っている。	
+
+	⇒本番環境に移行する際は、hostのアドレスを変更する必要が出るかも。。。
+
+
+
+
+ $ cd c:\xampp\htdocs\ポートフォリオ2023
+
+データベースの場所： cd C:\xampp\mysql\bin\
+	> mysql -u root -p	// パスワードは空白のままEnter
+
 
 
 Sass ⇒CSSへの変換

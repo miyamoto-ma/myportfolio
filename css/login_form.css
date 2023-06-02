@@ -281,65 +281,66 @@ body {
   background-color: #555;
 }
 
-.section {
-  padding-bottom: min(20vw, 300px);
-}
-
-.blogs .author {
-  display: block;
-  text-align: right;
-}
-.blogs .author a {
-  padding: 0.5em;
-  border-radius: 3px;
-  display: inline-block;
-  background-color: #555;
-  color: #ddd;
-  opacity: .6;
-  -o-transition: .3s all;
-  -moz-transition: .3s all;
-  -webkit-transition: .3s all;
-  transition: .3s all;
-}
-.blogs .author a:hover {
-  opacity: 0.8;
-}
-.blogs .blog {
+.form_wrap {
+  background-color: rgba(226, 250, 246, 0.6);
   max-width: 1000px;
-  margin: 50px auto 90px;
+  padding: 30px;
+  border-radius: 7px;
+  box-shadow: 0 0 8px 0 #88bcb3;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  -o-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-.blogs .blog .blog_wrap {
-  margin: 0 35px;
-}
-.blogs .blog .blog_title {
-  margin-bottom: 30px;
-  border-bottom: 2px solid #b6f9ee;
+.form_wrap .form_title {
+  margin: 0.5em 0 1.5em;
   font-size: 30px;
+  text-align: center;
 }
-.blogs .blog .blog_img {
-  max-width: 40%;
-}
-.blogs .blog .blog_img img {
-  width: 100%;
-}
-.blogs .blog .blog_content {
-  margin: 30px auto 10px;
+.form_wrap .form {
   font-size: 18px;
 }
-.blogs .blog .blog_etc {
+.form_wrap .form .input {
+  margin: 1em 0;
+}
+.form_wrap .form .input label {
+  display: block;
+  margin-bottom: 5px;
+}
+.form_wrap .form .input input,
+.form_wrap .form .input textarea {
+  width: 100%;
+  padding: .5em 1em;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 0 8px 0 #88bcb3;
+}
+.form_wrap .form .btns {
   display: flex;
-  justify-content: space-between;
 }
-.blogs .blog .blog_etc a {
-  margin-left: 1em;
-  color: #7daea6;
-  -o-transition: .3s all;
-  -moz-transition: .3s all;
-  -webkit-transition: .3s all;
-  transition: .3s all;
+.form_wrap .form .btns .btn, .form_wrap .form .btns .btn_anime_inout {
+  width: 120px;
+  height: 2.5em;
+  line-height: 2.5em;
+  margin: 20px 10px 40px;
+  padding: 0;
+  border-radius: 25px;
+  background-color: rgba(226, 250, 246, 0.7) !important;
 }
-.blogs .blog .blog_etc a:hover {
-  opacity: .7;
+.form_wrap .form .btns .btn:hover, .form_wrap .form .btns .btn_anime_inout:hover {
+  background-color: #fff;
+}
+.form_wrap .form .h_btn input, .form_wrap .form .header .header_wrap .h_nav ul li input, .header .header_wrap .h_nav ul .form_wrap .form li input {
+  width: 100%;
+  height: 100%;
+}
+.form_wrap .form .h_btn::before, .form_wrap .form .header .header_wrap .h_nav ul li::before, .header .header_wrap .h_nav ul .form_wrap .form li::before, .form_wrap .form .h_btn::after, .form_wrap .form .header .header_wrap .h_nav ul li::after, .header .header_wrap .h_nav ul .form_wrap .form li::after {
+  background-color: rgba(226, 250, 246, 0.7) !important;
+  box-shadow: inset 0 0 65px 5px #b6f9ee, inset 0 0 32.5px 1px #b6f9ee, inset 0 0 16.25px 0px #b6f9ee;
+  z-index: -1;
 }
 
-/*# sourceMappingURL=blog_page.css.map */
+/*# sourceMappingURL=login_form.css.map */
