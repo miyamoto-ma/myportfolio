@@ -106,13 +106,13 @@ if (filter_input(INPUT_GET, 'action') === 'add') {
                     <img id="new_img">
                 </div>
             </div>
-            <input type="hidden" name="token" value="<?php print $token; ?>">
+            <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
             <div class="btns">
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="submit" value="確認画面へ">
                 </div>
                 <div class="btn btn1 h_btn btn_anime_inout">
-                    <input type="reset" value="クリア">
+                    <input id="clear" type="reset" value="クリア">
                 </div>
             </div>
         </form>

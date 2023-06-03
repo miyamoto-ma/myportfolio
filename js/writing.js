@@ -46,13 +46,23 @@
      * ファイルを選択時にプレビューを表示する処理
     */
     let reader = new FileReader();
+    const preview = document.getElementById('new_img');
     reader.addEventListener('load', function () {
-        document.getElementById('new_img').src = reader.result;
+        preview.src = reader.result;
     }, false);
     input_file.addEventListener('change', function (e) {
         let input = input_file.files[0];
         reader.readAsDataURL(input);
     }, false);
+
+    /**
+     * 「クリア」ボタンをクリックで選択画像もクリアする
+     */
+    const clear = document.getElementById('clear');
+    clear.addEventListener('click', () => {
+        input_file.value = '';
+        preview.src = '';
+    });
 
 
     /**

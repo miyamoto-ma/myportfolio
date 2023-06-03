@@ -10,12 +10,13 @@
 
 
 
-
- $ cd c:\xampp\htdocs\ポートフォリオ2023
-
 データベースの場所： cd C:\xampp\mysql\bin\
 	> mysql -u root -p	// パスワードは空白のままEnter
 
+
+
+
+ $ cd c:\xampp\htdocs\ポートフォリオ2023
 
 
 Sass ⇒CSSへの変換
