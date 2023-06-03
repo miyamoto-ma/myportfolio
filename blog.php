@@ -1,5 +1,10 @@
 <?php
+require_once(__DIR__ . '/app/functions.php');
+session_start();
+
 // 投稿内容をデータベースから取得
+$pdo = getPDOInstance();
+$blogs = getBlogsAll($pdo);
 
 ?>
 
@@ -48,71 +53,29 @@
                 <div class="author">
                     <a href="./login.php">管理者用</a>
                 </div>
-                <!-- 投稿1件分（これを後ほどループする） -->
-                <div class="blog">
-                    <h3 class="blog_title">ブログタイトル</h3>
-                    <div class="blog_wrap">
-                        <div class="blog_img">
-                            <img src="./img/ajisai.jpg">
-                        </div>
-                        <div class="blog_content">
-                            投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文
-                        </div>
-                        <div class="blog_etc">
-                            <p class="date">2023/05/29 00:00:00</p>
-                            <!-- ログインしていたら表示 -->
-                            <div class="authorOnly">
-                                <a class="edit" href="">編集</a>
-                                <a class="delete" href="">削除</a>
+
+                <?php foreach ($blogs as $blog) : ?>
+                    <div class="blog">
+                        <h3 class="blog_title"><?= $blog["title"]; ?></h3>
+                        <div class="blog_wrap">
+                            <div class="blog_img">
+                                <img src="./upload/<?= $blog["img"]; ?>">
+                            </div>
+                            <div class="blog_content">
+                                <?= $blog["text"]; ?>
+                            </div>
+                            <div class="blog_etc">
+                                <p class="date"><?= $blog["create_time"]; ?></p>
+                                <?php if ($_SESSION['loginUserId'] === $blog['user_id']) : ?>
+                                    <div class="authorOnly" data-user="<?= $blog["user_id"]; ?>" data-blog="<?= $blog["id"]; ?>">
+                                        <a class="edit" href="">編集</a>
+                                        <a class="delete" href="">削除</a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- 繰り返しダミー -->
-                <div class="blog">
-                    <h3 class="blog_title">ブログタイトル2</h3>
-                    <div class="blog_wrap">
-                        <div class="blog_img">
-                            <img src="./img/ajisai2.jpg">
-                        </div>
-                        <div class="blog_content">
-                            投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文
-                        </div>
-                        <div class="blog_etc">
-                            <p class="date">2023/05/29 00:00:00</p>
-                            <!-- ログインしていたら表示 -->
-                            <div class="authorOnly">
-                                <a class="edit" href="">編集</a>
-                                <a class="delete" href="">削除</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- 繰り返しダミー2 -->
-                <div class="blog">
-                    <h3 class="blog_title">ブログタイトル3</h3>
-                    <div class="blog_wrap">
-                        <div class="blog_img">
-                            <img src="">
-                        </div>
-                        <div class="blog_content">
-                            投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文投稿本文
-                        </div>
-                        <div class="blog_etc">
-                            <p class="date">2023/05/29 00:00:00</p>
-                            <!-- ログインしていたら表示 -->
-                            <div class="authorOnly">
-                                <a class="edit" href="">編集</a>
-                                <a class="delete" href="">削除</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+                <?php endforeach; ?>
             </div>
         </section>
     </main>

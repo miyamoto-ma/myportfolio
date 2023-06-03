@@ -99,7 +99,7 @@ function getAccount($pdo, $name, $pass)
 // ブログの投稿
 function addBlog($pdo, $user_id, $title, $text, $img, $create_time)
 {
-    $sql = "INSERT INTO BLOGS (USER_ID, TITLE, TEXT, IMG, CREATE_TIME) VALUES (:user_id, :title, :text, :img, :create_time)";
+    $sql = "INSERT INTO BLOGS (user_id, title, text, img, create_time) VALUES (:user_id, :title, :text, :img, :create_time)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue('user_id', $user_id, PDO::PARAM_INT);
     $stmt->bindValue('title', $title, PDO::PARAM_STR);
@@ -108,4 +108,15 @@ function addBlog($pdo, $user_id, $title, $text, $img, $create_time)
     $stmt->bindValue('create_time', $create_time, PDO::PARAM_STR);
     $stmt->execute();
     return (int)$pdo->lastInsertId();
+}
+
+
+// ブログのすべて取得する
+function getBlogsAll($pdo)
+{
+    $sql = "SELECT id, user_id, title, text, img, create_time FROM BLOGS";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $blogs;
 }
