@@ -3,18 +3,30 @@ require_once(__DIR__ . '/app/functions.php');
 createToken();
 
 // ログインされていなければログイン画面へ
-if (!isset($_SESSION['loginUser'])) {
+if (!isset($_SESSION['loginUserId'])) {
     print 'ログインされていません<br>';
     print '<a href="login.php">ログイン画面へ</a>';
     exit();
 }
 
-if (filter_input(INPUT_GET, 'action') === 'add') {
+if (filter_input(INPUT_GET, 'action') === 'confirm') {
     // フォームデータを取得
     $title = h($_POST['title']);
     $text = h($_POST['text']);
-    $img = h($_POST['img']);
-
+    $img = '';
+    if (isset($_FILES['img'])) {
+        $filename = $_FILES['img']['name'];
+        $upload_path = './upload/' . $filename;
+        $upload_result = move_uploaded_file($_FILES['img']['tmp_name'], $upload_path);
+        if ($upload_result) {
+            $img = h($filename);
+        } else {
+            print '画像のアップロードに失敗しました。<br>';
+            print
+                '<a href="writing.php">投稿画面へ</a>';
+            exit();
+        }
+    }
 
     // バリデート
     $title_result = validateTitle($title);
@@ -30,30 +42,10 @@ if (filter_input(INPUT_GET, 'action') === 'add') {
         print '<a href="writing.php">投稿画面へ</a>';
         exit();
     }
-    // ユーザーIDを取得
-    $user_id = $_SESSION['loginUserId'];
-    // 現在時刻の取得
-    $create_time = date('Y-m-d H:i:s');
-    // PDOインスタンス取得
-    $pdo = getPDOInstance();
 
-    // ブログ投稿処理（失敗なら0）
-    $blog_id = addBlog($pdo, $user_id, $title, $text, $img, $create_time);
-    if ($blog_id == 0) {
-        print 'ブログ投稿処理に失敗しました。<br>';
-        print '<a href="writing.php">投稿画面へ</a>';
-        exit();
-    }
-
-    // セッションに追加したブログデータを格納
-    $blog = [
-        'user_id' => $user_id,
-        'title' => $title,
-        'text' => $text,
-        'img' => $img,
-        'create_time' => $create_time,
-    ];
-    $_SESSION['blog'] = $blog;
+    $_SESSION['title'] = $title;
+    $_SESSION['text'] = $text;
+    $_SESSION['img'] = $img;
     header('Location: confirm.php');
     exit();
 }
@@ -81,7 +73,7 @@ if (filter_input(INPUT_GET, 'action') === 'add') {
             <p>ようこそ<?= $_SESSION['loginUserName']; ?>さん</p>
             <a href="./blog.php">ブログ一覧へ</a>
         </div>
-        <form class="form" action="?action=add" method="post">
+        <form class="form" action="?action=confirm" method="post" enctype="multipart/form-data">
             <div class="input">
                 <label for="title">
                     <p>タイトル(100文字以内)：</p>
