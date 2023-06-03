@@ -316,16 +316,19 @@ body {
 }
 
 .blogs .author {
-  display: block;
-  text-align: right;
+  display: flex;
+  justify-content: right;
+  align-items: baseline;
 }
 .blogs .author a {
+  margin-left: 1em;
   padding: 0.5em;
   border-radius: 3px;
   display: inline-block;
   background-color: #555;
   color: #ddd;
   opacity: 0.6;
+  cursor: pointer;
   transition: 0.3s all;
 }
 .blogs .author a:hover {
@@ -350,7 +353,7 @@ body {
   width: 100%;
 }
 .blogs .blog .blog_content {
-  margin: 30px auto 10px;
+  margin: 1.5em auto 2.5em;
   font-size: 18px;
 }
 .blogs .blog .blog_etc {

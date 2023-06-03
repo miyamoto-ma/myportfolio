@@ -6,15 +6,18 @@
 }
 .blogs{
     .author {
-        display: block;
-        text-align: right;
+        display: flex;
+        justify-content: right;
+        align-items: baseline;
         a {
+            margin-left: 1em;
             padding: 0.5em;
             border-radius: 3px;
             display: inline-block;
             background-color: #555;
             color:#ddd;
             opacity: .6;
+            cursor: pointer;
             -o-transition: .3s all;
             -moz-transition: .3s all;
             -webkit-transition: .3s all;
@@ -43,7 +46,7 @@
             }
         }
         .blog_content {
-            margin: 30px auto 10px;
+            margin: 1.5em auto 2.5em;
             font-size: 18px;
         }
         .blog_etc {

@@ -92,7 +92,9 @@ function getAccount($pdo, $name, $pass)
     $stmt->bindValue('pass', $pass, PDO::PARAM_STR);
     $stmt->execute();
     $id_array = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $id_array['id'];
+    if (!empty($id_array)) {
+        return $id_array['id'];
+    }
 }
 
 
@@ -114,7 +116,7 @@ function addBlog($pdo, $user_id, $title, $text, $img, $create_time)
 // ブログのすべて取得する
 function getBlogsAll($pdo)
 {
-    $sql = "SELECT id, user_id, title, text, img, create_time FROM BLOGS";
+    $sql = "SELECT id, user_id, title, text, img, create_time FROM BLOGS ORDER BY id DESC";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -327,6 +327,9 @@ body {
   font-size: 30px;
   text-align: center;
 }
+.form_wrap .logout {
+  text-align: right;
+}
 .form_wrap .form {
   font-size: 18px;
 }

@@ -6,6 +6,12 @@ session_start();
 $pdo = getPDOInstance();
 $blogs = getBlogsAll($pdo);
 
+// ログアウト処理
+$logout_result = false;
+if (filter_input(INPUT_GET, 'action') === 'logout') {
+    $logout_result = session_destroy();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +57,15 @@ $blogs = getBlogsAll($pdo);
                     <p>Blog</p>
                 </h2>
                 <div class="author">
-                    <a href="./login.php">管理者用</a>
+                    <?php if ($logout_result) : ?>
+                        <p>ログアウトしました。</p>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['loginUserId']) && $logout_result === false) : ?>
+                        <a href="writing.php">投稿</a>
+                        <a href="?action=logout">ログアウト</a>
+                    <?php else : ?>
+                        <a href="./login.php">管理者用</a>
+                    <?php endif; ?>
                 </div>
 
                 <?php foreach ($blogs as $blog) : ?>
@@ -66,7 +80,7 @@ $blogs = getBlogsAll($pdo);
                             </div>
                             <div class="blog_etc">
                                 <p class="date"><?= $blog["create_time"]; ?></p>
-                                <?php if ($_SESSION['loginUserId'] === $blog['user_id']) : ?>
+                                <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $blog['user_id']) : ?>
                                     <div class="authorOnly" data-user="<?= $blog["user_id"]; ?>" data-blog="<?= $blog["id"]; ?>">
                                         <a class="edit" href="">編集</a>
                                         <a class="delete" href="">削除</a>
