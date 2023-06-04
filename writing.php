@@ -14,7 +14,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
     $title = h($_POST['title']);
     $text = h($_POST['text']);
     $img = '';
-    if (isset($_FILES['img'])) {
+    if (mb_strlen($_FILES['img']['name']) > 0) {
         $filename = $_FILES['img']['name'];
         $upload_path = './upload/' . $filename;
         $upload_result = move_uploaded_file($_FILES['img']['tmp_name'], $upload_path);

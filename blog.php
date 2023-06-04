@@ -1,17 +1,41 @@
 <?php
 require_once(__DIR__ . '/app/functions.php');
 session_start();
-
-// 投稿内容をデータベースから取得
 $pdo = getPDOInstance();
-$blogs = getBlogsAll($pdo);
 
 // ログアウト処理
 $logout_result = false;
-if (filter_input(INPUT_GET, 'action') === 'logout') {
-    $logout_result = session_destroy();
+if (filter_input(INPUT_GET, 'action') !== null) {
+    switch (filter_input(INPUT_GET, 'action')) {
+        case 'edit':
+            // $id = filter_input(INPUT_GET, 'blogId');
+            // $userId = getBlogUserId($pdo, $id);
+            // $loginUserId = $_SESSION['loginUserId'];
+            // if ($userId === $loginUserId) {
+
+            // }
+            break;
+        case 'delete':
+            $id = filter_input(INPUT_GET, 'blogId');
+            $userId = getBlogUserId($pdo, $id);
+            $loginUserId = $_SESSION['loginUserId'];
+            if ($userId === $loginUserId) {
+                $del_result = deleteBlog($pdo, $id);
+                if (!$del_result) {
+                    $err_del = '※ブログの削除に失敗しました。';
+                }
+            }
+            break;
+        case 'logout':
+            $logout_result = session_destroy();
+            break;
+        default:
+            exit;
+    }
 }
 
+// 投稿内容をデータベースから取得
+$blogs = getBlogsAll($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -72,18 +96,25 @@ if (filter_input(INPUT_GET, 'action') === 'logout') {
                     <div class="blog">
                         <h3 class="blog_title"><?= $blog["title"]; ?></h3>
                         <div class="blog_wrap">
-                            <div class="blog_img">
-                                <img src="./upload/<?= $blog["img"]; ?>">
-                            </div>
+                            <?php if (!empty($blog["img"])) : ?>
+                                <div class="blog_img">
+                                    <img src="./upload/<?= $blog["img"]; ?>">
+                                </div>
+                            <?php endif; ?>
                             <div class="blog_content">
                                 <?= $blog["text"]; ?>
                             </div>
                             <div class="blog_etc">
                                 <p class="date"><?= $blog["create_time"]; ?></p>
                                 <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $blog['user_id']) : ?>
-                                    <div class="authorOnly" data-user="<?= $blog["user_id"]; ?>" data-blog="<?= $blog["id"]; ?>">
-                                        <a class="edit" href="">編集</a>
-                                        <a class="delete" href="">削除</a>
+                                    <div class="auth_btns" data-blog="<?= $blog['id']; ?>">
+                                        <?php if (isset($err_del)) : ?>
+                                            <span><?= $err_del; ?></span>;
+                                        <?php endif; ?>
+                                        <span class="edit auth_btn">編集</span>
+                                        <span class="delete auth_btn">削除</span>
+                                        <!-- <a class="edit" href="?action=edit">編集</a>
+                                        <a class="delete" href="?action=delete">削除</a> -->
                                     </div>
                                 <?php endif; ?>
                             </div>

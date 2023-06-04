@@ -315,7 +315,7 @@ body {
   margin: 0 35px;
 }
 .blogs .blog .blog_title {
-  margin-bottom: 30px;
+  margin-bottom: 1em;
   border-bottom: 2px solid #b6f9ee;
   font-size: 30px;
 }
@@ -333,15 +333,16 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.blogs .blog .blog_etc a {
+.blogs .blog .blog_etc .auth_btn {
   margin-left: 1em;
   color: #7daea6;
   -o-transition: .3s all;
   -moz-transition: .3s all;
   -webkit-transition: .3s all;
   transition: .3s all;
+  cursor: pointer;
 }
-.blogs .blog .blog_etc a:hover {
+.blogs .blog .blog_etc .auth_btn:hover {
   opacity: .7;
 }
 

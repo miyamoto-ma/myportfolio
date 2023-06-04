@@ -97,6 +97,28 @@ function getAccount($pdo, $name, $pass)
     }
 }
 
+// ブログのすべて取得する
+function getBlogsAll($pdo)
+{
+    $sql = "SELECT id, user_id, title, text, img, create_time FROM BLOGS ORDER BY id DESC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $blogs;
+}
+
+// ブログの1件分のユーザーIDを取得
+function getBlogUserId($pdo, $id)
+{
+    $sql = "SELECT user_id FROM BLOGS WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue('id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $userId_arr = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!empty($userId_arr)) {
+        return $userId_arr['user_id'];
+    }
+}
 
 // ブログの投稿
 function addBlog($pdo, $user_id, $title, $text, $img, $create_time)
@@ -112,13 +134,25 @@ function addBlog($pdo, $user_id, $title, $text, $img, $create_time)
     return (int)$pdo->lastInsertId();
 }
 
-
-// ブログのすべて取得する
-function getBlogsAll($pdo)
+// ブログの編集
+function editBlog($pdo, $id, $title, $text, $img)
 {
-    $sql = "SELECT id, user_id, title, text, img, create_time FROM BLOGS ORDER BY id DESC";
+    $sql = "UPDATE BLOGS SET title = :title, text = :text, img = :img WHERE id = :id";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $blogs;
+    $stmt->bindValue('title', $title, PDO::PARAM_STR);
+    $stmt->bindValue('text', $text, PDO::PARAM_STR);
+    $stmt->bindValue('img', $img, PDO::PARAM_STR);
+    $stmt->bindValue('id', $id, PDO::PARAM_INT);
+    $result = $stmt->execute();
+    return $result;
+}
+
+// ブログの削除
+function deleteBlog($pdo, $id)
+{
+    $sql = "DELETE FROM BLOGS WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue('id', $id, PDO::PARAM_INT);
+    $result = $stmt->execute();
+    return $result;
 }

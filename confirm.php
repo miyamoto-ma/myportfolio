@@ -64,9 +64,11 @@ if (filter_input(INPUT_GET, 'action') === 'add') {
             <div class="title">
                 <p><?= $title; ?></p>
             </div>
-            <div class="preview">
-                <img id="new_img" src="./upload/<?= $img; ?>">
-            </div>
+            <?php if (!empty($img)) : ?>
+                <div class="preview">
+                    <img id="new_img" src="./upload/<?= $img; ?>">
+                </div>
+            <?php endif; ?>
             <div class="text">
                 <p><?= $text; ?></p>
             </div>
