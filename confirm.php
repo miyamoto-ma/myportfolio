@@ -1,39 +1,83 @@
 <?php
 require_once(__DIR__ . '/app/functions.php');
+require_once(__DIR__ . '/app/blogClass.php');
 createToken();
 
 // ログインされていなければログイン画面へ
 if (!isset($_SESSION['loginUserId'])) {
-    print 'ログインされていません';
+    print 'ログインされていません。<br>';
     print '<a href="login.php">ログイン画面へ</a>';
     exit();
 }
+
+// 戻るボタンのhref
+$back_url = '';
+$action = '';
+if (filter_input(INPUT_GET, 'from') === 'writing') {
+    $back_url = 'writing.php';
+    $action = 'add';
+} elseif (filter_input(INPUT_GET, 'from') === 'edit') {
+    $back_url = 'edit.php?action=edit&blogId=' . $_SESSION['blog']->id;
+    $action = 'update';
+}
+
+// セッションにblogがセットされていない場合
+if (!isset($_SESSION['blog'])) {
+    print 'ブログ情報が取得できませんでした。<br>';
+    print '<a href="' . $back_url . '">戻る</a>';
+}
+
 // ユーザー名を取得
 $name = $_SESSION['loginUserName'];
 
 // ユーザーIDを取得
 $user_id = $_SESSION['loginUserId'];
-// 現在時刻の取得
-$create_time = date('Y-m-d H:i:s');
 // PDOインスタンス取得
 $pdo = getPDOInstance();
-
+// ブログIDを取得
+if (filter_input(INPUT_GET, 'from') === 'edit' || filter_input(INPUT_GET, 'action') === 'update') {
+    $id = $_SESSION['blog']->id;
+}
 // 投稿タイトルを取得
-$title = $_SESSION['title'];
+$title = $_SESSION['blog']->title;
 // 投稿内容を取得
-$text = $_SESSION['text'];
+$text = $_SESSION['blog']->text;
 // 投稿画像を取得
-$img = $_SESSION['img'];
+$img = '';
+if (filter_input(INPUT_GET, 'from') === 'writing' || filter_input(INPUT_GET, 'action') === 'add') {
+    $img = $_SESSION['blog']->img;
+} elseif (filter_input(INPUT_GET, 'from') === 'edit' || filter_input(INPUT_GET, 'action') === 'update') {
+    if ($_SESSION['check']) {
+        $img = $_SESSION['blog']->new_img;
+    } elseif (mb_strlen($_SESSION['blog']->img) > 0) {
+        $img = $_SESSION['blog']->img;
+    }
+}
+// 投稿日時を取得
+$create_time = $_SESSION['blog']->create_time;
 
-if (filter_input(INPUT_GET, 'action') === 'add') {
-    // ブログ投稿処理（失敗なら0）
-    $blog_id = addBlog($pdo, $user_id, $title, $text, $img, $create_time);
-    if ($blog_id == 0) {
-        print 'ブログ投稿処理に失敗しました。<br>';
-        print '<a href="writing.php">投稿画面へ</a>';
+
+if (filter_input(INPUT_GET, 'action') !== null) {
+    validateToken();
+    switch (filter_input(INPUT_GET, 'action')) {
+        case 'add':
+            // ブログ投稿処理（失敗なら0）
+            $act_result = addBlog($pdo, $user_id, $title, $text, $img, $create_time);
+            break;
+        case 'update':
+            // ブログ更新処理（失敗ならfalse)
+            $act_result = editBlog($pdo, $id, $title, $text, $img);
+            unset($_SESSION['check']);
+            break;
+        default:
+            exit;
+    }
+    if (!$act_result) {
+        print 'ブログ投稿/更新処理に失敗しました。<br>';
+        print '<a href="' . $back_url . '">戻る</a>';
         exit();
     }
-
+    unset($_SESSION['blog']);
     header('Location: blog.php');
     exit();
 }
@@ -60,7 +104,7 @@ if (filter_input(INPUT_GET, 'action') === 'add') {
             <p>ようこそ<?= $name; ?>さん</p>
             <a href="./blog.php">ブログ一覧へ</a>
         </div>
-        <form class="form" action="?action=add" method="post">
+        <form class="form" action="?action=<?= $action; ?>" method="post">
             <div class="title">
                 <p><?= $title; ?></p>
             </div>
@@ -75,12 +119,12 @@ if (filter_input(INPUT_GET, 'action') === 'add') {
             <div class="create_time">
                 <p><?= $create_time; ?></p>
             </div>
-            <input type="hidden" value="<?= h($_SESSION['token']); ?>">
+            <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
             <div class="btns">
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="submit" name="submit" value="投稿">
                 </div>
-                <a class="btn btn1 h_btn btn_anime_inout" href="writing.php">戻る</a>
+                <a class="btn btn1 h_btn btn_anime_inout" href="<?= $back_url; ?>">戻る</a>
         </form>
     </div>
 </body>

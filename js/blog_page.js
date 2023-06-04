@@ -6,7 +6,7 @@
     edits.forEach(edit => {
         edit.addEventListener('click', e => {
             let blogId = e.target.parentNode.dataset.blog;
-            location.href = '?action=edit&blogId=' + blogId;
+            location.href = 'edit.php?action=edit&blogId=' + blogId;
         });
     });
 

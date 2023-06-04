@@ -29,6 +29,15 @@
 .img input {
   margin: 0.5em auto 1em 2em;
 }
+.img .check {
+  display: block;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+.img .check input {
+  margin: 0.5em auto 0.5em 2em;
+  vertical-align: revert;
+}
 
 .btns {
   justify-content: center;
@@ -38,10 +47,17 @@
   width: 140px !important;
 }
 
-.preview .new_preview {
-  width: 40%;
+.preview {
+  display: flex;
+  justify-content: left;
 }
-.preview .new_preview img {
+.preview div {
+  width: 40%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.preview div img {
   width: 100%;
   margin: 0.5em 0.5em 1.5em;
 }

@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/app/functions.php');
+require_once(__DIR__ . '/app/blogClass.php');
 createToken();
 
 // ログインされていなければログイン画面へ
@@ -10,6 +11,7 @@ if (!isset($_SESSION['loginUserId'])) {
 }
 
 if (filter_input(INPUT_GET, 'action') === 'confirm') {
+    validateToken();
     // フォームデータを取得
     $title = h($_POST['title']);
     $text = h($_POST['text']);
@@ -42,11 +44,10 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
         print '<a href="writing.php">投稿画面へ</a>';
         exit();
     }
-
-    $_SESSION['title'] = $title;
-    $_SESSION['text'] = $text;
-    $_SESSION['img'] = $img;
-    header('Location: confirm.php');
+    $create_time = date('Y-m-d H:i:s');
+    $blog = new blogClass($title, $text, $img, $create_time);
+    $_SESSION['blog'] = $blog;
+    header('Location: confirm.php?from=writing');
     exit();
 }
 
@@ -79,14 +80,14 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <p>タイトル(100文字以内)：</p>
                     <p><span id="char_title">0</span>/100</p>
                 </label>
-                <input id="title" type="text" name="title" maxlength="100" required>
+                <input id="title" type="text" name="title" maxlength="100" required value="<?= isset($_SESSION['blog']) ? $_SESSION['blog']->title : ''; ?>">
             </div>
             <div class="input">
                 <label for="text">
                     <p>内容(400文字以内)：</p>
                     <p><span id="char_text">0</span>/400</p>
                 </label>
-                <textarea id="text" name="text" maxlength="400" required></textarea>
+                <textarea id="text" name="text" maxlength="400" required><?= isset($_SESSION['blog']) ? $_SESSION['blog']->text : ''; ?></textarea>
             </div>
             <div class="img">
                 <span class="img_span">画像(任意)<span class="img_ctn">(.jpg, .jpeg, .gif画像のみ(1MB以内))</span>：</span>

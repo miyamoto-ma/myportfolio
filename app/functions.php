@@ -107,7 +107,7 @@ function getBlogsAll($pdo)
     return $blogs;
 }
 
-// ブログの1件分のユーザーIDを取得
+// ブログ1件分のユーザーIDを取得
 function getBlogUserId($pdo, $id)
 {
     $sql = "SELECT user_id FROM BLOGS WHERE id = :id";
@@ -118,6 +118,17 @@ function getBlogUserId($pdo, $id)
     if (!empty($userId_arr)) {
         return $userId_arr['user_id'];
     }
+}
+
+// ブログ1件分の情報を取得
+function getBlog($pdo, $id)
+{
+    $sql = "SELECT id, user_id, title, text, img, create_time FROM BLOGS WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue('id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $blog_arr = $stmt->fetch(PDO::FETCH_OBJ);
+    return $blog_arr;
 }
 
 // ブログの投稿
@@ -134,7 +145,7 @@ function addBlog($pdo, $user_id, $title, $text, $img, $create_time)
     return (int)$pdo->lastInsertId();
 }
 
-// ブログの編集
+// ブログの更新
 function editBlog($pdo, $id, $title, $text, $img)
 {
     $sql = "UPDATE BLOGS SET title = :title, text = :text, img = :img WHERE id = :id";

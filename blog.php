@@ -2,19 +2,12 @@
 require_once(__DIR__ . '/app/functions.php');
 session_start();
 $pdo = getPDOInstance();
+unset($_SESSION['blog']);
 
 // ログアウト処理
 $logout_result = false;
 if (filter_input(INPUT_GET, 'action') !== null) {
     switch (filter_input(INPUT_GET, 'action')) {
-        case 'edit':
-            // $id = filter_input(INPUT_GET, 'blogId');
-            // $userId = getBlogUserId($pdo, $id);
-            // $loginUserId = $_SESSION['loginUserId'];
-            // if ($userId === $loginUserId) {
-
-            // }
-            break;
         case 'delete':
             $id = filter_input(INPUT_GET, 'blogId');
             $userId = getBlogUserId($pdo, $id);
