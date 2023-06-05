@@ -1,30 +1,59 @@
 <?php
 require_once(__DIR__ . '/app/functions.php');
-session_start();
+createToken();
 $pdo = getPDOInstance();
 unset($_SESSION['blog']);
 
-// ログアウト処理
+
 $logout_result = false;
+// if (filter_input(INPUT_GET, 'action') !== null) {
+//     switch (filter_input(INPUT_GET, 'action')) {
+//         case 'delete':
+//             // ブログ1件分の削除処理
+//             $id = filter_input(INPUT_GET, 'blogId');
+//             $userId = getBlogUserId($pdo, $id);
+//             $loginUserId = $_SESSION['loginUserId'];
+//             if ($userId === $loginUserId) {
+//                 $del_result = deleteBlog($pdo, $id);
+//                 if (!$del_result) {
+//                     $err_del = '※ブログの削除に失敗しました。';
+//                 }
+//             }
+//             break;
+//         case 'logout':
+//             // ログアウト処理
+//             $logout_result = session_destroy();
+//             break;
+//         default:
+//             exit;
+//     }
+// }
 if (filter_input(INPUT_GET, 'action') !== null) {
     switch (filter_input(INPUT_GET, 'action')) {
         case 'delete':
-            $id = filter_input(INPUT_GET, 'blogId');
+            validateToken();
+            // ブログ1件分の削除処理
+            $id = filter_input(INPUT_POST, 'blogId');
             $userId = getBlogUserId($pdo, $id);
             $loginUserId = $_SESSION['loginUserId'];
+            header('Content-Type: application/json');
             if ($userId === $loginUserId) {
                 $del_result = deleteBlog($pdo, $id);
-                if (!$del_result) {
-                    $err_del = '※ブログの削除に失敗しました。';
+                if ($del_result) {
+                    echo json_encode(['res' => 'OK']);
+                } else {
+                    echo json_encode(['res' => '※ブログの削除に失敗しました。']);
                 }
             }
             break;
         case 'logout':
+            // ログアウト処理
             $logout_result = session_destroy();
             break;
         default:
             exit;
     }
+    exit;
 }
 
 // 投稿内容をデータベースから取得
@@ -67,7 +96,7 @@ $blogs = getBlogsAll($pdo);
         </div>
     </header>
 
-    <main>
+    <main data-token="<?= h($_SESSION['token']); ?>">
         <section class="section">
             <div class="blogs wrap">
                 <h2 class="section_title">
@@ -86,7 +115,7 @@ $blogs = getBlogsAll($pdo);
                 </div>
 
                 <?php foreach ($blogs as $blog) : ?>
-                    <div class="blog">
+                    <div id="blog_<?= $blog["id"] ?>" class="blog">
                         <h3 class="blog_title"><?= $blog["title"]; ?></h3>
                         <div class="blog_wrap">
                             <?php if (!empty($blog["img"])) : ?>
@@ -101,13 +130,9 @@ $blogs = getBlogsAll($pdo);
                                 <p class="date"><?= $blog["create_time"]; ?></p>
                                 <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $blog['user_id']) : ?>
                                     <div class="auth_btns" data-blog="<?= $blog['id']; ?>">
-                                        <?php if (isset($err_del)) : ?>
-                                            <span><?= $err_del; ?></span>;
-                                        <?php endif; ?>
+                                        <span class="err_del"></span>
                                         <span class="edit auth_btn">編集</span>
                                         <span class="delete auth_btn">削除</span>
-                                        <!-- <a class="edit" href="?action=edit">編集</a>
-                                        <a class="delete" href="?action=delete">削除</a> -->
                                     </div>
                                 <?php endif; ?>
                             </div>

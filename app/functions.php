@@ -20,7 +20,7 @@ function createToken()
 // トークンのバリデート
 function validateToken()
 {
-    if (!isset($_SESSION['token']) || $_POST['token'] !== $_SESSION['token']) {
+    if (!isset($_SESSION['token']) || filter_input(INPUT_POST, 'token') !== $_SESSION['token']) {
         print 'アクセスが不正です。<br>';
         print '<a href="login.php">ログイン画面へ</a>';
         exit();
