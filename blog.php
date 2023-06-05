@@ -79,18 +79,18 @@ $blogs = getBlogsAll($pdo);
     <header class="header">
         <div class="header_wrap">
             <div class="h_title">
-                <a href="./index.html">
+                <a href="./index.php">
                     <img class="icon" src="./img/icon.png" alt="">
                     <h1>MyPortfolioSite</h1>
                 </a>
             </div>
             <nav class="h_nav">
                 <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./about.html">About</a></li>
-                    <li><a href="./works.html">Works</a></li>
+                    <li><a href="./index.php">Home</a></li>
+                    <li><a href="./about.php">About</a></li>
+                    <li><a href="./works.php">Works</a></li>
                     <li><a class="active" href="./blog.php">Blog</a></li>
-                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./contact.php">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -146,25 +146,7 @@ $blogs = getBlogsAll($pdo);
 
 
 
-
-    <footer class="footer">
-        <div class="circle_wrap">
-            <div class="circle1 circle">
-                <div class="circle2 circle">
-                    <div class="circle3 circle">
-                        <div class="circle4 circle">
-                            <div class="circle5 circle">
-                                <div class="circle6 circle"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copylight">
-            <p>copylight©Manabu Miyamoto | All Rights Reserved.</p>
-        </div>
-    </footer>
+    <?php include './inc/footer.php'; ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./js/blog_page.js"></script>
 </body>

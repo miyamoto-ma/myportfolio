@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,22 +12,23 @@
     <link rel="stylesheet" href="./css/destyle.min.css">
     <link rel="stylesheet" href="./css/works_page.css">
 </head>
+
 <body>
     <header class="header">
         <div class="header_wrap">
             <div class="h_title">
-                <a href="./index.html">
+                <a href="./index.php">
                     <img class="icon" src="./img/icon.png" alt="">
                     <h1>MyPortfolioSite</h1>
                 </a>
             </div>
             <nav class="h_nav">
                 <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./about.html">About</a></li>
-                    <li><a class="active" href="./works.html">Works</a></li>
+                    <li><a href="./index.php">Home</a></li>
+                    <li><a href="./about.php">About</a></li>
+                    <li><a class="active" href="./works.php">Works</a></li>
                     <li><a href="./blog.php">Blog</a></li>
-                    <li><a href="./Contact.html">Contact</a></li>
+                    <li><a href="./Contact.php">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -35,7 +37,9 @@
     <main class="main">
         <section class="works_section section">
             <div class="works_wrap wrap">
-                <h2 class="section_title"><p>Works</p></h2>
+                <h2 class="section_title">
+                    <p>Works</p>
+                </h2>
                 <div class="works">
                     <div class="work">
                         <img src="./img/dummy.jpg" alt="">
@@ -150,25 +154,9 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="circle_wrap">
-            <div class="circle1 circle">
-                <div class="circle2 circle">
-                    <div class="circle3 circle">
-                        <div class="circle4 circle">
-                            <div class="circle5 circle">
-                                <div class="circle6 circle"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copylight">
-            <p>copylight©Manabu Miyamoto | All Rights Reserved.</p>
-        </div>
-    </footer>
+    <?php include './inc/footer.php'; ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./js/works_page.js"></script>
 </body>
+
 </html>

@@ -214,6 +214,40 @@ body {
   position: relative;
   margin-top: min(110px, 6vw);
 }
+.footer .to_top {
+  display: block;
+  width: 65px;
+  position: fixed;
+  bottom: 50px;
+  right: 10px;
+  -o-transition: .3s all;
+  -moz-transition: .3s all;
+  -webkit-transition: .3s all;
+  transition: .3s all;
+  opacity: 0.2;
+  z-index: 10;
+  cursor: pointer;
+}
+.footer .to_top:hover {
+  opacity: .6;
+  filter: drop-shadow(2px 1px 1px gray);
+  -o-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+.footer .to_top:active {
+  opacity: .4;
+  filter: drop-shadow(1px 0px 0.5px gray);
+  -o-transform: translateY(-1px);
+  -moz-transform: translateY(-1px);
+  -webkit-transform: translateY(-1px);
+  transform: translate(-1px);
+}
+.footer .to_top.hide {
+  opacity: 0;
+  visibility: hidden;
+}
 .footer .circle_wrap {
   width: 40vw;
   height: 25vw;
