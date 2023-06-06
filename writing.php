@@ -44,6 +44,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
         print '<a href="writing.php">投稿画面へ</a>';
         exit();
     }
+    date_default_timezone_set('Asia/Tokyo');
     $create_time = date('Y-m-d H:i:s');
     $blog = new blogClass($title, $text, $img, $create_time);
     $_SESSION['blog'] = $blog;

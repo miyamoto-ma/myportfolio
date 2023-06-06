@@ -45,7 +45,7 @@ function validateText($text)
 {
     if (empty($text)) {
         return '本文を入力してください。';
-    } elseif (mb_strlen($text) > 100) {
+    } elseif (mb_strlen($text) > 400) {
         return '本文は400文字以内で入力してください。';
     } else {
         return 'OK';

@@ -1,7 +1,9 @@
 'use strict';
 
 {
-    // 「編集」をクリックで、blogIdとuserIdをセットしてジャンプ
+    /**
+     * 「編集」をクリックで、blogIdとuserIdをセットしてジャンプ
+     */
     let edits = document.querySelectorAll('.edit');
     edits.forEach(edit => {
         edit.addEventListener('click', e => {
@@ -10,7 +12,9 @@
         });
     });
 
-    // 「削除」をクリックで、blogIdとuserIdをセットしてジャンプ
+    /**
+     * 「削除」をクリックで、blogIdとtokenをセットしてAjax
+     */
     let deletes = document.querySelectorAll('.delete');
     const token = document.querySelector('main').dataset.token;
     deletes.forEach(del => {
@@ -41,4 +45,9 @@
             }
         });
     });
+
+    /**
+     * モーダルウィンドウ
+     */
+
 }

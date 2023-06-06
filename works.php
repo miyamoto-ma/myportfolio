@@ -42,14 +42,35 @@
                 </h2>
                 <div class="works">
                     <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
+                        <img src="./img/java_blog_app.jpg" alt="JavaBlogAppの画像">
+                        <div class="contents">
+                            <p class="skill">
+                                使用したスキル：
+                                <span>HTML, CSS, JavaScript, Java, SQL(H2サーバー)</span>
+                            </p>
+                            <p class="description">
+                                JavaのサーブレットとJSPファイルを使用し、ブログアプリを作成しました。<br>
+                                アカウントの登録、取得(ログイン), 削除機能。<br>
+                                ブログの追加、表示、編集、削除機能。<br>
+                                Ajaxを使用した「いいね」機能や、アカウントの登録済みNAMEのチェック。<br>
+                                <a href="https://github.com/miyamoto-ma/java_blog_app" target="_blank">GitHub</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="work">
+                        <img src="./img/my_modal.jpg" alt="モーダルライブラリ画像">
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
                                 <span>HTML, CSS, JavaScript</span>
                             </p>
                             <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
+                                当サイトを作成するにあたり、モーダルウィンドウをパーツ化してみました。<br>
+                                画像をクリックすると開き、[×]ボタンもしくは背景をクリックすると閉じるというシンプルなものです。<br>
+                                css/my_modal.cssとjs/my_modal.jsをローカルにコピーした後、
+                                htmlファイルで親要素にmodalクラス、子要素にimg要素を設定するだけで実装が可能です。<br>
+                                <a href="./blog.php">当サイトのブログページにて実装。</a><br>
+                                <a href="https://github.com/miyamoto-ma/simple_modal_js/tree/main" target="_blank">GitHub</a>
                             </p>
                         </div>
                     </div>
@@ -61,19 +82,8 @@
                                 <span>HTML, CSS, JavaScript</span>
                             </p>
                             <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
+                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。<br>
+                                <a href=""></a>
                             </p>
                         </div>
                     </div>

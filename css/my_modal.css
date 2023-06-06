@@ -1,0 +1,124 @@
+@charset 'utf-8';
+
+/* モーダル時用css画像（モーダルにはこれを適用する） */
+
+/* モーダル時のHTML */
+html.modal_html {
+    overflow-y: hidden;
+}
+/* モーダル全体 */
+.modal {
+    position: relative;
+}
+.modal.active {
+    width: 100vw;
+    height: 100vh;
+    max-width: none !important;
+    min-width: none !important;
+    max-height: none !important;
+    min-height: none !important;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(85, 85, 85, .8);
+    z-index: 97;
+}
+/* モーダルボタン */
+.modal .modal_btn {
+    display: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 3px;
+    background-color: #555;
+    position: absolute;
+    top:8px;
+    right: 8px;
+    z-index: 100;
+    cursor: pointer;
+    -o-transition: .3s all;
+    -moz-transition: .3s all;
+    -webkit-transition: .3s all;
+    transition: .3s all;
+}
+.modal.active .modal_btn {
+    display: block;
+}
+.modal .modal_btn::before,
+.modal .modal_btn::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 3px;
+    border-radius: 1.5px;
+    background-color: #eee;
+    position :absolute;
+    top: 50%;
+    left: 50%;
+}
+.modal .modal_btn::before {
+    -o-transform: translate(-50%, -50%) rotate(45deg);
+    -moz-transform: translate(-50%, -50%) rotate(45deg);
+    -webkit-transform: translate(-50%, -50%) rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.modal .modal_btn::after {
+    -o-transform: translate(-50%, -50%) rotate(-45deg);
+    -moz-transform: translate(-50%, -50%) rotate(-45deg);
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.modal .modal_btn:hover {
+    opacity: .8;
+    box-shadow: 0 0 2px 3px#eee;
+}
+.modal .modal_btn:active {
+    opacity: .9;
+    box-shadow: 0 0 1px 2px #eee;
+}
+
+/* モーダル背景 */
+.modal .modal_back {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(85, 85, 85, .8);
+    z-index: 98;
+}
+.modal.active .modal_back {
+    display: block;
+    cursor: pointer;
+}
+
+/* 画像のラップ要素 */
+.modal.active .img_wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -o-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
+/* 画像 */
+.modal img {
+    width: 100%;
+    cursor: pointer;
+    -o-transition: .3s all;
+    -moz-transition: .3s all;
+    -webkit-transition: .3s all;
+    transition: .3s all;
+}
+.modal img:hover {
+    opacity: .8;
+}
+.modal.active img {
+    display: block;
+    cursor: auto;
+}
