@@ -16,3 +16,16 @@
 // for ($i = 0; $i < 10; $i++) {
 //     addBlog($pdo, $user_id, $title . '_' . $i, $text . '_' . $i, $img, $create_time);
 // }
+
+
+
+// // ページネーションのブログが取得できたか確認
+// $pdo = getPDOInstance();
+// $blogs = getBlogsByPage($pdo, 1, 3);
+// foreach ($blogs as $blog) {
+//     var_dump($blog);
+// }
+
+// // ブログの総数が取得出来たか確認
+// $pdo = getPDOInstance();
+// print(getTotal($pdo));

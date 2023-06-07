@@ -4,7 +4,6 @@ createToken();
 $pdo = getPDOInstance();
 unset($_SESSION['blog']);
 
-
 $logout_result = false;
 if (filter_input(INPUT_GET, 'action') !== null) {
     switch (filter_input(INPUT_GET, 'action')) {
@@ -34,7 +33,23 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 }
 
 // 投稿内容をデータベースから取得
-$blogs = getBlogsAll($pdo);
+// $blogs = getBlogsAll($pdo);      // 全てのブログを取得する用
+$page = filter_input(INPUT_GET, 'page');
+$current_page = (int)(filter_input(INPUT_GET, 'page') ? filter_input(INPUT_GET, 'page') : 1);      // 現在のページ
+$items_per_page = 2;                                   // 1ページのアイテム数
+$blogs = getBlogsByPage($pdo, $current_page, $items_per_page);  // ブログデータ取得
+$total_items = getTotal($pdo);                          // 総アイテム数
+$total_pages = ceil($total_items / $items_per_page);    // 総ページ数
+print($total_pages);
+// ページナビに表示する数値の配列を取得
+$around_pages = [];
+if ($current_page >= 1 && $current_page <= $total_pages) {
+    if ($current_page >= 3)  array_push($around_pages, $current_page - 2);
+    if ($current_page >= 2) array_push($around_pages, $current_page - 1);
+    array_push($around_pages, $current_page);
+    if ($current_page <= $total_pages - 1) array_push($around_pages, $current_page + 1);
+    if ($current_page <= $total_pages - 2) array_push($around_pages, $current_page + 2);
+}
 ?>
 
 <!DOCTYPE html>
@@ -119,6 +134,37 @@ $blogs = getBlogsAll($pdo);
                         </div>
                     </div>
                 <?php endforeach; ?>
+
+                <div class="pagenate">
+                    <?php if ($current_page >= 3) : ?>
+                        <a href="?page=1" class="page_first">≪</a>
+                    <?php endif; ?>
+                    <?php if ($current_page >= 2) : ?>
+                        <a href="?page=<?= $current_page - 1; ?>" class="page_pre">&lt;</a>
+                    <?php endif; ?>
+                    <?php if ($current_page >= 4) : ?>
+                        <span class="page_dots">...</span>
+                    <?php endif; ?>
+
+                    <?php foreach ($around_pages as $num) : ?>
+                        <?php if ($num !== $current_page) : ?>
+                            <a href="?page=<?= $num; ?>" class="page_btn"><?= $num; ?></a>
+                        <?php else : ?>
+                            <span class="page_btn current_btn"><?= $num; ?></span>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+
+                    <?php if ($current_page <= ($total_pages - 3)) : ?>
+                        <span class="page_dots">...</span>
+                    <?php endif; ?>
+                    <a href=""></a>
+                    <?php if ($current_page <= $total_pages - 1) : ?>
+                        <a href="?page=<?= $current_page + 1; ?>" class="page_next">&gt;</a>
+                    <?php endif; ?>
+                    <?php if ($current_page <= ($total_pages - 2)) : ?>
+                        <a href="?page=<?= $total_pages; ?>" class="page_last">≫</a>
+                    <?php endif; ?>
+                </div>
             </div>
         </section>
     </main>

@@ -107,6 +107,34 @@ function getBlogsAll($pdo)
     return $blogs;
 }
 
+// 該当ページのブログを取得（ページネーション）
+function getBlogsByPage($pdo, $current_page, $items_per_page)
+{
+    $start_row = ($current_page - 1) * $items_per_page;
+    $end_row = $start_row + $items_per_page;
+    $sql = "SELECT B.id, B.user_id, B.title, B.text, B.img, B.create_time
+                FROM (SELECT * ,
+                            ROW_NUMBER() OVER (ORDER BY id DESC) RN
+                            FROM BLOGS) B
+                            WHERE B.RN > :start_row AND B.RN <= :end_row";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue('start_row', $start_row, PDO::PARAM_INT);
+    $stmt->bindValue('end_row', $end_row, PDO::PARAM_INT);
+    $stmt->execute();
+    $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $blogs;
+}
+
+// ブログの総数を取得
+function getTotal($pdo)
+{
+    $sql = "SELECT COUNT(*) AS count FROM BLOGS";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $total = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $total["count"];
+}
+
 // ブログ1件分のユーザーIDを取得
 function getBlogUserId($pdo, $id)
 {
