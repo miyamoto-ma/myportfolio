@@ -107,9 +107,16 @@
             .home_work_item {
                 width: 32%;
                 margin-bottom: min(24px, 2vw);
+                @include middle {
+                    width: 31%;
+                    margin-bottom: min(27px, 3vw);
+                }
                 &:nth-child(3n),
                 &:nth-child(3n-1) {
                     margin-left: 2%;
+                    @include middle {
+                        margin-left: 3%;
+                    }
                 }
             }
         }

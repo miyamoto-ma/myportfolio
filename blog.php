@@ -36,7 +36,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 // $blogs = getBlogsAll($pdo);      // 全てのブログを取得する用
 $page = filter_input(INPUT_GET, 'page');
 $current_page = (int)(filter_input(INPUT_GET, 'page') ? filter_input(INPUT_GET, 'page') : 1);      // 現在のページ
-$items_per_page = 10;                                   // 1ページのアイテム数
+$items_per_page = 6;                                   // 1ページのアイテム数
 $blogs = getBlogsByPage($pdo, $current_page, $items_per_page);  // ブログデータ取得
 $total_items = getTotal($pdo);                          // 総アイテム数
 $total_pages = ceil($total_items / $items_per_page);    // 総ページ数

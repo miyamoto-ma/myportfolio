@@ -244,6 +244,31 @@ body {
   position: relative;
   margin-top: min(110px, 6vw);
 }
+.footer .to_top {
+  display: block;
+  width: 65px;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  transition: 0.3s all;
+  opacity: 0.2;
+  z-index: 10;
+  cursor: pointer;
+}
+.footer .to_top:hover {
+  opacity: 0.6;
+  filter: drop-shadow(2px 1px 1px gray);
+  transform: translateY(-2px);
+}
+.footer .to_top:active {
+  opacity: 0.4;
+  filter: drop-shadow(1px 0px 0.5px gray);
+  transform: translate(-1px);
+}
+.footer .to_top.hide {
+  opacity: 0;
+  visibility: hidden;
+}
 .footer .circle_wrap {
   width: 40vw;
   height: 25vw;
@@ -313,6 +338,9 @@ body {
 
 .main .works_section {
   margin-bottom: 22vw;
+}
+.main .works_wrap {
+  padding: 0 2em;
 }
 .main .works_wrap .works {
   display: flex;

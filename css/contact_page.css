@@ -316,8 +316,8 @@ body {
 }
 
 .main .wrap .c_form {
+  margin: 0 2em 100px;
   padding: 80px 10%;
-  margin-bottom: 100px;
   border-radius: 5px;
   background-color: rgba(226, 250, 246, 0.4);
   color: #555;

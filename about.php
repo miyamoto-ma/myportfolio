@@ -42,7 +42,7 @@
                     <p>About me</p>
                 </h2>
                 <div class="about_1_content">
-                    <div class="shadow">
+                    <div id="shadow" class="shadow">
                         <img src="./img/portfolio.jpg" alt="">
                     </div>
                     <p>

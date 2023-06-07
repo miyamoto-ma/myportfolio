@@ -340,6 +340,9 @@ body {
   padding-bottom: min(20vw, 300px);
 }
 
+.blogs {
+  padding: 0 2em;
+}
 .blogs .author {
   display: flex;
   justify-content: right;

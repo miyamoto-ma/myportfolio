@@ -318,6 +318,9 @@ body {
 .main .works_section {
   margin-bottom: 22vw;
 }
+.main .works_wrap {
+  padding: 0 2em;
+}
 .main .works_wrap .works {
   display: flex;
   flex-wrap: wrap;

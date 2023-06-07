@@ -1,3 +1,19 @@
+// ブレークポイント
+$middle: 1024px;
+$small: 768px;
+
+@mixin middle {
+    @media (max-width: ($middle)) {
+        @content;
+    }
+}
+
+@mixin small {
+    @media (max-width: ($small)) {
+        @content;
+    }
+}
+
 // フォントサイズ
 $h1_fs: 35px;
 $h2_fs: 40px;

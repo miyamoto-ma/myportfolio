@@ -414,8 +414,19 @@ body {
   width: 32%;
   margin-bottom: min(24px, 2vw);
 }
+@media (max-width: 1024px) {
+  .main .home_works .home_work_items .home_work_item {
+    width: 31%;
+    margin-bottom: min(27px, 3vw);
+  }
+}
 .main .home_works .home_work_items .home_work_item:nth-child(3n), .main .home_works .home_work_items .home_work_item:nth-child(3n-1) {
   margin-left: 2%;
+}
+@media (max-width: 1024px) {
+  .main .home_works .home_work_items .home_work_item:nth-child(3n), .main .home_works .home_work_items .home_work_item:nth-child(3n-1) {
+    margin-left: 3%;
+  }
 }
 .main .home_blog .home_blog_wrap {
   max-width: 100%;
