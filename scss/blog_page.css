@@ -244,6 +244,31 @@ body {
   position: relative;
   margin-top: min(110px, 6vw);
 }
+.footer .to_top {
+  display: block;
+  width: 65px;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  transition: 0.3s all;
+  opacity: 0.2;
+  z-index: 10;
+  cursor: pointer;
+}
+.footer .to_top:hover {
+  opacity: 0.6;
+  filter: drop-shadow(2px 1px 1px gray);
+  transform: translateY(-2px);
+}
+.footer .to_top:active {
+  opacity: 0.4;
+  filter: drop-shadow(1px 0px 0.5px gray);
+  transform: translate(-1px);
+}
+.footer .to_top.hide {
+  opacity: 0;
+  visibility: hidden;
+}
 .footer .circle_wrap {
   width: 40vw;
   height: 25vw;
@@ -368,5 +393,38 @@ body {
 }
 .blogs .blog .blog_etc .auth_btn:hover {
   opacity: 0.7;
+}
+
+.pagenate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 20px;
+  color: #777;
+}
+.pagenate .current_btn,
+.pagenate .page_btn,
+.pagenate .page_arrow {
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: 0.3s all;
+}
+.pagenate .page_arrow {
+  border: 1px solid #777;
+}
+.pagenate .current_btn,
+.pagenate .page_btn:hover,
+.pagenate .page_arrow:hover {
+  color: #eee;
+  background-color: #777;
+}
+.pagenate .page_btn:active,
+.pagenate .page_arrow:active {
+  opacity: 0.8;
 }
 /*# sourceMappingURL=blog_page.css.map */
