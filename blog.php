@@ -70,25 +70,7 @@ if ($current_page >= 1 && $current_page <= $total_pages) {
 </head>
 
 <body>
-    <header class="header">
-        <div class="header_wrap">
-            <div class="h_title">
-                <a href="./index.php">
-                    <img class="icon" src="./img/icon.png" alt="">
-                    <h1>MyPortfolioSite</h1>
-                </a>
-            </div>
-            <nav class="h_nav">
-                <ul>
-                    <li><a href="./index.php">Home</a></li>
-                    <li><a href="./about.php">About</a></li>
-                    <li><a href="./works.php">Works</a></li>
-                    <li><a class="active" href="./blog.php">Blog</a></li>
-                    <li><a href="./contact.php">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <?php include_once './inc/header.php'; ?>
 
     <main data-token="<?= h($_SESSION['token']); ?>">
         <section class="section">

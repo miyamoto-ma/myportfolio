@@ -14,25 +14,7 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="header_wrap">
-            <div class="h_title">
-                <a href="./index.php">
-                    <img class="icon" src="./img/icon.png" alt="">
-                    <h1>MyPortfolioSite</h1>
-                </a>
-            </div>
-            <nav class="h_nav">
-                <ul>
-                    <li><a href="./index.php">Home</a></li>
-                    <li><a href="./about.php">About</a></li>
-                    <li><a class="active" href="./works.php">Works</a></li>
-                    <li><a href="./blog.php">Blog</a></li>
-                    <li><a href="./Contact.php">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <?php include_once './inc/header.php'; ?>
 
     <main class="main">
         <section class="works_section section">

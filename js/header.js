@@ -2,6 +2,24 @@
 
 {
     /**
+     * メニュー（ナビ）現在ページのボタンにクラスを付ける
+     */
+    const file_name = location.href.split('/').pop();
+    let lists = Array.from(document.getElementById('h_nav').children[0].children);
+    lists.pop();
+    window.addEventListener('load', () => {
+        lists.forEach(list => {
+            let a_tag = list.children[0];
+            let href_file_name = a_tag.href.split('/').pop();
+            if (file_name === href_file_name) {
+                a_tag.classList.add('active');
+            } else {
+                a_tag.classList.remove('active');
+            }
+        });
+    });
+
+    /**
      * ハンバーガーメニュー
      */
     const hum_btn = document.getElementById('hum_btn');
