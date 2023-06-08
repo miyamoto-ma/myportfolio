@@ -45,6 +45,7 @@ $normail_transition: .3s;
 $space_150: 150px;
 $space_100: 100px;
 $space_80: 80px;
+$space_70: 70px;
 $space_50: 50px;
 
 // 背景色と文字色
@@ -85,6 +86,15 @@ $c_line_w3: $c_line_w/6;
 $c_line_w4: $c_line_w/3;
 $c_line_w5: $c_line_w/1.5;
 $c_line_w6: $c_line_w/5;
+// // サークル用（モバイルサイズ）
+// $c_s_size: 85vw; // 一番大きい円のサイズ
+// $c_s_space_w: 5vw; // スペース
+// $c_s_line_w1: $c_line_w/4.5;
+// $c_s_line_w2: $c_line_w/2;
+// $c_s_line_w3: $c_line_w/6;
+// $c_s_line_w4: $c_line_w/3;
+// $c_s_line_w5: $c_line_w/1.5;
+// $c_s_line_w6: $c_line_w/5;
 // ライン幅の合計値（外側から）
 $c_tline_w1: $c_line_w1 + $c_space_w/3;
 $c_tline_w2: $c_tline_w1 + $c_line_w2 + $c_space_w/2;
@@ -117,6 +127,10 @@ body {
     margin: $space_80 auto;
     font-size: $h2_fs;
     text-align: center;
+    @include small {
+        margin: 40px auto 55px;
+        font-size: $h1_fs;
+    }
 
     p {
         display: inline-block;
@@ -142,6 +156,9 @@ body {
 .section {
     padding-top: 80px;
     padding-bottom: 80px;
+    @include small {
+        padding-bottom: $space_50;
+    }
 }
 .wrap {
     max-width: $swrap_max_w;

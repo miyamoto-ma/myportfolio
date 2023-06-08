@@ -54,6 +54,22 @@
                 display: flex;
                 justify-content: center;
                 gap: 5%;
+                @include small {
+                    display: block;
+                    margin-bottom: $space_70;
+                    .h_img {
+                        width: 45% !important;
+                        height: auto !important;
+                        margin: 0 auto 3.5em;
+                    }
+                    p {
+                        display: block;
+                        width: 90% !important;
+                        margin: 0 auto;
+                        line-height: 1.4em;
+                        font-size: $fs_s !important;
+                    }
+                }
                 .h_img {
                     width: 25%;
                     position: relative;
@@ -104,6 +120,9 @@
             padding: 10px 50px;
             display: flex;
             flex-wrap: wrap;
+            @include small {
+                padding: 0 30px;
+            }
             .home_work_item {
                 width: 32%;
                 margin-bottom: min(24px, 2vw);
@@ -111,11 +130,22 @@
                     width: 31%;
                     margin-bottom: min(27px, 3vw);
                 }
+                @include small {
+                    width: 48%;
+                }
                 &:nth-child(3n),
                 &:nth-child(3n-1) {
                     margin-left: 2%;
                     @include middle {
                         margin-left: 3%;
+                    }
+                }
+                @include small {
+                    &:nth-child(2n-1){
+                        margin-left: 0;
+                    }
+                    &:nth-child(2n) {
+                        margin-left: 4%;
                     }
                 }
             }

@@ -17,6 +17,7 @@
     .about_1_wrap {
         .about_1_content {
             @extend .about_content;
+            flex-direction: column;
             .shadow{
                 width: 25%;
                 position: relative;
@@ -37,6 +38,10 @@
                     width: 100%;
                     border-radius: 50%;
                 }
+                @include small {
+                    width: 50%;
+                    margin: 0 auto 1.5em;
+                }
             }
             p {
                 display: block;
@@ -44,6 +49,12 @@
                 padding: 3%;
                 margin-left: 3%;
                 box-sizing: border-box;
+                @include small {
+                    width: 90%;
+                    margin: 0 auto;
+                    font-size: $fs_s;
+                    line-height: 1.3em;
+                }
             }
         }
     }
@@ -52,12 +63,24 @@
     .about_2_wrap {
         .about_2_content {
             @extend .about_content;
+            flex-direction: column-reverse;
             .skills {
                 display: block;
                 width: 45%;
                 // padding: 3%;
                 margin-right: 3%;
                 box-sizing: border-box;
+                @include small {
+                    width: 90%;
+                    margin: 0 auto;
+                    font-size: $fs_s;
+                    li {
+                        margin-bottom: 1.2em !important;
+                    }
+                    h3 {
+                        font-size: $fs_m !important;
+                    }
+                }
                 li {
                     margin-bottom: .8em;
                     h3 {
@@ -66,12 +89,17 @@
                     }
                     p {
                         margin-left: 1em;
+                        line-height: 1.3em;
                     }
                 }
             }
             .chart {
                 display: block;
                 width: 35%;
+                @include small {
+                    width: 85%;
+                    margin: 0 auto 1.5em;
+                }
             }
         }
     }
