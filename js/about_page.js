@@ -2,6 +2,19 @@
 
 {
     /**
+     * 画像のインナーのbox-shadowのサイズを調整
+     */
+    const shadow = document.getElementById('shadow');
+    const img = shadow.children[0];
+    function adjust_height() {
+        let img_height = img.clientHeight;
+        shadow.style.height = img_height + 'px';
+    }
+    window.addEventListener('load', () => { adjust_height(); });
+    window.addEventListener('resize', () => { adjust_height(); });
+
+
+    /**
      * Chart.jsの設定
      */
     let ctx = document.getElementById("myRadarChart");
@@ -69,15 +82,5 @@
     });
 
 
-    /**
-     * 画像のインナーのbox-shadowのサイズを調整
-     */
-    const shadow = document.getElementById('shadow');
-    const img = shadow.children[0];
-    function adjust_height() {
-        let img_height = img.clientHeight;
-        shadow.style.height = img_height + 'px';
-    }
-    window.addEventListener('load', () => { adjust_height(); });
-    window.addEventListener('resize', () => { adjust_height(); });
+
 }

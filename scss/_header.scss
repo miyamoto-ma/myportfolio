@@ -2,6 +2,10 @@
 @import "functions";
 @import "animations";
 
+
+html.hum_active {
+    overflow-y: hidden;
+}
 body {
     font-family: $font1;
 }
@@ -12,6 +16,12 @@ body {
     position: sticky;
     top: 0;
     z-index: 9999;
+    @include small {
+        overflow: hidden;
+        &.active {
+            overflow: unset;
+        }
+    }
     .header_wrap {
         height: $h_btn_height;
         max-width: 1200px;
@@ -19,6 +29,9 @@ body {
         display: flex;
         justify-content: space-between;
         padding: 0px 20px;
+        @include small {
+            padding-right: 0;
+        }
         .h_title{
             a{
                 display: flex;
@@ -36,6 +49,70 @@ body {
                     margin-left: 15px;
                     font-family: $font1;
                     font-style: italic;
+                    @include small {
+                        font-size: 30px;
+                    }
+                }
+            }
+        }
+        .hum_btn{
+            display: none;
+            @include small {
+                display: block;
+                width: 50px;
+                height: 50px;
+                margin-left: 5px;
+                background-color: #777;
+                position: relative;
+                &.active {
+                    span:first-child {
+                        top: 50%;
+                        -o-transform: translate(-50%, -50%) rotate(315deg);
+                        -moz-transform: translate(-50%, -50%) rotate(315deg);
+                        -webkit-transform: translate(-50%, -50%) rotate(315deg);
+                        transform: translate(-50%, -50%) rotate(315deg);
+
+                    }
+                    span:nth-child(2) {
+                        opacity: 0;
+                        -o-transform: translate(-50%, -50%) rotate(225deg);
+                        -moz-transform: translate(-50%, -50%) rotate(225deg);
+                        -webkit-transform: translate(-50%, -50%) rotate(225deg);
+                        transform: translate(-50%, -50%) rotate(225deg);
+                    }
+                    span:last-child {
+                        top: 50%;
+                        -o-transform: translate(-50%, -50%) rotate(405deg);
+                        -moz-transform: translate(-50%, -50%) rotate(405deg);
+                        -webkit-transform: translate(-50%, -50%) rotate(405deg);
+                        transform: translate(-50%, -50%) rotate(405deg);
+                    }
+                }
+            }
+            span {
+                @include small {
+                    display: block;
+                    width: 35px;
+                    height: 4px;
+                    border-radius: 4px;
+                    background-color: #ebfbf9;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    -o-transform: translate(-50%, -50%);
+                    -moz-transform: translate(-50%, -50%);
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                    -o-transition: .5s all;
+                    -moz-transition: .5s all;
+                    -webkit-transition: .5s all;
+                    transition: .5s all;
+                    &:first-child {
+                        top: 25%;
+                    }
+                    &:last-child {
+                        top: 75%;
+                    }
                 }
             }
         }
@@ -51,6 +128,55 @@ body {
                     line-height: $h_btn_height;
                     font-size: $h_btn_fs;
                     @extend .h_btn;
+                    &:last-child {
+                        display: none;
+                    }
+                }
+            }
+            @include small {
+                // display: none;
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+                top: 55px;
+                left: 0;
+                opacity: 0;
+                transform: translateX(100vw);
+                -o-transition: .5s all;
+                -moz-transition: .5s all;
+                -webkit-transition: .5s all;
+                transition: .5s all;
+                &.active {
+                    display: block;
+                    transform: translateX(0);
+                    opacity: 1;
+                    // position: ;
+                }
+                ul {
+                    width: 100%;
+                    height: 100%;
+                    flex-direction: column;
+                    justify-content: start;
+                    li {
+                        width: 100%;
+                        margin: 0 0 5px !important;
+                        z-index: 10;
+                        &:last-child {
+                            display: block;
+                            width: auto;
+                            height: auto;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background-color: #777777d6 !important;
+                            z-index: 9;
+                        }
+                        a {
+                            text-align: center;
+                        }
+                    }
                 }
             }
         }

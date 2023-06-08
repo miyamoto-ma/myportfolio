@@ -16,7 +16,25 @@
 </head>
 
 <body>
-    <?php include_once './inc/header.php'; ?>
+    <header class="header">
+        <div class="header_wrap">
+            <div class="h_title">
+                <a href="./index.php">
+                    <img class="icon" src="./img/icon.png" alt="">
+                    <h1>MyPortfolioSite</h1>
+                </a>
+            </div>
+            <nav class="h_nav">
+                <ul>
+                    <li><a class="active" href="./index.php">Home</a></li>
+                    <li><a href="./about.php">About</a></li>
+                    <li><a href="./works.php">Works</a></li>
+                    <li><a href="./blog.php">Blog</a></li>
+                    <li><a href="./contact.php">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <main class="main">
         <section class="home_about section">
@@ -285,7 +303,7 @@
         </section>
     </main>
 
-    <?php include_once './inc/footer.php'; ?>
+    <?php include './inc/footer.php'; ?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./js/slick.min.js"></script>
