@@ -36,7 +36,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 // $blogs = getBlogsAll($pdo);      // 全てのブログを取得する用
 $page = filter_input(INPUT_GET, 'page');
 $current_page = (int)(filter_input(INPUT_GET, 'page') ? filter_input(INPUT_GET, 'page') : 1);      // 現在のページ
-$items_per_page = 6;                                   // 1ページのアイテム数
+$items_per_page = 3;                                   // 1ページのアイテム数
 $blogs = getBlogsByPage($pdo, $current_page, $items_per_page);  // ブログデータ取得
 $total_items = getTotal($pdo);                          // 総アイテム数
 $total_pages = ceil($total_items / $items_per_page);    // 総ページ数
@@ -82,7 +82,7 @@ if ($current_page >= 1 && $current_page <= $total_pages) {
                     <?php if ($logout_result) : ?>
                         <p>ログアウトしました。</p>
                     <?php elseif (isset($_SESSION['loginUserId'])) : ?>
-                        <p><?= $_SESSION['loginUserName']; ?>さんログイン中</p>
+                        <p><?= $_SESSION['loginUserName']; ?>さんログイン中</p><br class="sp_br">
                     <?php endif; ?>
                     <?php if (isset($_SESSION['loginUserId']) && $logout_result === false) : ?>
                         <a href="writing.php">投稿</a>

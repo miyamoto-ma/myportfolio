@@ -1,3 +1,5 @@
+@import "header";
+@import "footer";
 
 .form_wrap {
     margin: 50px 0;
@@ -7,18 +9,31 @@
     -moz-transform: translate(-50%, 0%);
     -webkit-transform: translate(-50%, 0%);
     transform: translate(-50%, 0%);
+    @include small {
+        max-width: 90vw;
+    }
 }
 
 .form_welcome {
     margin-bottom: 2em;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    @include small {
+        margin-bottom: 1em;
+    }
     p {
-        font-size: 20px;
+        font-size: $fs_m;
+        @include small {
+            font-size: $fs_m - 2;
+        }
     }
     a {
-        font-size: 18px;
+        font-size: $fs_m - 2;
         color: #75a29a;
+        @include small {
+            font-size: $fs_m - 4;
+        }
     }
 }
 
@@ -28,11 +43,22 @@
 }
 
 .img {
+    .img_span {
+        @include small {
+            display: block;
+            width: 100%;
+        }
+    }
     .img_ctn {
         font-size: 16px;
     }
     input {
         margin: .5em auto 1em 2em;
+        @include small {
+            width: 75vw;
+            margin: .5em auto 1em .5em;
+            font-size: 15px;
+        }
     }
     .check {
         display: block;
@@ -41,6 +67,10 @@
         input {
             margin: 0.5em auto 0.5em 2em;
             vertical-align: revert;
+            @include small {
+                width: auto;
+                margin: 0.5em auto 0.5em 0.5em;
+            }
         }
     }
 }
@@ -50,6 +80,9 @@
     gap: 2em;
     .btn {
         width: 140px !important;
+        @include small {
+            width: 100px !important;
+        }
     }
 }
 
@@ -61,9 +94,12 @@
         margin-left: 5%;
         display: flex;
         flex-direction: column;
+        @include small {
+            width: 45%;
+        }
         img {
                 width: 100%;
-                margin: 0.5em 0.5em 1.5em;
+                margin: 0.5em 0 1.5em;
             }
     }
 }

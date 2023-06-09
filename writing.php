@@ -91,7 +91,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                 <textarea id="text" name="text" maxlength="400" required><?= isset($_SESSION['blog']) ? $_SESSION['blog']->text : ''; ?></textarea>
             </div>
             <div class="img">
-                <span class="img_span">画像(任意)<span class="img_ctn">(.jpg, .jpeg, .gif画像のみ(1MB以内))</span>：</span>
+                <span class="img_span">画像(任意)<br class="sp_br"><span class="img_ctn">(.jpg, .jpeg, .gif画像のみ(1MB以内))</span>：</span>
                 <input id="file" type="file" name="img" accept=".jpg, .jpeg, .gif">
             </div>
             <div class="preview">

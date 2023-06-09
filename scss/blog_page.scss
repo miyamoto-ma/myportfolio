@@ -3,6 +3,9 @@
 
 .section {
     padding-bottom: min(20vw, 300px);
+    @include small {
+        padding-bottom: min(35vw, 500px);
+    }
 }
 .blogs{
     padding: 0 2em;
@@ -10,6 +13,10 @@
         display: flex;
         justify-content: right;
         align-items: baseline;
+        @include small {
+            display: block;
+            text-align: right;
+        }
         a {
             margin-left: 1em;
             padding: 0.5em;
@@ -26,22 +33,38 @@
             &:hover {
                 opacity: 0.8;
             }
+            @include small {
+                margin-left: .2em;
+            }
         }
     }
     .blog {
         max-width: 1000px;
         margin:50px auto 90px;
+        @include small {
+            margin: 50px auto 80px;
+        }
         .blog_wrap {
             margin: 0 35px;
+            @include small {
+                margin: 0 10px;
+            }
         }
         .blog_title {
             margin-bottom: 1em;
             border-bottom: 2px solid #b6f9ee;
             font-size: 30px;
+            @include small {
+                font-size: $fs_l;
+            }
         }
         .blog_img {
             max-width: 40%;
-
+            @include small {
+                width: 55%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
             img {
                 width: 100%;
             }
@@ -49,6 +72,11 @@
         .blog_content {
             margin: 1.5em auto 2.5em;
             font-size: 18px;
+            @include small {
+                margin: 1.2em auto 2em;
+                line-height: 1.3em;
+                font-size: $fs_s;
+            }
         }
         .blog_etc {
             display: flex;
@@ -76,8 +104,11 @@
     justify-content: center;
     align-items: center;
     gap: .3em;
-    font-size: 20px;
+    font-size: $fs_m;
     color: #777;
+    @include small {
+        font-size: $fs_s + 1;
+    }
     .current_btn,
     .page_btn,
     .page_arrow {

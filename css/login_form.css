@@ -65,6 +65,14 @@ body {
 .btn:active, .btn_anime_inout:active {
   transform: translateY(-1px);
 }
+@media (max-width: 768px) {
+  .btn, .btn_anime_inout {
+    width: 100px;
+    height: 45px;
+    padding: 8px 20px;
+    font-size: 15px;
+  }
+}
 
 .btn1 {
   margin: 50px 10px;
@@ -75,6 +83,15 @@ body {
 }
 .btn1:active {
   box-shadow: 0 0 3px 0 #88bcb3;
+}
+
+.sp_br {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sp_br {
+    display: block;
+  }
 }
 
 .h_btn a, .header .header_wrap .h_nav ul li a {
@@ -163,6 +180,12 @@ body {
   left: 50%;
   transform-origin: center;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 768px) {
+  .btn_anime_inout::before, .btn_anime_inout::after {
+    width: 120px;
+    height: 120px;
+  }
 }
 .btn_anime_inout:active::before, .btn_anime_inout:active::after {
   animation: btn_anime .3s ease-in-out;
@@ -495,6 +518,11 @@ body {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+@media (max-width: 768px) {
+  .form_wrap {
+    padding: 30px 20px;
+  }
+}
 .form_wrap .form_title {
   margin: 0.5em 0 1.5em;
   font-size: 30px;
@@ -505,6 +533,11 @@ body {
 }
 .form_wrap .form {
   font-size: 18px;
+}
+@media (max-width: 768px) {
+  .form_wrap .form {
+    font-size: 16px;
+  }
 }
 .form_wrap .form .input {
   margin: 1em 0;
@@ -532,6 +565,12 @@ body {
   padding: 0;
   border-radius: 25px;
   background-color: rgba(226, 250, 246, 0.7) !important;
+}
+@media (max-width: 768px) {
+  .form_wrap .form .btns .btn, .form_wrap .form .btns .btn_anime_inout {
+    width: 88px;
+    margin: 15px 7px 30px;
+  }
 }
 .form_wrap .form .btns .btn:hover, .form_wrap .form .btns .btn_anime_inout:hover {
   background-color: #fff;

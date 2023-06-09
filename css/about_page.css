@@ -65,6 +65,14 @@ body {
 .btn:active, .btn_anime_inout:active {
   transform: translateY(-1px);
 }
+@media (max-width: 768px) {
+  .btn, .btn_anime_inout {
+    width: 100px;
+    height: 45px;
+    padding: 8px 20px;
+    font-size: 15px;
+  }
+}
 
 .btn1 {
   margin: 50px 10px;
@@ -75,6 +83,15 @@ body {
 }
 .btn1:active {
   box-shadow: 0 0 3px 0 #88bcb3;
+}
+
+.sp_br {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sp_br {
+    display: block;
+  }
 }
 
 .h_btn a, .header .header_wrap .h_nav ul li a {
@@ -163,6 +180,12 @@ body {
   left: 50%;
   transform-origin: center;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 768px) {
+  .btn_anime_inout::before, .btn_anime_inout::after {
+    width: 120px;
+    height: 120px;
+  }
 }
 .btn_anime_inout:active::before, .btn_anime_inout:active::after {
   animation: btn_anime .3s ease-in-out;
