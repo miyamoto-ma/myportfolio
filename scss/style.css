@@ -67,6 +67,14 @@ body {
 .btn:active, .btn_anime_inout:active {
   transform: translateY(-1px);
 }
+@media (max-width: 768px) {
+  .btn, .btn_anime_inout {
+    width: 100px;
+    height: 45px;
+    padding: 8px 20px;
+    font-size: 15px;
+  }
+}
 
 .btn1 {
   margin: 50px 10px;
@@ -77,6 +85,15 @@ body {
 }
 .btn1:active {
   box-shadow: 0 0 3px 0 #88bcb3;
+}
+
+.sp_br {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sp_br {
+    display: block;
+  }
 }
 
 .h_btn a, .header .header_wrap .h_nav ul li a {
@@ -190,6 +207,12 @@ body {
   left: 50%;
   transform-origin: center;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 768px) {
+  .btn_anime_inout::before, .btn_anime_inout::after {
+    width: 120px;
+    height: 120px;
+  }
 }
 .btn_anime_inout:active::before, .btn_anime_inout:active::after {
   -webkit-animation: btn_anime 0.3s ease-in-out;
@@ -405,6 +428,23 @@ body {
   overflow: hidden;
   z-index: -1;
 }
+@media (max-width: 1024px) {
+  .footer .circle_wrap {
+    height: 20vw;
+    top: -25vw;
+    right: 10vw;
+    transform: scale(1.5);
+  }
+}
+@media (max-width: 768px) {
+  .footer .circle_wrap {
+    width: 30vw;
+    height: 20vw;
+    top: -30vw;
+    right: 15vw;
+    transform: scale(2);
+  }
+}
 .footer .circle_wrap .circle {
   display: flex;
   justify-content: center;
@@ -533,29 +573,28 @@ body {
   width: 25%;
   position: relative;
 }
-.main .home_about .home_about_wrap .h_about .h_img::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 3px solid #adeae0;
-  position: absolute;
-  bottom: -22px;
-  z-index: -1;
-}
 .main .home_about .home_about_wrap .h_about .h_img img {
   width: 100%;
 }
 .main .home_about .home_about_wrap .h_about .h_img.h_img1 {
   box-shadow: -1px -0.5px 5px 0.5px #88bcb3;
 }
-.main .home_about .home_about_wrap .h_about .h_img.h_img1::before {
-  left: -25px;
-}
 .main .home_about .home_about_wrap .h_about .h_img.h_img2 {
   box-shadow: 1px 0.5px 5px 0.5px #88bcb3;
 }
-.main .home_about .home_about_wrap .h_about .h_img.h_img2::before {
+.main .home_about .home_about_wrap .h_about .h_img .parallax {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #adeae0;
+  position: absolute;
+  bottom: -30px;
+  z-index: -1;
+}
+.main .home_about .home_about_wrap .h_about .h_img.h_img1 .parallax {
+  left: -25px;
+}
+.main .home_about .home_about_wrap .h_about .h_img.h_img2 .parallax {
   right: -25px;
 }
 .main .home_about .home_about_wrap .h_about p {

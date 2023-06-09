@@ -73,30 +73,29 @@
                 .h_img {
                     width: 25%;
                     position: relative;
-                    &::before {
-                        content: '';
-                        display: block;
-                        width: 100%;
-                        height: 100%;
-                        border: 3px solid $point_color4;
-                        position: absolute;
-                        bottom: -22px;
-                        z-index: -1;
-                    }
                     img {
                         width: 100%;
                     }
                     &.h_img1{
                         box-shadow: -1px -0.5px 5px 0.5px $point_color3;
-                        &::before{
-                            left: -25px;
-                        }
                     }
                     &.h_img2 {
                         box-shadow: 1px 0.5px 5px 0.5px $point_color3;
-                        &::before {
-                            right: -25px;
-                        }
+                    }
+                    .parallax{
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        border: 3px solid $point_color4;
+                        position: absolute;
+                        bottom: -30px;
+                        z-index: -1;
+                    }
+                    &.h_img1 .parallax {
+                        left: -25px;
+                    }
+                    &.h_img2 .parallax {
+                        right: -25px;
                     }
                 }
                 p {

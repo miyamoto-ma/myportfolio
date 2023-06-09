@@ -48,4 +48,47 @@
         window.addEventListener('load', () => { adjust_height(h_img, img); });
         window.addEventListener('resize', () => { adjust_height(h_img, img); });
     });
+
+    /**
+     * 画像枠のパララックス
+     */
+    const targets = document.querySelectorAll('.parallax');
+    let window_h = window.innerHeight;  // ウィンドウの高さ
+    let targets_pos = [];
+    const offset = 50;
+    targets.forEach((target, index) => {
+        targets_pos[index] = target.getBoundingClientRect().top - offset;
+    });
+    let speed = 0;
+    function getSpeed() {
+        speed = -0.13;
+        if (window.innerWidth <= 768) {
+            speed = speed / 2;
+        }
+    }
+    let timer = null;
+    function parallax() {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            let window_pos = window.scrollY;        // ウィンドウのスクロール量(縦)
+            targets.forEach((target, index) => {
+                let pos = targets_pos[index];
+                if (window_pos + window_h >= pos) {
+                    let translateY = 0;
+                    if (pos + offset < window_h) {
+                        translateY = window_pos * speed;
+                    } else {
+                        translateY = (window_pos + window_h - pos) * speed;
+                    }
+                    target.style.transform = "translateY(" + translateY + "px)";
+                }
+            });
+        }, 8);
+    }
+    window.addEventListener('DOMContentLoaded', getSpeed);
+    window.addEventListener('resize', getSpeed);
+    window.addEventListener('scroll', parallax, {passive: true});
+
+
+
 }
