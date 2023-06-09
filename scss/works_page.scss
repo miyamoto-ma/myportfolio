@@ -8,21 +8,104 @@
     }
     .works_wrap {
         padding: 0 2em;
+        @include small {
+            padding: 0 1em;
+        }
         .works {
             display: flex;
             flex-wrap: wrap;
+            @include middle {
+                max-width: 900px;
+                margin: 0 auto;
+            }
             .work{
                 width: 30%;
                 margin-bottom: min(55px, 4vw);
                 padding: 1%;
                 box-sizing: border-box;
+                @include middle {
+                    width: 48%;
+                    margin-bottom: min(55px, 6vw);
+                }
+                @include small {
+                    width: 95%;
+                    margin: 0 auto min(55px, 20vw) !important;
+                }
+                .w_title {
+                    margin-bottom: 1em;
+                    border-bottom: 2px solid #b6f9ee;
+                    font-size: $fs_l - 1;
 
+                    @include small {
+                        font-size: $fs_l;
+                    }
+                }
                 &:nth-child(3n-1),
                 &:nth-child(3n) {
                     margin-left: 5%;
+                    @include middle {
+                        margin-left: 0;
+                    }
+                    @include small {
+                        margin-left: 0;
+                    }
                 }
-                img {
-                    width: 100%;
+                &:nth-child(2n) {
+                    @include middle {
+                        margin-left: 4%;
+                    }
+                }
+                .w_img_wrap {
+                    max-width: 500px;
+                    margin: 0 auto;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                    img {
+                        height: 100%;
+                    }
+                }
+                .contents {
+                    margin-top: 1.5em;
+                    line-height: 1.3em;
+                    @include small {
+                        max-width: 600px;
+                        margin: 1.5em auto 0;
+                        font-size: $fs_s;
+                    }
+                    p:not(:first-child) {
+                        margin-top: .6em;
+                    }
+                    .skill {
+                        span {
+                            display: block;
+                            margin-left: 1em;
+                        }
+                    }
+                    .description {
+                        max-height: 7em;
+                        overflow-y: auto;
+                        &::-webkit-scrollbar {
+                            width: 5px;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            border-radius: 2.5px;
+                            background-color: $point_color2;
+                            box-shadow: inset 0 0 3px $point_color3;
+                        }
+                        &::-webkit-scrollbar-track {
+                            background-color: $point_color2;
+                        }
+                    }
+                    a {
+                        display: block;
+                        margin-top: .5em;
+                        color: $point_color3;
+                        @include small {
+                            margin-top: 1em;
+                        }
+                    }
                 }
             }
         }

@@ -24,7 +24,10 @@
                 </h2>
                 <div class="works">
                     <div class="work">
-                        <img src="./img/java_blog_app.jpg" alt="JavaBlogAppの画像">
+                        <p class="w_title">ブログアプリ(Java)</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/java_blog_app.jpg" alt="JavaBlogAppの画像">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -34,13 +37,16 @@
                                 JavaのサーブレットとJSPファイルを使用し、ブログアプリを作成しました。<br>
                                 アカウントの登録、取得(ログイン), 削除機能。<br>
                                 ブログの追加、表示、編集、削除機能。<br>
-                                Ajaxを使用した「いいね」機能や、アカウントの登録済みNAMEのチェック。<br>
-                                <a href="https://github.com/miyamoto-ma/java_blog_app" target="_blank">GitHub</a>
+                                Ajaxを使用した「いいね」機能や、アカウントの登録済みユーザーネームのチェック機能等を実装しています。
                             </p>
+                            <a href="https://github.com/miyamoto-ma/java_blog_app" target="_blank">GitHub</a>
                         </div>
                     </div>
                     <div class="work">
-                        <img src="./img/my_modal.jpg" alt="モーダルライブラリ画像">
+                        <p class="w_title">モーダルウィンドウパーツ</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/my_modal.jpg" alt="モーダルライブラリ画像">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -50,14 +56,17 @@
                                 当サイトを作成するにあたり、モーダルウィンドウをパーツ化してみました。<br>
                                 画像をクリックすると開き、[×]ボタンもしくは背景をクリックすると閉じるというシンプルなものです。<br>
                                 css/my_modal.cssとjs/my_modal.jsをローカルにコピーした後、
-                                htmlファイルで親要素にmodalクラス、子要素にimg要素を設定するだけで実装が可能です。<br>
-                                <a href="./blog.php">当サイトのブログページにて実装。</a><br>
-                                <a href="https://github.com/miyamoto-ma/simple_modal_js/tree/main" target="_blank">GitHub</a>
+                                htmlファイルで親要素にmodalクラス、子要素にimg要素を設定するだけで実装が可能です。
                             </p>
+                            <a href="./blog.php">当サイトのブログページにて実装。</a>
+                            <a href="https://github.com/miyamoto-ma/simple_modal_js/tree/main" target="_blank">GitHub</a>
                         </div>
                     </div>
                     <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
+                        <p class="w_title">ダミー</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/dummy.jpg" alt="">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -67,10 +76,14 @@
                                 説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。<br>
                                 <a href=""></a>
                             </p>
+                            <a href="">ダミーリンク</a>
                         </div>
                     </div>
                     <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
+                        <p class="w_title">ダミー</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/dummy.jpg" alt="">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -79,10 +92,14 @@
                             <p class="description">
                                 説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
                             </p>
+                            <a href="">ダミーリンク</a>
                         </div>
                     </div>
                     <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
+                        <p class="w_title">ダミー</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/dummy.jpg" alt="">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -91,10 +108,14 @@
                             <p class="description">
                                 説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
                             </p>
+                            <a href="">ダミーリンク</a>
                         </div>
                     </div>
                     <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
+                        <p class="w_title">ダミー</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/dummy.jpg" alt="">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -103,10 +124,14 @@
                             <p class="description">
                                 説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
                             </p>
+                            <a href="">ダミーリンク</a>
                         </div>
                     </div>
                     <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
+                        <p class="w_title">ダミー</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/dummy.jpg" alt="">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -115,10 +140,14 @@
                             <p class="description">
                                 説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
                             </p>
+                            <a href="">ダミーリンク</a>
                         </div>
                     </div>
                     <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
+                        <p class="w_title">ダミー</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/plant1.jpg" alt="">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -127,10 +156,14 @@
                             <p class="description">
                                 説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
                             </p>
+                            <a href="">ダミーリンク</a>
                         </div>
                     </div>
                     <div class="work">
-                        <img src="./img/dummy.jpg" alt="">
+                        <p class="w_title">ダミー</p>
+                        <div class="w_img_wrap">
+                            <img src="./img/dummy.jpg" alt="">
+                        </div>
                         <div class="contents">
                             <p class="skill">
                                 使用したスキル：
@@ -139,6 +172,7 @@
                             <p class="description">
                                 説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
                             </p>
+                            <a href="">ダミーリンク</a>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@
         let img_height = img.clientHeight;
         shadow.style.height = img_height + 'px';
     }
-    window.addEventListener('load', () => { adjust_height(); });
+    window.addEventListener('DOMContentLoaded', () => { adjust_height(); });
     window.addEventListener('resize', () => { adjust_height(); });
 
 
