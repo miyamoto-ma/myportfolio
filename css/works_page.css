@@ -7,6 +7,11 @@ body {
   font-size: 40px;
   text-align: center;
 }
+@media (max-width: 1024px) {
+  .section_title {
+    font-size: 38px;
+  }
+}
 @media (max-width: 768px) {
   .section_title {
     margin: 40px auto 55px;
@@ -540,7 +545,7 @@ body {
 @media (max-width: 768px) {
   .main .works_wrap .works .work {
     width: 95%;
-    margin: 0 auto min(55px, 20vw) !important;
+    margin: 0 auto min(80px, 20vw) !important;
   }
 }
 .main .works_wrap .works .work .w_title {

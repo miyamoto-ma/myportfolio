@@ -7,6 +7,11 @@ body {
   font-size: 40px;
   text-align: center;
 }
+@media (max-width: 1024px) {
+  .section_title {
+    font-size: 38px;
+  }
+}
 @media (max-width: 768px) {
   .section_title {
     margin: 40px auto 55px;
@@ -565,6 +570,11 @@ body {
   border-bottom: 2px solid #b6f9ee;
   font-size: 30px;
 }
+@media (max-width: 1024px) {
+  .blogs .blog .blog_title {
+    font-size: 28px;
+  }
+}
 @media (max-width: 768px) {
   .blogs .blog .blog_title {
     font-size: 25px;
@@ -572,6 +582,12 @@ body {
 }
 .blogs .blog .blog_img {
   max-width: 40%;
+}
+@media (max-width: 1024px) {
+  .blogs .blog .blog_img {
+    width: 48%;
+    max-width: 350px;
+  }
 }
 @media (max-width: 768px) {
   .blogs .blog .blog_img {

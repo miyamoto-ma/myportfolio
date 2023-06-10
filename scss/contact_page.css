@@ -67,6 +67,14 @@ body {
 .btn:active, .btn_anime_inout:active {
   transform: translateY(-1px);
 }
+@media (max-width: 768px) {
+  .btn, .btn_anime_inout {
+    width: 100px;
+    height: 45px;
+    padding: 8px 20px;
+    font-size: 15px;
+  }
+}
 
 .btn1 {
   margin: 50px 10px;
@@ -77,6 +85,15 @@ body {
 }
 .btn1:active {
   box-shadow: 0 0 3px 0 #88bcb3;
+}
+
+.sp_br {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sp_br {
+    display: block;
+  }
 }
 
 .h_btn a, .header .header_wrap .h_nav ul li a {
@@ -190,6 +207,12 @@ body {
   left: 50%;
   transform-origin: center;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 768px) {
+  .btn_anime_inout::before, .btn_anime_inout::after {
+    width: 120px;
+    height: 120px;
+  }
 }
 .btn_anime_inout:active::before, .btn_anime_inout:active::after {
   -webkit-animation: btn_anime 0.3s ease-in-out;
@@ -478,6 +501,9 @@ body {
   background-color: #555;
 }
 
+.main .wrap {
+  padding: 0 1em 50px;
+}
 .main .wrap .c_form {
   margin: 0 2em 100px;
   padding: 80px 10%;
@@ -489,7 +515,8 @@ body {
 }
 @media (max-width: 768px) {
   .main .wrap .c_form {
-    margin: 0 1em 35px;
+    max-width: 650px;
+    margin: 0 auto 35px;
     padding: 70px 5%;
   }
 }
@@ -511,6 +538,12 @@ body {
   box-shadow: 0 0 4px 0px #88bcb3, 0 0 10px 0 rgba(226, 250, 246, 0.4);
   background-color: rgba(255, 255, 255, 0.7);
 }
+@media (max-width: 1024px) {
+  .main .wrap .c_form .f_item input, .main .wrap .c_form .f_item textarea {
+    width: 100%;
+    max-width: 500px;
+  }
+}
 @media (max-width: 768px) {
   .main .wrap .c_form .f_item input, .main .wrap .c_form .f_item textarea {
     width: 100%;
@@ -518,6 +551,11 @@ body {
 }
 .main .wrap .c_form .f_item textarea {
   width: 100%;
+}
+@media (max-width: 1024px) {
+  .main .wrap .c_form .f_item textarea {
+    max-width: none;
+  }
 }
 .main .wrap .c_form .f_contents {
   margin-top: 20px;

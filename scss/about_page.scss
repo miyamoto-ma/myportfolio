@@ -42,6 +42,7 @@
                 }
                 @include small {
                     width: 50%;
+                    max-width: 300px;
                     margin: 0 auto 1.5em;
                 }
             }
@@ -50,12 +51,15 @@
                 width: 50%;
                 padding: 3%;
                 margin-left: 3%;
+                line-height: 1.3em;
                 box-sizing: border-box;
+                @include middle {
+                    font-size: $fs_m - 2;
+                }
                 @include small {
                     width: 90%;
                     margin: 0 auto;
                     font-size: $fs_s;
-                    line-height: 1.3em;
                 }
             }
         }
@@ -74,22 +78,28 @@
                 // padding: 3%;
                 margin-right: 3%;
                 box-sizing: border-box;
+                @include middle {
+                    font-size: $fs_m - 2;
+                }
                 @include small {
                     width: 90%;
                     margin: 0 auto;
                     font-size: $fs_s;
-                    li {
-                        margin-bottom: 1.2em !important;
-                    }
-                    h3 {
-                        font-size: $fs_m !important;
-                    }
                 }
                 li {
                     margin-bottom: .8em;
+                    @include small {
+                        margin-bottom: 1.2em;
+                    }
                     h3 {
                         font-size: $fs_m + 2px;
                         margin-bottom: .3em;
+                        @include middle {
+                            font-size: $fs_m;
+                        }
+                        @include small {
+                            font-size: $fs_m;
+                        }
                     }
                     p {
                         margin-left: 1em;
@@ -102,6 +112,7 @@
                 width: 35%;
                 @include small {
                     width: 85%;
+                    max-width: 480px;
                     margin: 0 auto 1.5em;
                 }
             }

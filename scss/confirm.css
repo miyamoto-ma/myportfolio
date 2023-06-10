@@ -574,6 +574,7 @@ body {
 @media (max-width: 768px) {
   .form .preview img {
     width: 80%;
+    max-width: 400px;
   }
 }
 .form .text,

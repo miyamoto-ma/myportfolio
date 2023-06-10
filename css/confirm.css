@@ -7,6 +7,11 @@ body {
   font-size: 40px;
   text-align: center;
 }
+@media (max-width: 1024px) {
+  .section_title {
+    font-size: 38px;
+  }
+}
 @media (max-width: 768px) {
   .section_title {
     margin: 40px auto 55px;
@@ -580,6 +585,7 @@ body {
 @media (max-width: 768px) {
   .form .preview img {
     width: 80%;
+    max-width: 400px;
   }
 }
 .form .text,

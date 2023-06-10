@@ -87,6 +87,15 @@ body {
   box-shadow: 0 0 3px 0 #88bcb3;
 }
 
+.sp_br {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sp_br {
+    display: block;
+  }
+}
+
 .h_btn a, .header .header_wrap .h_nav ul li a {
   display: block;
   height: 50px;
@@ -505,6 +514,7 @@ body {
 }
 @media (max-width: 768px) {
   .form_wrap {
+    min-width: 60vw;
     padding: 30px 20px;
   }
 }
@@ -541,6 +551,7 @@ body {
 }
 .form_wrap .form .btns {
   display: flex;
+  justify-content: center;
 }
 .form_wrap .form .btns .btn, .form_wrap .form .btns .btn_anime_inout {
   width: 120px;

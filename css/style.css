@@ -7,6 +7,11 @@ body {
   font-size: 40px;
   text-align: center;
 }
+@media (max-width: 1024px) {
+  .section_title {
+    font-size: 38px;
+  }
+}
 @media (max-width: 768px) {
   .section_title {
     margin: 40px auto 55px;
@@ -559,22 +564,18 @@ body {
     display: block;
     margin-bottom: 70px;
   }
-  .main .home_about .home_about_wrap .h_about .h_img {
-    width: 45% !important;
-    height: auto !important;
-    margin: 0 auto 3.5em;
-  }
-  .main .home_about .home_about_wrap .h_about p {
-    display: block;
-    width: 90% !important;
-    margin: 0 auto;
-    line-height: 1.4em;
-    font-size: 15px !important;
-  }
 }
 .main .home_about .home_about_wrap .h_about .h_img {
   width: 25%;
   position: relative;
+}
+@media (max-width: 768px) {
+  .main .home_about .home_about_wrap .h_about .h_img {
+    width: 45%;
+    max-width: 250px;
+    height: auto;
+    margin: 0 auto 3.5em;
+  }
 }
 .main .home_about .home_about_wrap .h_about .h_img img {
   width: 100%;
@@ -607,7 +608,21 @@ body {
 }
 .main .home_about .home_about_wrap .h_about p {
   width: 50%;
+  line-height: 1.4em;
   font-size: 20px;
+}
+@media (max-width: 1024px) {
+  .main .home_about .home_about_wrap .h_about p {
+    font-size: 18px;
+  }
+}
+@media (max-width: 768px) {
+  .main .home_about .home_about_wrap .h_about p {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 15px;
+  }
 }
 .main .home_about .home_about_wrap .h_about2 {
   flex-direction: row-reverse;

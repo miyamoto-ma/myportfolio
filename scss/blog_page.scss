@@ -54,12 +54,19 @@
             margin-bottom: 1em;
             border-bottom: 2px solid #b6f9ee;
             font-size: 30px;
+            @include middle {
+                font-size: 28px;
+            }
             @include small {
                 font-size: $fs_l;
             }
         }
         .blog_img {
             max-width: 40%;
+            @include middle {
+                width: 48%;
+                max-width: 350px;
+            }
             @include small {
                 width: 55%;
                 max-width: 400px;

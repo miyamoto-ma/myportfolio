@@ -129,6 +129,9 @@ body {
     margin: $space_80 auto;
     font-size: $h2_fs;
     text-align: center;
+    @include middle {
+        font-size: $h2_fs - 2;
+    }
     @include small {
         margin: 40px auto 55px;
         font-size: $h1_fs;
