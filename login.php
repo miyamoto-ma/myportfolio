@@ -1,14 +1,19 @@
 <?php
-require_once(__DIR__ . '/app/functions.php');
-createToken();
+require_once(__DIR__ . '/app/config.php');
+require_once(__DIR__ . '/app/Database.php');
+require_once(__DIR__ . '/app/Blog.php');
+require_once(__DIR__ . '/app/Token.php');
+require_once(__DIR__ . '/app/Utils.php');
+
+Token::createToken();
 
 if (isset($_POST['name']) && isset($_POST['pass'])) {
-    validateToken();
-    $name = h($_POST['name']);
-    $pass = h($_POST['pass']);
+    Token::validateToken();
+    $name = Utils::h($_POST['name']);
+    $pass = Utils::h($_POST['pass']);
 
-    $pdo = getPDOInstance();
-    $id = getAccount($pdo, $name, $pass);
+    $pdo = Database::getPDOInstance();
+    $id = Blog::getAccount($pdo, $name, $pass);
     if (!empty($id)) {
         $_SESSION['loginUserId'] = $id;
         $_SESSION['loginUserName'] = $name;
@@ -53,7 +58,7 @@ if (isset($_POST['name']) && isset($_POST['pass'])) {
                 </label>
                 <input type="password" name="pass" maxlength="20" require>
             </div>
-            <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+            <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']); ?>">
             <div class="btns">
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="submit" value="ログイン">

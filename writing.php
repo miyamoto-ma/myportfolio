@@ -1,7 +1,12 @@
 <?php
-require_once(__DIR__ . '/app/functions.php');
+require_once(__DIR__ . '/app/config.php');
+require_once(__DIR__ . '/app/Blog.php');
 require_once(__DIR__ . '/app/blogClass.php');
-createToken();
+require_once(__DIR__ . '/app/Token.php');
+require_once(__DIR__ . '/app/Utils.php');
+require_once(__DIR__ . '/app/Validate.php');
+
+Token::createToken();
 
 // ログインされていなければログイン画面へ
 if (!isset($_SESSION['loginUserId'])) {
@@ -11,17 +16,17 @@ if (!isset($_SESSION['loginUserId'])) {
 }
 
 if (filter_input(INPUT_GET, 'action') === 'confirm') {
-    validateToken();
+    Token::validateToken();
     // フォームデータを取得
-    $title = h($_POST['title']);
-    $text = h($_POST['text']);
+    $title = Utils::h($_POST['title']);
+    $text = Utils::h($_POST['text']);
     $img = '';
     if (mb_strlen($_FILES['img']['name']) > 0) {
         $filename = $_FILES['img']['name'];
         $upload_path = './upload/' . $filename;
         $upload_result = move_uploaded_file($_FILES['img']['tmp_name'], $upload_path);
         if ($upload_result) {
-            $img = h($filename);
+            $img = Utils::h($filename);
         } else {
             print '画像のアップロードに失敗しました。<br>';
             print
@@ -31,8 +36,8 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
     }
 
     // バリデート
-    $title_result = validateTitle($title);
-    $text_result = validateText($text);
+    $title_result = Validate::validate100($title, 'タイトル');
+    $text_result = Validate::validate400($text, '本文');
 
     if ($title_result !== 'OK') {
         print $title_result . '<br>';
@@ -100,7 +105,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <img id="new_img">
                 </div>
             </div>
-            <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+            <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']); ?>">
             <div class="btns">
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="submit" value="確認画面へ">

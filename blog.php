@@ -1,21 +1,27 @@
 <?php
-require_once(__DIR__ . '/app/functions.php');
-createToken();
-$pdo = getPDOInstance();
+require_once(__DIR__ . '/app/config.php');
+require_once(__DIR__ . '/app/Database.php');
+require_once(__DIR__ . '/app/Blog.php');
+require_once(__DIR__ . '/app/Token.php');
+require_once(__DIR__ . '/app/Utils.php');
+
+Token::createToken();
+
+$pdo = Database::getPDOInstance();
 unset($_SESSION['blog']);
 
 $logout_result = false;
 if (filter_input(INPUT_GET, 'action') !== null) {
     switch (filter_input(INPUT_GET, 'action')) {
         case 'delete':
-            validateToken();
+            Token::validateToken();
             // ブログ1件分の削除処理
             $id = filter_input(INPUT_POST, 'blogId');
-            $userId = getBlogUserId($pdo, $id);
+            $userId = Blog::getBlogUserId($pdo, $id);
             $loginUserId = $_SESSION['loginUserId'];
             header('Content-Type: application/json');
             if ($userId === $loginUserId) {
-                $del_result = deleteBlog($pdo, $id);
+                $del_result = Blog::deleteBlog($pdo, $id);
                 if ($del_result) {
                     echo json_encode(['res' => 'OK']);
                 } else {
@@ -37,8 +43,8 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 $page = filter_input(INPUT_GET, 'page');
 $current_page = (int)(filter_input(INPUT_GET, 'page') ? filter_input(INPUT_GET, 'page') : 1);      // 現在のページ
 $items_per_page = 3;                                   // 1ページのアイテム数
-$blogs = getBlogsByPage($pdo, $current_page, $items_per_page);  // ブログデータ取得
-$total_items = getTotal($pdo);                          // 総アイテム数
+$blogs = Blog::getBlogsByPage($pdo, $current_page, $items_per_page);  // ブログデータ取得
+$total_items = Blog::getTotal($pdo);                          // 総アイテム数
 $total_pages = ceil($total_items / $items_per_page);    // 総ページ数
 // ページナビに表示する数値の配列を取得
 $around_pages = [];
@@ -72,7 +78,7 @@ if ($current_page >= 1 && $current_page <= $total_pages) {
 <body>
     <?php include_once './inc/header.php'; ?>
 
-    <main data-token="<?= h($_SESSION['token']); ?>">
+    <main data-token="<?= Utils::h($_SESSION['token']); ?>">
         <section class="section">
             <div class="blogs wrap">
                 <h2 class="section_title">

@@ -1,7 +1,12 @@
 <?php
-require_once(__DIR__ . '/app/functions.php');
+require_once(__DIR__ . '/app/config.php');
+require_once(__DIR__ . '/app/Database.php');
+require_once(__DIR__ . '/app/Blog.php');
 require_once(__DIR__ . '/app/blogClass.php');
-createToken();
+require_once(__DIR__ . '/app/Token.php');
+require_once(__DIR__ . '/app/Utils.php');
+
+Token::createToken();
 
 // ログインされていなければログイン画面へ
 if (!isset($_SESSION['loginUserId'])) {
@@ -40,7 +45,7 @@ $name = $_SESSION['loginUserName'];
 // ユーザーIDを取得
 $user_id = $_SESSION['loginUserId'];
 // PDOインスタンス取得
-$pdo = getPDOInstance();
+$pdo = Database::getPDOInstance();
 // ブログIDを取得
 if (filter_input(INPUT_GET, 'from') === 'edit' || filter_input(INPUT_GET, 'action') === 'update') {
     $id = $_SESSION['blog']->id;
@@ -65,15 +70,15 @@ $create_time = $_SESSION['blog']->create_time;
 
 
 if (filter_input(INPUT_GET, 'action') !== null) {
-    validateToken();
+    Token::validateToken();
     switch (filter_input(INPUT_GET, 'action')) {
         case 'add':
             // ブログ投稿処理（失敗なら0）
-            $act_result = addBlog($pdo, $user_id, $title, $text, $img, $create_time);
+            $act_result = Blog::addBlog($pdo, $user_id, $title, $text, $img, $create_time);
             break;
         case 'update':
             // ブログ更新処理（失敗ならfalse)
-            $act_result = editBlog($pdo, $id, $title, $text, $img);
+            $act_result = Blog::editBlog($pdo, $id, $title, $text, $img);
             unset($_SESSION['check']);
             break;
         default:
@@ -126,7 +131,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             <div class="create_time">
                 <p><?= $create_time; ?></p>
             </div>
-            <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+            <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']); ?>">
             <div class="btns">
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="submit" name="submit" value="投稿">

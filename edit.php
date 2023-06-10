@@ -1,6 +1,13 @@
 <?php
-require_once(__DIR__ . '/app/functions.php');
-createToken();
+require_once(__DIR__ . '/app/config.php');
+require_once(__DIR__ . '/app/Database.php');
+require_once(__DIR__ . '/app/Blog.php');
+require_once(__DIR__ . '/app/Token.php');
+require_once(__DIR__ . '/app/Utils.php');
+require_once(__DIR__ . '/app/Validate.php');
+
+
+Token::createToken();
 
 // ログインされていなければログイン画面へ
 if (!isset($_SESSION['loginUserId'])) {
@@ -15,9 +22,9 @@ if (filter_input(INPUT_GET, 'action') !== null) {
     switch (filter_input(INPUT_GET, 'action')) {
         case 'edit':
             if (!isset($_SESSION['blog'])) {
-                $pdo = getPDOInstance();
+                $pdo = Database::getPDOInstance();
                 $id = filter_input(INPUT_GET, 'blogId');
-                $_SESSION['blog'] = getBlog($pdo, $id);
+                $_SESSION['blog'] = Blog::getBlog($pdo, $id);
             }
             $blog = $_SESSION['blog'];
             if ($blog->user_id !== $_SESSION['loginUserId']) {
@@ -25,13 +32,13 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             }
             break;
         case 'confirm':
-            validateToken();
+            Token::validateToken();
             // フォームデータを取得
-            $title = h($_POST['title']);
-            $text = h($_POST['text']);
+            $title = Utils::h($_POST['title']);
+            $text = Utils::h($_POST['text']);
             $check = false;
             if (isset($_POST['check'])) {
-                $check = h($_POST['check']);
+                $check = Utils::h($_POST['check']);
             }
             $_SESSION['check'] = $check;
             $blog = $_SESSION['blog'];
@@ -43,7 +50,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
                     $upload_path = './upload/' . $filename;
                     $upload_result = move_uploaded_file($_FILES['img']['tmp_name'], $upload_path);
                     if ($upload_result) {
-                        $new_img = h($filename);
+                        $new_img = Utils::h($filename);
                     } else {
                         print '画像のアップロードに失敗しました。<br>';
                         print
@@ -55,8 +62,8 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             }
 
             // バリデート
-            $title_result = validateTitle($title);
-            $text_result = validateText($text);
+            $title_result = Validate::validate100($title, 'タイトル');
+            $text_result = Validate::validate400($text, '本文');
 
             if ($title_result !== 'OK') {
                 print $title_result . '<br>';
@@ -136,7 +143,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
                     <img id="new_img">
                 </div>
             </div>
-            <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+            <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']); ?>">
             <div class=" btns">
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="submit" value="確認画面へ">

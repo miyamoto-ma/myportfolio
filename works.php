@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -22,6 +26,21 @@
                 <h2 class="section_title">
                     <p>Works</p>
                 </h2>
+
+                <div class="author">
+                    <?php if ($logout_result) : ?>
+                        <p>ログアウトしました。</p>
+                    <?php elseif (isset($_SESSION['loginUserId'])) : ?>
+                        <p><?= $_SESSION['loginUserName']; ?>さんログイン中</p><br class="sp_br">
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['loginUserId']) && $logout_result === false) : ?>
+                        <a href="writing.php">投稿</a>
+                        <a href="?action=logout">ログアウト</a>
+                    <?php else : ?>
+                        <a href="./login.php">管理者用</a>
+                    <?php endif; ?>
+                </div>
+
                 <div class="works">
                     <div class="work">
                         <p class="w_title">ブログアプリ(Java)</p>
