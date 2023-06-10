@@ -9,17 +9,24 @@ if (!isset($_SESSION['loginUserId'])) {
     print '<a href="login.php">ログイン画面へ</a>';
     exit();
 }
+// ページ番号の取得
+$current_page = 1;
+if (filter_input(INPUT_GET, 'page') !== null) {
+    $current_page = filter_input(INPUT_GET, 'page');
+}
 
-// 戻るボタンのhref
-$back_url = '';
-$action = '';
+// url
+$back_url = '';     // 戻るボタンのhref
+$action = '';       // フォームのaction
 if (filter_input(INPUT_GET, 'from') === 'writing') {
     $back_url = 'writing.php';
     $action = 'add';
 } elseif (filter_input(INPUT_GET, 'from') === 'edit') {
-    $back_url = 'edit.php?action=edit&blogId=' . $_SESSION['blog']->id;
+    $back_url = 'edit.php?action=edit&blogId=' . $_SESSION['blog']->id . '&page=' . $current_page;
     $action = 'update';
 }
+
+
 
 // セッションにblogがセットされていない場合
 if (!isset($_SESSION['blog'])) {
@@ -78,7 +85,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
         exit();
     }
     unset($_SESSION['blog']);
-    header('Location: blog.php');
+    header('Location: blog.php?page=' . $current_page);
     exit();
 }
 ?>
@@ -104,7 +111,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             <p>ようこそ<?= $name; ?>さん</p>
             <a href="./blog.php">ブログ一覧へ</a>
         </div>
-        <form class="form" action="?action=<?= $action; ?>" method="post">
+        <form class="form" action="?action=<?= $action; ?>&page=<?= $current_page; ?>" method="post">
             <div class="title">
                 <p><?= $title; ?></p>
             </div>

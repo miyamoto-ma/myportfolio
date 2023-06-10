@@ -517,8 +517,10 @@ body {
 .main .about:last-child {
   margin-bottom: 15vw;
 }
-.main .about_1_wrap .about_1_content {
-  flex-direction: column;
+@media (max-width: 768px) {
+  .main .about_1_wrap .about_1_content {
+    flex-direction: column;
+  }
 }
 .main .about_1_wrap .about_1_content .shadow {
   width: 25%;
@@ -562,8 +564,10 @@ body {
     line-height: 1.3em;
   }
 }
-.main .about_2_wrap .about_2_content {
-  flex-direction: column-reverse;
+@media (max-width: 768px) {
+  .main .about_2_wrap .about_2_content {
+    flex-direction: column-reverse;
+  }
 }
 .main .about_2_wrap .about_2_content .skills {
   display: block;

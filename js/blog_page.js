@@ -8,7 +8,8 @@
     edits.forEach(edit => {
         edit.addEventListener('click', e => {
             let blogId = e.target.parentNode.dataset.blog;
-            location.href = 'edit.php?action=edit&blogId=' + blogId;
+            let current_page = e.target.parentNode.dataset.page;
+            location.href = 'edit.php?action=edit&blogId=' + blogId + '&page=' + current_page;
         });
     });
 

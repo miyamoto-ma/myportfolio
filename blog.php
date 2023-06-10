@@ -107,8 +107,8 @@ if ($current_page >= 1 && $current_page <= $total_pages) {
                             <div class="blog_etc">
                                 <p class="date"><?= $blog["create_time"]; ?></p>
                                 <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $blog['user_id']) : ?>
-                                    <div class="auth_btns" data-blog="<?= $blog['id']; ?>">
-                                        <span class="err_del"></span>
+                                    <div class="auth_btns" data-blog="<?= $blog['id']; ?>" data-page="<?= $current_page; ?>">
+                                        <span class=" err_del"></span>
                                         <span class="edit auth_btn">編集</span>
                                         <span class="delete auth_btn">削除</span>
                                     </div>

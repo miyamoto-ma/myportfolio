@@ -8,6 +8,8 @@ if (!isset($_SESSION['loginUserId'])) {
     print '<a href="login.php">ログイン画面へ</a>';
     exit();
 }
+// ページ番号取得
+$current_page = filter_input(INPUT_GET, 'page');
 
 if (filter_input(INPUT_GET, 'action') !== null) {
     switch (filter_input(INPUT_GET, 'action')) {
@@ -19,7 +21,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             }
             $blog = $_SESSION['blog'];
             if ($blog->user_id !== $_SESSION['loginUserId']) {
-                header('Location: blog.php');
+                header('Location: blog.php?page=' . $current_page);
             }
             break;
         case 'confirm':
@@ -27,7 +29,10 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             // フォームデータを取得
             $title = h($_POST['title']);
             $text = h($_POST['text']);
-            $check = h($_POST['check']);
+            $check = false;
+            if (isset($_POST['check'])) {
+                $check = h($_POST['check']);
+            }
             $_SESSION['check'] = $check;
             $blog = $_SESSION['blog'];
 
@@ -66,7 +71,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 
             $_SESSION['blog']->title = $title;
             $_SESSION['blog']->text = $text;
-            header('Location: confirm.php?from=edit');
+            header('Location: confirm.php?from=edit&page=' . $current_page);
             exit();
         default:
             exit;
@@ -96,7 +101,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             <p>ようこそ<?= $_SESSION['loginUserName']; ?>さん</p>
             <a href="./blog.php">ブログ一覧へ</a>
         </div>
-        <form class="form" action="?action=confirm" method="post" enctype="multipart/form-data">
+        <form class="form" action="?action=confirm&page=<?= $current_page; ?>" method="post" enctype="multipart/form-data">
             <div class="input">
                 <label for="title">
                     <p>タイトル(100文字以内)：</p>
@@ -132,7 +137,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
                 </div>
             </div>
             <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-            <div class="btns">
+            <div class=" btns">
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="submit" value="確認画面へ">
                 </div>

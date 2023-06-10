@@ -582,6 +582,7 @@ body {
 }
 .blogs .blog .blog_img img {
   width: 100%;
+  box-shadow: 1px 1px 3px 0px #88bcb3;
 }
 .blogs .blog .blog_content {
   margin: 1.5em auto 2.5em;
