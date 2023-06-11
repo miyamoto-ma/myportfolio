@@ -42,8 +42,8 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 
 // ページナビ用のデータ読み込み
 $items_per_page = 3;    // 1ページに表示するアイテム数
-$page_ins = new Page($pdo);
-$data = $page_ins->itemsByPage('blog', $items_per_page);
+$page_ins = new Page($pdo, 'blog', $items_per_page);
+$data = $page_ins->itemsByPage();
 ?>
 
 <!DOCTYPE html>

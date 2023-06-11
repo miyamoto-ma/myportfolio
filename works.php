@@ -42,28 +42,8 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 
 // ページナビ用のデータ読み込み
 $items_per_page = 3;    // 1ページに表示するアイテム数
-$page_ins = new Page($pdo);
-$data = $page_ins->itemsByPage('works', $items_per_page);
-
-// $page = filter_input(INPUT_GET, 'page');
-// $current_page = (int)(filter_input(INPUT_GET, 'page') ? filter_input(INPUT_GET, 'page') : 1);      // 現在のページ
-// $items_per_page = 3;                                   // 1ページのアイテム数
-// $blogs = Blog::getBlogsByPage($pdo, $current_page, $items_per_page);  // ブログデータ取得
-// $total_items = Blog::getTotal($pdo);                          // 総アイテム数
-// $total_pages = ceil($total_items / $items_per_page);    // 総ページ数
-// // ページナビに表示する数値の配列を取得
-// $around_pages = [];
-// if ($current_page >= 1 && $current_page <= $total_pages) {
-//     if ($current_page >= 3)  array_push($around_pages, $current_page - 2);
-//     if ($current_page >= 2) array_push($around_pages, $current_page - 1);
-//     array_push($around_pages, $current_page);
-//     if ($current_page <= $total_pages - 1) array_push($around_pages, $current_page + 1);
-//     if ($current_page <= $total_pages - 2) array_push($around_pages, $current_page + 2);
-// } else {
-//     header('Location: blog.php');
-// }
-
-
+$page_ins = new Page($pdo, 'works', $items_per_page);
+$data = $page_ins->itemsByPage();
 
 ?>
 
