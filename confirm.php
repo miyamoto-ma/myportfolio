@@ -14,10 +14,25 @@ use MySite\Utils;
 
 Token::createToken();
 
+if (filter_input(INPUT_GET, 'base') !== null) {
+    $base = filter_input(INPUT_GET, 'base');
+    if ($base !== 'blog' && $base !== 'works') {
+        print 'blogページもしくはworksページより投稿してください。<br>';
+        print '<a href="works.php">worksページへ</a><br>';
+        print '<a href="blog.php">blogページへ</a>';
+        exit;
+    }
+} else {
+    print 'blogページもしくはworksページより投稿してください。<br>';
+    print '<a href="works.php">worksページへ</a><br>';
+    print '<a href="blog.php">blogページへ</a>';
+    exit;
+}
+
 // ログインされていなければログイン画面へ
 if (!isset($_SESSION['loginUserId'])) {
     print 'ログインされていません。<br>';
-    print '<a href="login.php">ログイン画面へ</a>';
+    print '<a href="login.php?base=' . $base . '">ログイン画面へ</a>';
     exit();
 }
 // ページ番号の取得
@@ -31,10 +46,10 @@ $blog = unserialize($_SESSION['blog']);
 $back_url = '';     // 戻るボタンのhref
 $action = '';       // フォームのaction
 if (filter_input(INPUT_GET, 'from') === 'writing') {
-    $back_url = 'writing.php';
+    $back_url = 'writing.php?base=' . $base;
     $action = 'add';
 } elseif (filter_input(INPUT_GET, 'from') === 'edit') {
-    $back_url = 'edit.php?action=edit&blogId=' . $blog->id . '&page=' . $current_page;
+    $back_url = 'edit.php?base=' . $base . '&action=edit&blogId=' . $blog->id . '&page=' . $current_page;
     $action = 'update';
 }
 
@@ -123,7 +138,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             <p>ようこそ<?= $name; ?>さん</p>
             <a href="./blog.php">ブログ一覧へ</a>
         </div>
-        <form class="form" action="?action=<?= $action; ?>&page=<?= $current_page; ?>" method="post">
+        <form class="form" action="?base=<?= $base; ?>&action=<?= $action; ?>&page=<?= $current_page; ?>" method="post">
             <div class="title">
                 <p><?= $title; ?></p>
             </div>

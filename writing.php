@@ -1,9 +1,5 @@
 <?php
 require_once(__DIR__ . '/app/config.php');
-// require_once(__DIR__ . '/app/blogClass.php');
-// require_once(__DIR__ . '/app/Token.php');
-// require_once(__DIR__ . '/app/Utils.php');
-// require_once(__DIR__ . '/app/Validate.php');
 
 use MySite\blogClass;
 use MySite\Token;
@@ -12,10 +8,25 @@ use MySite\Validate;
 
 Token::createToken();
 
+if (filter_input(INPUT_GET, 'base') !== null) {
+    $base = filter_input(INPUT_GET, 'base');
+    if ($base !== 'blog' && $base !== 'works') {
+        print 'blogページもしくはworksページより投稿してください。<br>';
+        print '<a href="works.php">worksページへ</a><br>';
+        print '<a href="blog.php">blogページへ</a>';
+        exit;
+    }
+} else {
+    print 'blogページもしくはworksページより投稿してください。<br>';
+    print '<a href="works.php">worksページへ</a><br>';
+    print '<a href="blog.php">blogページへ</a>';
+    exit;
+}
+
 // ログインされていなければログイン画面へ
 if (!isset($_SESSION['loginUserId'])) {
     print 'ログインされていません<br>';
-    print '<a href="login.php">ログイン画面へ</a>';
+    print '<a href="login.php?base=' . $base . '">ログイン画面へ</a>';
     exit();
 }
 
@@ -33,8 +44,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
             $img = Utils::h($filename);
         } else {
             print '画像のアップロードに失敗しました。<br>';
-            print
-                '<a href="writing.php">投稿画面へ</a>';
+            print '<a href="writing.php?base=' . $base . '">投稿画面へ</a>';
             exit();
         }
     }
@@ -45,19 +55,19 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
 
     if ($title_result !== 'OK') {
         print $title_result . '<br>';
-        print '<a href="writing.php">投稿画面へ</a>';
+        print '<a href="writing.php?base=' . $base . '">投稿画面へ</a>';
         exit();
     }
     if ($text_result !== 'OK') {
         print $text_result . '<br>';
-        print '<a href="writing.php">投稿画面へ</a>';
+        print '<a href="writing.php?base=' . $base . '">投稿画面へ</a>';
         exit();
     }
     date_default_timezone_set('Asia/Tokyo');
     $create_time = date('Y-m-d H:i:s');
     $blog = new blogClass($title, $text, $img, $create_time);
     $_SESSION['blog'] = serialize($blog);
-    header('Location: confirm.php?from=writing');
+    header('Location: confirm.php?base=' . $base . '&from=writing');
     exit();
 }
 
@@ -84,7 +94,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
             <p>ようこそ<?= $_SESSION['loginUserName']; ?>さん</p>
             <a href="./blog.php">ブログ一覧へ</a>
         </div>
-        <form class="form" action="?action=confirm" method="post" enctype="multipart/form-data">
+        <form class="form" action="?base=<?= $base; ?>&action=confirm" method="post" enctype="multipart/form-data">
             <div class="input">
                 <label for="title">
                     <p>タイトル(100文字以内)：</p>

@@ -1,9 +1,5 @@
 <?php
 require_once(__DIR__ . '/app/config.php');
-// require_once(__DIR__ . '/app/Database.php');
-// require_once(__DIR__ . '/app/Blog.php');
-// require_once(__DIR__ . '/app/Token.php');
-// require_once(__DIR__ . '/app/Utils.php');
 
 use MySite\Database;
 use MySite\Blog;
@@ -96,10 +92,10 @@ if ($current_page >= 1 && $current_page <= $total_pages) {
                         <p><?= $_SESSION['loginUserName']; ?>さんログイン中</p><br class="sp_br">
                     <?php endif; ?>
                     <?php if (isset($_SESSION['loginUserId']) && $logout_result === false) : ?>
-                        <a href="writing.php">投稿</a>
+                        <a href="writing.php?base=blog">投稿</a>
                         <a href="?action=logout">ログアウト</a>
                     <?php else : ?>
-                        <a href="./login.php">管理者用</a>
+                        <a href="./login.php?base=blog">管理者用</a>
                     <?php endif; ?>
                 </div>
 

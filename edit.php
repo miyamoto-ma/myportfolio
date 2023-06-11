@@ -15,10 +15,25 @@ use MySite\Validate;
 
 Token::createToken();
 
+if (filter_input(INPUT_GET, 'base') !== null) {
+    $base = filter_input(INPUT_GET, 'base');
+    if ($base !== 'blog' && $base !== 'works') {
+        print 'blogページもしくはworksページより編集してください。<br>';
+        print '<a href="works.php">worksページへ</a><br>';
+        print '<a href="blog.php">blogページへ</a>';
+        exit;
+    }
+} else {
+    print 'blogページもしくはworksページより編集してください。<br>';
+    print '<a href="works.php">worksページへ</a><br>';
+    print '<a href="blog.php">blogページへ</a>';
+    exit;
+}
+
 // ログインされていなければログイン画面へ
 if (!isset($_SESSION['loginUserId'])) {
     print 'ログインされていません<br>';
-    print '<a href="login.php">ログイン画面へ</a>';
+    print '<a href="login.php?base=' . $base . '">ログイン画面へ</a>';
     exit();
 }
 // ページ番号取得
@@ -60,7 +75,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
                     } else {
                         print '画像のアップロードに失敗しました。<br>';
                         print
-                            '<a href="edit.php">編集画面へ</a>';
+                            '<a href="edit.php?base=' . $base . '">編集画面へ</a>';
                         exit();
                     }
                 }
@@ -73,19 +88,19 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 
             if ($title_result !== 'OK') {
                 print $title_result . '<br>';
-                print '<a href="edit.php">編集画面へ</a>';
+                print '<a href="edit.php?base=' . $base . '">編集画面へ</a>';
                 exit();
             }
             if ($text_result !== 'OK') {
                 print $text_result . '<br>';
-                print '<a href="edit.php">編集画面へ</a>';
+                print '<a href="edit.php?base=' . $base . '">編集画面へ</a>';
                 exit();
             }
 
             $blog->title = $title;
             $blog->text = $text;
             $_SESSION['blog'] = serialize($blog);
-            header('Location: confirm.php?from=edit&page=' . $current_page);
+            header('Location: confirm.php?base=' . $base . '&from=edit&page=' . $current_page);
             exit();
         default:
             exit;
@@ -115,7 +130,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             <p>ようこそ<?= $_SESSION['loginUserName']; ?>さん</p>
             <a href="./blog.php">ブログ一覧へ</a>
         </div>
-        <form class="form" action="?action=confirm&page=<?= $current_page; ?>" method="post" enctype="multipart/form-data">
+        <form class="form" action="?base=<?= $base; ?>&action=confirm&page=<?= $current_page; ?>" method="post" enctype="multipart/form-data">
             <div class="input">
                 <label for="title">
                     <p>タイトル(100文字以内)：</p>

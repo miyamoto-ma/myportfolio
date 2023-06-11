@@ -1,6 +1,12 @@
 'use strict';
 
 {
+    let path_name = (new URL(window.location.href).pathname);
+    let sepa1 = path_name.lastIndexOf('/');
+    let file = path_name.substring(sepa1 + 1);
+    let sepa2 = file.lastIndexOf('.');
+    const base = file.substring(0, sepa2);
+
     /**
      * 「編集」をクリックで、blogIdとuserIdをセットしてジャンプ
      */
@@ -9,7 +15,7 @@
         edit.addEventListener('click', e => {
             let blogId = e.target.parentNode.dataset.blog;
             let current_page = e.target.parentNode.dataset.page;
-            location.href = 'edit.php?action=edit&blogId=' + blogId + '&page=' + current_page;
+            location.href = 'edit.php?base='+ base +'&action=edit&blogId=' + blogId + '&page=' + current_page;
         });
     });
 

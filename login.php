@@ -1,9 +1,5 @@
 <?php
 require_once(__DIR__ . '/app/config.php');
-// require_once(__DIR__ . '/app/Database.php');
-// require_once(__DIR__ . '/app/Blog.php');
-// require_once(__DIR__ . '/app/Token.php');
-// require_once(__DIR__ . '/app/Utils.php');
 
 use MySite\Database;
 use MySite\Blog;
@@ -12,24 +8,45 @@ use MySite\Utils;
 
 Token::createToken();
 
-if (isset($_POST['name']) && isset($_POST['pass'])) {
-    Token::validateToken();
-    $name = Utils::h($_POST['name']);
-    $pass = Utils::h($_POST['pass']);
+if (filter_input(INPUT_GET, 'base') !== null) {
+    switch (filter_input(INPUT_GET, 'base')) {
+        case 'blog':
+            if (isset($_POST['name']) && isset($_POST['pass'])) {
+                Token::validateToken();
+                $name = Utils::h($_POST['name']);
+                $pass = Utils::h($_POST['pass']);
 
-    $pdo = Database::getPDOInstance();
-    $id = Blog::getAccount($pdo, $name, $pass);
-    if (!empty($id)) {
-        $_SESSION['loginUserId'] = $id;
-        $_SESSION['loginUserName'] = $name;
-        header('Location: writing.php');
-        exit();
-    } else {
-        print 'アカウントが見つかりませんでした。<br>';
-        print
-            '<a href="login.php">ログイン画面へ</a>';
-        exit();
+                $pdo = Database::getPDOInstance();
+                $id = Blog::getAccount($pdo, $name, $pass);
+                if (!empty($id)) {
+                    $_SESSION['loginUserId'] = $id;
+                    $_SESSION['loginUserName'] = $name;
+                    header('Location: writing.php?base=blog');
+                    exit();
+                } else {
+                    print 'アカウントが見つかりませんでした。<br>';
+                    print
+                        '<a href="login.php">ログイン画面へ</a>';
+                    exit();
+                }
+            }
+            break;
+
+        case 'works':
+            // 後ほど記述
+            break;
+
+        default:
+            print 'blogページもしくはworksページよりログインしてください。<br>';
+            print '<a href="works.php">worksページへ</a><br>';
+            print '<a href="blog.php">blogページへ</a>';
+            exit;
     }
+} else {
+    print 'blogページもしくはworksページよりログインしてください。<br>';
+    print '<a href="works.php">worksページへ</a><br>';
+    print '<a href="blog.php">blogページへ</a>';
+    exit;
 }
 
 ?>
