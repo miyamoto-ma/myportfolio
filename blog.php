@@ -3,6 +3,7 @@ require_once(__DIR__ . '/app/config.php');
 
 use MySite\Database;
 use MySite\Blog;
+use MySite\Page;
 use MySite\Token;
 use MySite\Utils;
 
@@ -39,25 +40,10 @@ if (filter_input(INPUT_GET, 'action') !== null) {
     }
 }
 
-// 投稿内容をデータベースから取得
-// $blogs = getBlogsAll($pdo);      // 全てのブログを取得する用
-$page = filter_input(INPUT_GET, 'page');
-$current_page = (int)(filter_input(INPUT_GET, 'page') ? filter_input(INPUT_GET, 'page') : 1);      // 現在のページ
-$items_per_page = 3;                                   // 1ページのアイテム数
-$blogs = Blog::getBlogsByPage($pdo, $current_page, $items_per_page);  // ブログデータ取得
-$total_items = Blog::getTotal($pdo);                          // 総アイテム数
-$total_pages = ceil($total_items / $items_per_page);    // 総ページ数
-// ページナビに表示する数値の配列を取得
-$around_pages = [];
-if ($current_page >= 1 && $current_page <= $total_pages) {
-    if ($current_page >= 3)  array_push($around_pages, $current_page - 2);
-    if ($current_page >= 2) array_push($around_pages, $current_page - 1);
-    array_push($around_pages, $current_page);
-    if ($current_page <= $total_pages - 1) array_push($around_pages, $current_page + 1);
-    if ($current_page <= $total_pages - 2) array_push($around_pages, $current_page + 2);
-} else {
-    header('Location: blog.php');
-}
+// ページナビ用のデータ読み込み
+$items_per_page = 3;    // 1ページに表示するアイテム数
+$page_ins = new Page($pdo);
+$data = $page_ins->itemsByPage('blog', $items_per_page);
 ?>
 
 <!DOCTYPE html>
@@ -99,7 +85,7 @@ if ($current_page >= 1 && $current_page <= $total_pages) {
                     <?php endif; ?>
                 </div>
 
-                <?php foreach ($blogs as $blog) : ?>
+                <?php foreach ($data["items"] as $blog) : ?>
                     <div id="blog_<?= $blog["id"] ?>" class="blog">
                         <h3 class="blog_title"><?= $blog["title"]; ?></h3>
                         <div class="blog_wrap">
@@ -125,36 +111,7 @@ if ($current_page >= 1 && $current_page <= $total_pages) {
                     </div>
                 <?php endforeach; ?>
 
-                <div class="pagenate">
-                    <?php if ($current_page >= 3) : ?>
-                        <a href="?page=1" class="page_arrow">≪</a>
-                    <?php endif; ?>
-                    <?php if ($current_page >= 2) : ?>
-                        <a href="?page=<?= $current_page - 1; ?>" class="page_arrow">&lt;</a>
-                    <?php endif; ?>
-                    <?php if ($current_page >= 4) : ?>
-                        <span class="page_dots">...</span>
-                    <?php endif; ?>
-
-                    <?php foreach ($around_pages as $num) : ?>
-                        <?php if ($num !== $current_page) : ?>
-                            <a href="?page=<?= $num; ?>" class="page_btn"><?= $num; ?></a>
-                        <?php else : ?>
-                            <p class="page_btn current_btn"><?= $num; ?></p>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-
-                    <?php if ($current_page <= ($total_pages - 3)) : ?>
-                        <span class="page_dots">...</span>
-                    <?php endif; ?>
-                    <a href=""></a>
-                    <?php if ($current_page <= $total_pages - 1) : ?>
-                        <a href="?page=<?= $current_page + 1; ?>" class="page_arrow">&gt;</a>
-                    <?php endif; ?>
-                    <?php if ($current_page <= ($total_pages - 2)) : ?>
-                        <a href="?page=<?= $total_pages; ?>" class="page_arrow">≫</a>
-                    <?php endif; ?>
-                </div>
+                <?php include './inc/page_nav.php'; ?>
             </div>
         </section>
     </main>

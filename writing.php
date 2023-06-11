@@ -30,6 +30,11 @@ if (!isset($_SESSION['loginUserId'])) {
     exit();
 }
 
+// confirm.phpから戻るボタンで戻ってきた場合
+if (isset($_SESSION['blog'])) {
+    $blog = unserialize($_SESSION['blog']);
+}
+
 if (filter_input(INPUT_GET, 'action') === 'confirm') {
     Token::validateToken();
     // フォームデータを取得
@@ -100,14 +105,14 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <p>タイトル(100文字以内)：</p>
                     <p><span id="char_title">0</span>/100</p>
                 </label>
-                <input id="title" type="text" name="title" maxlength="100" required value="<?= isset($_SESSION['blog']) ? $_SESSION['blog']->title : ''; ?>">
+                <input id="title" type="text" name="title" maxlength="100" required value="<?= isset($_SESSION['blog']) ? $blog->title : ''; ?>">
             </div>
             <div class="input">
                 <label for="text">
                     <p>内容(400文字以内)：</p>
                     <p><span id="char_text">0</span>/400</p>
                 </label>
-                <textarea id="text" name="text" maxlength="400" required><?= isset($_SESSION['blog']) ? $_SESSION['blog']->text : ''; ?></textarea>
+                <textarea id="text" name="text" maxlength="400" required><?= isset($_SESSION['blog']) ? $blog->text : ''; ?></textarea>
             </div>
             <div class="img">
                 <span class="img_span">画像(任意)<br class="sp_br"><span class="img_ctn">(.jpg, .jpeg, .gif画像のみ(1MB以内))</span>：</span>

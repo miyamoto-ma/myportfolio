@@ -1,5 +1,6 @@
 @import "header";
 @import "footer";
+@import "page_nav";
 
 
 .main {
@@ -11,12 +12,48 @@
         @include small {
             padding: 0 1em;
         }
+
+        .author {
+            display: flex;
+            justify-content: right;
+            align-items: baseline;
+
+            @include small {
+                display: block;
+                text-align: right;
+            }
+
+            a {
+                margin-left: 1em;
+                padding: 0.5em;
+                border-radius: 3px;
+                display: inline-block;
+                background-color: #555;
+                color: #ddd;
+                opacity: .6;
+                cursor: pointer;
+                -o-transition: .3s all;
+                -moz-transition: .3s all;
+                -webkit-transition: .3s all;
+                transition: .3s all;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+
+                @include small {
+                    margin-left: .2em;
+                }
+            }
+        }
+
         .works {
+            margin:50px auto 90px;
             display: flex;
             flex-wrap: wrap;
             @include middle {
                 max-width: 900px;
-                margin: 0 auto;
+                margin: 50px auto 80px;
             }
             .work{
                 width: 30%;

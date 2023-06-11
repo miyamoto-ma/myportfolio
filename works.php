@@ -1,4 +1,69 @@
 <?php
+require_once(__DIR__ . '/app/config.php');
+
+use MySite\Database;
+use MySite\Works;
+use MySite\Page;
+use MySite\Token;
+use MySite\Utils;
+
+Token::createToken();
+
+$pdo = Database::getPDOInstance();
+// unset($_SESSION['works']);
+
+$logout_result = false;
+if (filter_input(INPUT_GET, 'action') !== null) {
+    switch (filter_input(INPUT_GET, 'action')) {
+            // case 'delete':
+            //     Token::validateToken();
+            //     // ブログ1件分の削除処理
+            //     $id = filter_input(INPUT_POST, 'blogId');
+            //     $userId = Blog::getBlogUserId($pdo, $id);
+            //     $loginUserId = $_SESSION['loginUserId'];
+            //     header('Content-Type: application/json');
+            //     if ($userId === $loginUserId) {
+            //         $del_result = Blog::deleteBlog($pdo, $id);
+            //         if ($del_result) {
+            //             echo json_encode(['res' => 'OK']);
+            //         } else {
+            //             echo json_encode(['res' => '※ブログの削除に失敗しました。']);
+            //         }
+            //     }
+            //     exit;
+        case 'logout':
+            // ログアウト処理
+            $logout_result = session_destroy();
+            break;
+        default:
+            exit;
+    }
+}
+
+// ページナビ用のデータ読み込み
+$items_per_page = 3;    // 1ページに表示するアイテム数
+$page_ins = new Page($pdo);
+$data = $page_ins->itemsByPage('works', $items_per_page);
+
+// $page = filter_input(INPUT_GET, 'page');
+// $current_page = (int)(filter_input(INPUT_GET, 'page') ? filter_input(INPUT_GET, 'page') : 1);      // 現在のページ
+// $items_per_page = 3;                                   // 1ページのアイテム数
+// $blogs = Blog::getBlogsByPage($pdo, $current_page, $items_per_page);  // ブログデータ取得
+// $total_items = Blog::getTotal($pdo);                          // 総アイテム数
+// $total_pages = ceil($total_items / $items_per_page);    // 総ページ数
+// // ページナビに表示する数値の配列を取得
+// $around_pages = [];
+// if ($current_page >= 1 && $current_page <= $total_pages) {
+//     if ($current_page >= 3)  array_push($around_pages, $current_page - 2);
+//     if ($current_page >= 2) array_push($around_pages, $current_page - 1);
+//     array_push($around_pages, $current_page);
+//     if ($current_page <= $total_pages - 1) array_push($around_pages, $current_page + 1);
+//     if ($current_page <= $total_pages - 2) array_push($around_pages, $current_page + 2);
+// } else {
+//     header('Location: blog.php');
+// }
+
+
 
 ?>
 
@@ -42,159 +107,32 @@
                 </div>
 
                 <div class="works">
-                    <div class="work">
-                        <p class="w_title">ブログアプリ(Java)</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/java_blog_app.jpg" alt="JavaBlogAppの画像">
+                    <?php foreach ($data["items"] as $work) : ?>
+                        <div class="work">
+                            <p class="w_title"><?= $work["title"]; ?></p>
+                            <div class="w_img_wrap">
+                                <img src="./upload/<?= $work["img"]; ?>" alt="<?= $work["title"]; ?>の画像">
+                            </div>
+                            <div class="contents">
+                                <p class="skill">
+                                    使用したスキル：
+                                    <span><?= $work["skill"]; ?></span>
+                                </p>
+                                <p class="description">
+                                    <?= $work["text"]; ?>
+                                </p>
+                                <?php if ($work["link1"] !== '') : ?>
+                                    <a href="<?= $work["link1"]; ?>" target="_blank"><?= $work["link_text1"]; ?></a>
+                                <?php endif; ?>
+                                <?php if ($work["link2"] !== '') : ?>
+                                    <a href="<?= $work["link2"]; ?>" target="_blank"><?= $work["link_text2"]; ?></a>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript, Java, SQL(H2サーバー)</span>
-                            </p>
-                            <p class="description">
-                                JavaのサーブレットとJSPファイルを使用し、ブログアプリを作成しました。<br>
-                                アカウントの登録、取得(ログイン), 削除機能。<br>
-                                ブログの追加、表示、編集、削除機能。<br>
-                                Ajaxを使用した「いいね」機能や、アカウントの登録済みユーザーネームのチェック機能等を実装しています。
-                            </p>
-                            <a href="https://github.com/miyamoto-ma/java_blog_app" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <p class="w_title">モーダルウィンドウパーツ</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/my_modal.jpg" alt="モーダルライブラリ画像">
-                        </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                当サイトを作成するにあたり、モーダルウィンドウをパーツ化してみました。<br>
-                                画像をクリックすると開き、[×]ボタンもしくは背景をクリックすると閉じるというシンプルなものです。<br>
-                                css/my_modal.cssとjs/my_modal.jsをローカルにコピーした後、
-                                htmlファイルで親要素にmodalクラス、子要素にimg要素を設定するだけで実装が可能です。
-                            </p>
-                            <a href="./blog.php">当サイトのブログページにて実装。</a>
-                            <a href="https://github.com/miyamoto-ma/simple_modal_js/tree/main" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <p class="w_title">ダミー</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/dummy.jpg" alt="">
-                        </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。<br>
-                                <a href=""></a>
-                            </p>
-                            <a href="">ダミーリンク</a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <p class="w_title">ダミー</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/dummy.jpg" alt="">
-                        </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                            </p>
-                            <a href="">ダミーリンク</a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <p class="w_title">ダミー</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/dummy.jpg" alt="">
-                        </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                            </p>
-                            <a href="">ダミーリンク</a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <p class="w_title">ダミー</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/dummy.jpg" alt="">
-                        </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                            </p>
-                            <a href="">ダミーリンク</a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <p class="w_title">ダミー</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/dummy.jpg" alt="">
-                        </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                            </p>
-                            <a href="">ダミーリンク</a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <p class="w_title">ダミー</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/plant1.jpg" alt="">
-                        </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                            </p>
-                            <a href="">ダミーリンク</a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <p class="w_title">ダミー</p>
-                        <div class="w_img_wrap">
-                            <img src="./img/dummy.jpg" alt="">
-                        </div>
-                        <div class="contents">
-                            <p class="skill">
-                                使用したスキル：
-                                <span>HTML, CSS, JavaScript</span>
-                            </p>
-                            <p class="description">
-                                説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                            </p>
-                            <a href="">ダミーリンク</a>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
+
                 </div>
+                <?php include './inc/page_nav.php'; ?>
             </div>
         </section>
     </main>

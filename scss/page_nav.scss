@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+// ページナビ
+.pagenate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3em;
+    font-size: $fs_m;
+    color: #777;
+
+    @include small {
+        font-size: $fs_s + 1;
+    }
+
+    .current_btn,
+    .page_btn,
+    .page_arrow {
+        width: 1.5em;
+        height: 1.5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        -o-transition: .3s all;
+        -moz-transition: .3s all;
+        -webkit-transition: .3s all;
+        transition: .3s all;
+    }
+
+    .page_arrow {
+        border: 1px solid #777;
+    }
+
+    .current_btn,
+    .page_btn:hover,
+    .page_arrow:hover {
+        color: #eee;
+        background-color: #777;
+    }
+
+    .page_btn:active,
+    .page_arrow:active {
+        opacity: .8;
+    }
+}
