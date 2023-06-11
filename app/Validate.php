@@ -1,5 +1,7 @@
 <?php
 
+namespace MySite;
+
 class Validate
 {
     // 100文字以内 空はだめ

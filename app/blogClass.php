@@ -1,5 +1,7 @@
 <?php
 
+namespace MySite;
+
 class blogClass
 {
     public $title;

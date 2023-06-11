@@ -1,10 +1,16 @@
 <?php
 require_once(__DIR__ . '/app/config.php');
-require_once(__DIR__ . '/app/Database.php');
-require_once(__DIR__ . '/app/Blog.php');
-require_once(__DIR__ . '/app/blogClass.php');
-require_once(__DIR__ . '/app/Token.php');
-require_once(__DIR__ . '/app/Utils.php');
+// require_once(__DIR__ . '/app/Database.php');
+// require_once(__DIR__ . '/app/Blog.php');
+// require_once(__DIR__ . '/app/blogClass.php');
+// require_once(__DIR__ . '/app/Token.php');
+// require_once(__DIR__ . '/app/Utils.php');
+
+use MySite\Database;
+use MySite\Blog;
+// use MySite\blogClass;
+use MySite\Token;
+use MySite\Utils;
 
 Token::createToken();
 

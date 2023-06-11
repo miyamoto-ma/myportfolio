@@ -1,5 +1,7 @@
 <?php
 
+namespace MySite;
+
 class Utils
 {
     // 埋め込む文字をエスケープする関数

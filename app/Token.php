@@ -1,5 +1,7 @@
 <?php
 
+namespace MySite;
+
 class Token
 {
     // トークンの作成
