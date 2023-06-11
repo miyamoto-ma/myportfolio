@@ -20,6 +20,7 @@ if (filter_input(INPUT_GET, 'page') !== null) {
     $current_page = filter_input(INPUT_GET, 'page');
 }
 
+$blog = unserialize($_SESSION['blog']);
 // url
 $back_url = '';     // 戻るボタンのhref
 $action = '';       // フォームのaction
@@ -27,17 +28,17 @@ if (filter_input(INPUT_GET, 'from') === 'writing') {
     $back_url = 'writing.php';
     $action = 'add';
 } elseif (filter_input(INPUT_GET, 'from') === 'edit') {
-    $back_url = 'edit.php?action=edit&blogId=' . $_SESSION['blog']->id . '&page=' . $current_page;
+    $back_url = 'edit.php?action=edit&blogId=' . $blog->id . '&page=' . $current_page;
     $action = 'update';
 }
-
-
 
 // セッションにblogがセットされていない場合
 if (!isset($_SESSION['blog'])) {
     print 'ブログ情報が取得できませんでした。<br>';
     print '<a href="' . $back_url . '">戻る</a>';
 }
+
+
 
 // ユーザー名を取得
 $name = $_SESSION['loginUserName'];
@@ -48,25 +49,25 @@ $user_id = $_SESSION['loginUserId'];
 $pdo = Database::getPDOInstance();
 // ブログIDを取得
 if (filter_input(INPUT_GET, 'from') === 'edit' || filter_input(INPUT_GET, 'action') === 'update') {
-    $id = $_SESSION['blog']->id;
+    $id = $blog->id;
 }
 // 投稿タイトルを取得
-$title = $_SESSION['blog']->title;
+$title = $blog->title;
 // 投稿内容を取得
-$text = $_SESSION['blog']->text;
+$text = $blog->text;
 // 投稿画像を取得
 $img = '';
 if (filter_input(INPUT_GET, 'from') === 'writing' || filter_input(INPUT_GET, 'action') === 'add') {
-    $img = $_SESSION['blog']->img;
+    $img = $blog->img;
 } elseif (filter_input(INPUT_GET, 'from') === 'edit' || filter_input(INPUT_GET, 'action') === 'update') {
     if ($_SESSION['check']) {
-        $img = $_SESSION['blog']->new_img;
-    } elseif (mb_strlen($_SESSION['blog']->img) > 0) {
-        $img = $_SESSION['blog']->img;
+        $img = $blog->new_img;
+    } elseif (mb_strlen($blog->img) > 0) {
+        $img = $blog->img;
     }
 }
 // 投稿日時を取得
-$create_time = $_SESSION['blog']->create_time;
+$create_time = $blog->create_time;
 
 
 if (filter_input(INPUT_GET, 'action') !== null) {

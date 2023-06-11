@@ -24,9 +24,9 @@ if (filter_input(INPUT_GET, 'action') !== null) {
             if (!isset($_SESSION['blog'])) {
                 $pdo = Database::getPDOInstance();
                 $id = filter_input(INPUT_GET, 'blogId');
-                $_SESSION['blog'] = Blog::getBlog($pdo, $id);
+                $_SESSION['blog'] = serialize(Blog::getBlog($pdo, $id));
             }
-            $blog = $_SESSION['blog'];
+            $blog = unserialize($_SESSION['blog']);
             if ($blog->user_id !== $_SESSION['loginUserId']) {
                 header('Location: blog.php?page=' . $current_page);
             }
@@ -41,7 +41,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
                 $check = Utils::h($_POST['check']);
             }
             $_SESSION['check'] = $check;
-            $blog = $_SESSION['blog'];
+            $blog = unserialize($_SESSION['blog']);
 
             if ($check) {
                 $new_img = '';
@@ -58,7 +58,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
                         exit();
                     }
                 }
-                $_SESSION['blog']->new_img = $new_img;
+                $blog->new_img = $new_img;
             }
 
             // バリデート
@@ -76,8 +76,9 @@ if (filter_input(INPUT_GET, 'action') !== null) {
                 exit();
             }
 
-            $_SESSION['blog']->title = $title;
-            $_SESSION['blog']->text = $text;
+            $blog->title = $title;
+            $blog->text = $text;
+            $_SESSION['blog'] = serialize($blog);
             header('Location: confirm.php?from=edit&page=' . $current_page);
             exit();
         default:
