@@ -37,9 +37,17 @@
     }
 }
 
-.input label {
-    display: flex !important;
-    justify-content: space-between;
+.input{
+    label {
+        display: flex !important;
+        justify-content: space-between;
+    }
+    &.link_set {
+        margin: 1.5em 0 !important;
+        input {
+            margin-bottom: 0.5em;
+        }
+    }
 }
 
 .img {

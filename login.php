@@ -5,49 +5,39 @@ use MySite\Database;
 use MySite\Blog;
 use MySite\Token;
 use MySite\Utils;
+use MySite\Account;
 
 Token::createToken();
 
 if (filter_input(INPUT_GET, 'base') !== null) {
-    switch (filter_input(INPUT_GET, 'base')) {
-        case 'blog':
-            if (isset($_POST['name']) && isset($_POST['pass'])) {
-                Token::validateToken();
-                $name = Utils::h($_POST['name']);
-                $pass = Utils::h($_POST['pass']);
-
-                $pdo = Database::getPDOInstance();
-                $id = Blog::getAccount($pdo, $name, $pass);
-                if (!empty($id)) {
-                    $_SESSION['loginUserId'] = $id;
-                    $_SESSION['loginUserName'] = $name;
-                    header('Location: writing.php?base=blog');
-                    exit();
-                } else {
-                    print 'アカウントが見つかりませんでした。<br>';
-                    print
-                        '<a href="login.php">ログイン画面へ</a>';
-                    exit();
-                }
-            }
-            break;
-
-        case 'works':
-            // 後ほど記述
-            break;
-
-        default:
-            print 'blogページもしくはworksページよりログインしてください。<br>';
-            print '<a href="works.php">worksページへ</a><br>';
-            print '<a href="blog.php">blogページへ</a>';
-            exit;
-    }
+    $base = filter_input(INPUT_GET, 'base');
 } else {
     print 'blogページもしくはworksページよりログインしてください。<br>';
     print '<a href="works.php">worksページへ</a><br>';
     print '<a href="blog.php">blogページへ</a>';
     exit;
 }
+
+if (isset($_POST['name']) && isset($_POST['pass'])) {
+    Token::validateToken();
+    $name = Utils::h($_POST['name']);
+    $pass = Utils::h($_POST['pass']);
+
+    $pdo = Database::getPDOInstance();
+    $id = Account::getAccount($pdo, $name, $pass);
+    if (!empty($id)) {
+        $_SESSION['loginUserId'] = $id;
+        $_SESSION['loginUserName'] = $name;
+        header('Location: writing.php?base=' . $base);
+        exit();
+    } else {
+        print 'アカウントが見つかりませんでした。<br>';
+        print
+            '<a href="login.php?base=' . $base . '">ログイン画面へ</a>';
+        exit();
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -57,7 +47,7 @@ if (filter_input(INPUT_GET, 'base') !== null) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyPortfolioSite -Blog Login-</title>
+    <title>MyPortfolioSite -Login-</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
@@ -88,7 +78,7 @@ if (filter_input(INPUT_GET, 'base') !== null) {
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="reset" value="クリア">
                 </div>
-                <a class="btn btn1 h_btn btn_anime_inout" href="blog.php">戻る</a>
+                <a class="btn btn1 h_btn btn_anime_inout" href="<?= $base; ?>.php">戻る</a>
             </div>
         </form>
     </div>

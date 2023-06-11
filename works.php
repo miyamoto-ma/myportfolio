@@ -79,10 +79,10 @@ $data = $page_ins->itemsByPage();
                         <p><?= $_SESSION['loginUserName']; ?>さんログイン中</p><br class="sp_br">
                     <?php endif; ?>
                     <?php if (isset($_SESSION['loginUserId']) && $logout_result === false) : ?>
-                        <a href="writing.php">投稿</a>
+                        <a href="writing.php?base=works">投稿</a>
                         <a href="?action=logout">ログアウト</a>
                     <?php else : ?>
-                        <a href="./login.php">管理者用</a>
+                        <a href="./login.php?base=works">管理者用</a>
                     <?php endif; ?>
                 </div>
 
@@ -107,6 +107,15 @@ $data = $page_ins->itemsByPage();
                                 <?php if ($work["link2"] !== '') : ?>
                                     <a href="<?= $work["link2"]; ?>" target="_blank"><?= $work["link_text2"]; ?></a>
                                 <?php endif; ?>
+                                <div class="blog_etc">
+                                    <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $blog['user_id']) : ?>
+                                        <div class="auth_btns" data-blog="<?= $blog['id']; ?>" data-page="<?= $current_page; ?>">
+                                            <span class=" err_del"></span>
+                                            <span class="edit auth_btn">編集</span>
+                                            <span class="delete auth_btn">削除</span>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -7,6 +7,11 @@ body {
   font-size: 40px;
   text-align: center;
 }
+@media (max-width: 1024px) {
+  .section_title {
+    font-size: 38px;
+  }
+}
 @media (max-width: 768px) {
   .section_title {
     margin: 40px auto 55px;
@@ -545,6 +550,12 @@ body {
 .input label {
   display: flex !important;
   justify-content: space-between;
+}
+.input.link_set {
+  margin: 1.5em 0 !important;
+}
+.input.link_set input {
+  margin-bottom: 0.5em;
 }
 
 @media (max-width: 768px) {
