@@ -696,4 +696,17 @@ body {
     margin-top: 1em;
   }
 }
+.main .works_wrap .works .work .contents .blog_etc {
+  display: flex;
+  justify-content: space-between;
+}
+.main .works_wrap .works .work .contents .blog_etc .auth_btn {
+  margin-left: 1em;
+  color: #88bcb3;
+  transition: 0.3s all;
+  cursor: pointer;
+}
+.main .works_wrap .works .work .contents .blog_etc .auth_btn:hover {
+  opacity: 0.7;
+}
 /*# sourceMappingURL=works_page.css.map */

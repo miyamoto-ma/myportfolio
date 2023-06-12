@@ -11,6 +11,8 @@ Token::createToken();
 
 if (filter_input(INPUT_GET, 'base') !== null) {
     $base = filter_input(INPUT_GET, 'base');
+    $from = 'writing';      // 現在ページの種類を設定
+    $return_url = $from . '.php' . '?base=' . $base;
     if ($base !== 'blog' && $base !== 'works') {
         print 'blogページもしくはworksページより投稿してください。<br>';
         print '<a href="works.php">worksページへ</a><br>';
@@ -31,10 +33,23 @@ if (!isset($_SESSION['loginUserId'])) {
     exit();
 }
 
-// confirm.phpから戻るボタンで戻ってきた場合
-if (isset($_SESSION['item'])) {
-    $item = unserialize($_SESSION['item']);
+// フラグが付いていたら古いセッション情報を削除
+if (filter_input(INPUT_GET, 'd_flag') === 'true') {
+    if ($base === 'blog') {
+        unset($_SESSION['blog']);
+    } elseif ($base === 'works') {
+        unset($_SESSION['work']);
+    }
 }
+
+// confirm.phpから戻るボタンで戻ってきた場合
+$item = null;
+if ($base === 'blog' && isset($_SESSION['blog'])) {
+    $item = unserialize($_SESSION['blog']);
+} elseif ($base === 'works' && isset($_SESSION['work'])) {
+    $item = unserialize($_SESSION['work']);
+}
+
 
 if (filter_input(INPUT_GET, 'action') === 'confirm') {
     Token::validateToken();
@@ -58,13 +73,12 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
             $img = Utils::h($filename);
         } else {
             print '画像のアップロードに失敗しました。<br>';
-            print '<a href="writing.php?base=' . $base . '">投稿画面へ</a>';
+            print '<a href="' . $return_url . '">投稿画面へ</a>';
             exit();
         }
     }
 
-    // 現在ページの種類を設定
-    $from = 'writing';
+
 
     // バリデート
     $result_arr = [];
@@ -80,17 +94,17 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
         array_push($result_arr, $skill_result, $link1_result, $link_text1_result, $link2_result, $link_text2_result);
     }
     foreach ($result_arr as $result) {
-        Validate::validateResultProcessing($result, $base, $from);
+        Validate::validateResultProcessing($result, $return_url);
     }
 
     if ($base === 'blog') {
         date_default_timezone_set('Asia/Tokyo');
         $create_time = date('Y-m-d H:i:s');
         $blog = new blogClass($title, $text, $img, $create_time);
-        $_SESSION['item'] = serialize($blog);
+        $_SESSION['blog'] = serialize($blog);
     } elseif ($base === 'works') {
         $works = new worksClass($title, $text, $skill, $link1, $link_text1, $link2, $link_text2, $img);
-        $_SESSION['item'] = serialize($works);
+        $_SESSION['work'] = serialize($works);
     }
     header('Location: confirm.php?base=' . $base . '&from=' . $from);
     exit();
@@ -125,7 +139,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <p>タイトル(必須: 100文字以内)：</p>
                     <p><span id="char_title">0</span>/100</p>
                 </label>
-                <input id="title" type="text" name="title" maxlength="100" required value="<?= isset($_SESSION['item']) ? $item->title : ''; ?>">
+                <input id="title" type="text" name="title" maxlength="100" required value="<?= $item !== null ? $item->title : ''; ?>">
             </div>
             <?php if ($base === 'works') : ?>
                 <div class="input">
@@ -133,7 +147,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                         <p>使用スキル(必須: 100文字以内)：</p>
                         <p><span id="char_skill">0</span>/100</p>
                     </label>
-                    <input id="skill" type="text" name="skill" maxlength="100" required value="<?= isset($_SESSION['item']) ? $item->skill : ''; ?>">
+                    <input id="skill" type="text" name="skill" maxlength="100" required value="<?= $item !== null ? $item->skill : ''; ?>">
                 </div>
             <?php endif; ?>
             <div class="input">
@@ -141,7 +155,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <p>内容(必須: 400文字以内)：</p>
                     <p><span id="char_text">0</span>/400</p>
                 </label>
-                <textarea id="text" name="text" maxlength="400" required><?= isset($_SESSION['item']) ? $item->text : ''; ?></textarea>
+                <textarea id="text" name="text" maxlength="400" required><?= $item !== null ? $item->text : ''; ?></textarea>
             </div>
 
             <?php if ($base === 'works') : ?>
@@ -150,30 +164,30 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                         <p>リンク① テキスト(100文字以内)：</p>
                         <p><span id="char_link_text1">0</span>/100</p>
                     </label>
-                    <input id="link_text1" type="text" name="link_text1" maxlength="100" value="<?= isset($_SESSION['item']) ? $item->link_text1 : ''; ?>">
+                    <input id="link_text1" type="text" name="link_text1" maxlength="100" value="<?= $item !== null ? $item->link_text1 : ''; ?>">
                     <label for="link1">
                         <p>リンク① URL(100文字以内)：</p>
                         <p><span id="char_link1">0</span>/100</p>
                     </label>
-                    <input id="link1" type="url" name="link1" maxlength="100" value="<?= isset($_SESSION['item']) ? $item->link1 : ''; ?>">
+                    <input id="link1" type="url" name="link1" maxlength="100" value="<?= $item !== null ? $item->link1 : ''; ?>">
                 </div>
                 <div class="input link_set">
                     <label for="link_text2">
                         <p>リンク② テキスト(100文字以内)：</p>
                         <p><span id="char_link_text2">0</span>/100</p>
                     </label>
-                    <input id="link_text2" type="text" name="link_text2" maxlength="100" value="<?= isset($_SESSION['item']) ? $item->link_text2 : ''; ?>">
+                    <input id="link_text2" type="text" name="link_text2" maxlength="100" value="<?= $item !== null ? $item->link_text2 : ''; ?>">
                     <label for="link2">
                         <p>リンク② URL(100文字以内)：</p>
                         <p><span id="char_link2">0</span>/100</p>
                     </label>
-                    <input id="link2" type="url" name="link2" maxlength="100" value="<?= isset($_SESSION['item']) ? $item->link2 : ''; ?>">
+                    <input id="link2" type="url" name="link2" maxlength="100" value="<?= $item !== null ? $item->link2 : ''; ?>">
                 </div>
             <?php endif; ?>
 
             <div class="img">
-                <span class="img_span">画像(任意)<br class="sp_br"><span class="img_ctn">(.jpg, .jpeg, .gif画像のみ(1MB以内))</span>：</span>
-                <input id="file" type="file" name="img" accept=".jpg, .jpeg, .gif">
+                <span class="img_span">画像(<?= $base === 'blog' ? '任意' : '必須'; ?>)<br class="sp_br"><span class="img_ctn">(.jpg, .jpeg, .gif画像のみ(1MB以内))</span>：</span>
+                <input id="file" type="file" name="img" accept=".jpg, .jpeg, .gif" <?= $base === 'works' ? 'required' : ''; ?>>
             </div>
             <div class="preview">
                 <div class="new_preview">

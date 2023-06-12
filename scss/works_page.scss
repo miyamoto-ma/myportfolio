@@ -57,16 +57,17 @@
             }
             .work{
                 width: 30%;
-                margin-bottom: min(55px, 4vw);
+                margin-bottom: min(60px, 5vw);
                 padding: 1%;
+                position: relative;
                 box-sizing: border-box;
                 @include middle {
                     width: 48%;
-                    margin-bottom: min(55px, 6vw);
+                    margin-bottom: min(75px, 8vw);
                 }
                 @include small {
                     width: 95%;
-                    margin: 0 auto min(80px, 20vw) !important;
+                    margin: 0 auto min(90px, 23vw) !important;
                 }
                 .w_title {
                     margin-bottom: 1em;
@@ -140,6 +141,25 @@
                         color: $point_color3;
                         @include small {
                             margin-top: 1em;
+                        }
+                    }
+                    .blog_etc {
+                        display: flex;
+                        justify-content: end;
+                        position: absolute;
+                        right: 2em;
+                        bottom: -1.5em;
+                        .auth_btn {
+                            margin-left: 1em;
+                            color: $point_color3;
+                            -o-transition: .3s all;
+                            -moz-transition: .3s all;
+                            -webkit-transition: .3s all;
+                            transition: .3s all;
+                            cursor: pointer;
+                            &:hover {
+                                opacity: .7;
+                            }
                         }
                     }
                 }

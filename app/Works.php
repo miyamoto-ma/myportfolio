@@ -69,6 +69,17 @@ class Works
         return $works;
     }
 
+    // work1件分の情報を取得
+    public static function getWork($pdo, $id)
+    {
+        $sql = "SELECT id, user_id, title, skill, text, img, link1, link2, link_text1, link_text2 FROM WORKS WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue('id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $work_arr = $stmt->fetch(\PDO::FETCH_OBJ);
+        return $work_arr;
+    }
+
     // worksの総数を取得
     public static function getTotal($pdo)
     {
@@ -77,5 +88,28 @@ class Works
         $stmt->execute();
         $total = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $total["count"];
+    }
+
+    // work1件分のユーザーIDを取得
+    public static function getWorkUserId($pdo, $id)
+    {
+        $sql = "SELECT user_id FROM WORKS WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue('id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $userId_arr = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (!empty($userId_arr)) {
+            return $userId_arr['user_id'];
+        }
+    }
+
+    // workの削除
+    public static function deleteWork($pdo, $id)
+    {
+        $sql = "DELETE FROM WORKS WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue('id', $id, \PDO::PARAM_INT);
+        $result = $stmt->execute();
+        return $result;
     }
 }

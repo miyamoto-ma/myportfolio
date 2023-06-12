@@ -8,9 +8,7 @@ use MySite\Token;
 use MySite\Utils;
 
 Token::createToken();
-
 $pdo = Database::getPDOInstance();
-unset($_SESSION['blog']);
 
 $logout_result = false;
 if (filter_input(INPUT_GET, 'action') !== null) {
@@ -18,7 +16,7 @@ if (filter_input(INPUT_GET, 'action') !== null) {
         case 'delete':
             Token::validateToken();
             // ブログ1件分の削除処理
-            $id = filter_input(INPUT_POST, 'blogId');
+            $id = filter_input(INPUT_POST, 'itemId');
             $userId = Blog::getBlogUserId($pdo, $id);
             $loginUserId = $_SESSION['loginUserId'];
             header('Content-Type: application/json');
@@ -78,7 +76,7 @@ $data = $page_ins->itemsByPage();
                         <p><?= $_SESSION['loginUserName']; ?>さんログイン中</p><br class="sp_br">
                     <?php endif; ?>
                     <?php if (isset($_SESSION['loginUserId']) && $logout_result === false) : ?>
-                        <a href="writing.php?base=blog">投稿</a>
+                        <a href="writing.php?base=blog&d_flag=true">投稿</a>
                         <a href="?action=logout">ログアウト</a>
                     <?php else : ?>
                         <a href="./login.php?base=blog">管理者用</a>
@@ -86,7 +84,7 @@ $data = $page_ins->itemsByPage();
                 </div>
 
                 <?php foreach ($data["items"] as $blog) : ?>
-                    <div id="blog_<?= $blog["id"] ?>" class="blog">
+                    <div id="item_<?= $blog["id"] ?>" class="blog">
                         <h3 class="blog_title"><?= $blog["title"]; ?></h3>
                         <div class="blog_wrap">
                             <?php if (!empty($blog["img"])) : ?>
@@ -100,7 +98,7 @@ $data = $page_ins->itemsByPage();
                             <div class="blog_etc">
                                 <p class="date"><?= $blog["create_time"]; ?></p>
                                 <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $blog['user_id']) : ?>
-                                    <div class="auth_btns" data-blog="<?= $blog['id']; ?>" data-page="<?= $current_page; ?>">
+                                    <div class="auth_btns" data-item_id="<?= $blog['id']; ?>" data-page="<?= $data["current_page"]; ?>">
                                         <span class=" err_del"></span>
                                         <span class="edit auth_btn">編集</span>
                                         <span class="delete auth_btn">削除</span>

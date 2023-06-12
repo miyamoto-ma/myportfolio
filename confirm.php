@@ -39,7 +39,11 @@ if (filter_input(INPUT_GET, 'page') !== null) {
     $current_page = filter_input(INPUT_GET, 'page');
 }
 
-$item = unserialize($_SESSION['item']);
+if ($base === 'blog') {
+    $item = unserialize($_SESSION['blog']);
+} elseif ($base === 'works') {
+    $item = unserialize($_SESSION['work']);
+}
 // url
 $back_url = '';     // 戻るボタンのhref
 $action = '';       // フォームのaction
@@ -52,12 +56,12 @@ if ($from === 'writing') {
 }
 
 // セッションにitemがセットされていない場合
-if (!isset($_SESSION['item'])) {
+if (($base === 'blog' && !isset($_SESSION['blog'])) || ($base === 'works' && !isset($_SESSION['work']))) {
     print 'データが取得できませんでした。<br>';
     print '<a href="' . $back_url . '">戻る</a>';
 }
 
-// postで戻ってきたaction
+// Postで戻ってきたaction
 $r_action = filter_input(INPUT_GET, 'action');
 
 // ユーザー名を取得
@@ -80,7 +84,7 @@ $img = '';
 if ($from === 'writing' || $r_action === 'add') {
     $img = $item->img;
 } elseif ($from === 'edit' || $r_action === 'update') {
-    if ($_SESSION['check']) {
+    if (filter_input(INPUT_GET, 'check') === 'on') {
         $img = $item->new_img;
     } elseif (mb_strlen($item->img) > 0) {
         $img = $item->img;
@@ -119,7 +123,6 @@ if ($r_action !== null) {
                 // work更新処理（失敗ならfalse)
                 $act_result = Works::editWork($pdo, $id, $title, $skill, $text, $img, $link1, $link2, $link_text1, $link_text2);
             }
-            unset($_SESSION['check']);
             break;
         default:
             exit;
@@ -130,7 +133,11 @@ if ($r_action !== null) {
         print '<a href="' . $back_url . '">戻る</a>';
         exit();
     }
-    unset($_SESSION['item']);
+    if ($base === 'blog') {
+        unset($_SESSION['blog']);
+    } elseif ($base === 'works') {
+        unset($_SESSION['work']);
+    }
     header('Location: ' . $base . '.php?page=' . $current_page);
     exit();
 }

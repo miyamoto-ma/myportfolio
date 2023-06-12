@@ -8,29 +8,27 @@ use MySite\Token;
 use MySite\Utils;
 
 Token::createToken();
-
 $pdo = Database::getPDOInstance();
-// unset($_SESSION['works']);
 
 $logout_result = false;
 if (filter_input(INPUT_GET, 'action') !== null) {
     switch (filter_input(INPUT_GET, 'action')) {
-            // case 'delete':
-            //     Token::validateToken();
-            //     // ブログ1件分の削除処理
-            //     $id = filter_input(INPUT_POST, 'blogId');
-            //     $userId = Blog::getBlogUserId($pdo, $id);
-            //     $loginUserId = $_SESSION['loginUserId'];
-            //     header('Content-Type: application/json');
-            //     if ($userId === $loginUserId) {
-            //         $del_result = Blog::deleteBlog($pdo, $id);
-            //         if ($del_result) {
-            //             echo json_encode(['res' => 'OK']);
-            //         } else {
-            //             echo json_encode(['res' => '※ブログの削除に失敗しました。']);
-            //         }
-            //     }
-            //     exit;
+        case 'delete':
+            Token::validateToken();
+            // ブログ1件分の削除処理
+            $id = filter_input(INPUT_POST, 'itemId');
+            $userId = Works::getWorkUserId($pdo, $id);
+            $loginUserId = $_SESSION['loginUserId'];
+            header('Content-Type: application/json');
+            if ($userId === $loginUserId) {
+                $del_result = Works::deleteWork($pdo, $id);
+                if ($del_result) {
+                    echo json_encode(['res' => 'OK']);
+                } else {
+                    echo json_encode(['res' => '※Workの削除に失敗しました。']);
+                }
+            }
+            exit;
         case 'logout':
             // ログアウト処理
             $logout_result = session_destroy();
@@ -64,7 +62,7 @@ $data = $page_ins->itemsByPage();
 <body>
     <?php include_once './inc/header.php'; ?>
 
-    <main class="main">
+    <main class="main" data-token="<?= Utils::h($_SESSION['token']); ?>">
         <section class="works_section section">
             <div class="works_wrap wrap">
                 <h2 class="section_title">
@@ -78,7 +76,7 @@ $data = $page_ins->itemsByPage();
                         <p><?= $_SESSION['loginUserName']; ?>さんログイン中</p><br class="sp_br">
                     <?php endif; ?>
                     <?php if (isset($_SESSION['loginUserId']) && $logout_result === false) : ?>
-                        <a href="writing.php?base=works">投稿</a>
+                        <a href="writing.php?base=works&d_flag=true">投稿</a>
                         <a href="?action=logout">ログアウト</a>
                     <?php else : ?>
                         <a href="./login.php?base=works">管理者用</a>
@@ -87,7 +85,7 @@ $data = $page_ins->itemsByPage();
 
                 <div class="works">
                     <?php foreach ($data["items"] as $work) : ?>
-                        <div class="work">
+                        <div id="item_<?= $work["id"] ?>" class="work">
                             <p class="w_title"><?= $work["title"]; ?></p>
                             <div class="w_img_wrap">
                                 <img src="./upload/<?= $work["img"]; ?>" alt="<?= $work["title"]; ?>の画像">
@@ -108,7 +106,7 @@ $data = $page_ins->itemsByPage();
                                 <?php endif; ?>
                                 <div class="blog_etc">
                                     <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $work['user_id']) : ?>
-                                        <div class="auth_btns" data-blog="<?= $work['id']; ?>" data-page="<?= $current_page; ?>">
+                                        <div class="auth_btns" data-item_id="<?= $work['id']; ?>" data-page="<?= $data["current_page"]; ?>">
                                             <span class=" err_del"></span>
                                             <span class="edit auth_btn">編集</span>
                                             <span class="delete auth_btn">削除</span>
@@ -128,6 +126,7 @@ $data = $page_ins->itemsByPage();
     <?php include './inc/footer.php'; ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./js/works_page.js"></script>
+    <script src="./js/blog_page.js"></script>
 </body>
 
 </html>

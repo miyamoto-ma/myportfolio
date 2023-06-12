@@ -38,12 +38,12 @@ class Validate
         }
     }
 
-    // バリデートの結果処理
-    public static function validateResultProcessing($result, $base, $from)
+    // バリデートの結果処理(Writing用)
+    public static function validateResultProcessing($result, $return_url)
     {
         if ($result !== 'OK') {
             print $result . '<br>';
-            print '<a href="' . $from . '.php?base=' . $base . '">戻る</a>';
+            print '<a href="' . $return_url . '">戻る</a>';
             exit();
         }
     }
