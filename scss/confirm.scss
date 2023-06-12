@@ -17,6 +17,7 @@
     }
     .form {
         font-size: 18px;
+        line-height: 1.3em;
         @include small {
             font-size: $fs_s + 1;
         }
@@ -32,6 +33,7 @@
     margin-bottom: 2em;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     @include small {
         margin-bottom: 1em;
     }
@@ -70,5 +72,14 @@
     .text,
     .create_time {
         margin-bottom: 1.5em;
+    }
+    .works_contents {
+        margin-bottom: 1em;
+        p {
+            margin-left: 2em;
+            &:nth-child(2) {
+                margin-left: 2.5em;
+            }
+        }
     }
 }

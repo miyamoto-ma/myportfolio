@@ -44,7 +44,6 @@ if (filter_input(INPUT_GET, 'action') !== null) {
 $items_per_page = 3;    // 1ページに表示するアイテム数
 $page_ins = new Page($pdo, 'works', $items_per_page);
 $data = $page_ins->itemsByPage();
-
 ?>
 
 <!DOCTYPE html>
@@ -108,8 +107,8 @@ $data = $page_ins->itemsByPage();
                                     <a href="<?= $work["link2"]; ?>" target="_blank"><?= $work["link_text2"]; ?></a>
                                 <?php endif; ?>
                                 <div class="blog_etc">
-                                    <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $blog['user_id']) : ?>
-                                        <div class="auth_btns" data-blog="<?= $blog['id']; ?>" data-page="<?= $current_page; ?>">
+                                    <?php if (isset($_SESSION['loginUserId']) && $_SESSION['loginUserId'] === $work['user_id']) : ?>
+                                        <div class="auth_btns" data-blog="<?= $work['id']; ?>" data-page="<?= $current_page; ?>">
                                             <span class=" err_del"></span>
                                             <span class="edit auth_btn">編集</span>
                                             <span class="delete auth_btn">削除</span>

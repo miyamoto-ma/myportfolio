@@ -55,16 +55,6 @@
         reader.readAsDataURL(input);
     }, false);
 
-    /**
-     * 「クリア」ボタンをクリックで選択画像もクリアする
-     */
-    const clear = document.getElementById('clear');
-    clear.addEventListener('click', () => {
-        document.getElementById('title').defaultValue = '';
-        document.getElementById('text').defaultValue = '';
-        input_file.value = '';
-        preview.src = '';
-    });
 
 
     /**
@@ -74,7 +64,18 @@
     const char_title = document.getElementById('char_title');
     const input_text = document.getElementById('text');
     const char_text = document.getElementById('char_text');
+    const input_skill = document.getElementById('skill');
+    const char_skill = document.getElementById('char_skill');
+    const input_link1 = document.getElementById('link1');
+    const char_link1 = document.getElementById('char_link1');
+    const input_link_text1 = document.getElementById('link_text1');
+    const char_link_text1 = document.getElementById('char_link_text1');
+    const input_link2 = document.getElementById('link2');
+    const char_link2 = document.getElementById('char_link2');
+    const input_link_text2 = document.getElementById('link_text2');
+    const char_link_text2 = document.getElementById('char_link_text2');
 
+    const clear = document.getElementById('clear');
 
     // target:対象input要素、char_span:文字数を出力する要素
     function charCount(target, char_span) {
@@ -90,5 +91,26 @@
     }
     charCount(input_title, char_title);
     charCount(input_text, char_text);
+    charCount(input_skill, char_skill);
+    charCount(input_link1, char_link1);
+    charCount(input_link_text1, char_link_text1);
+    charCount(input_link2, char_link2);
+    charCount(input_link_text2, char_link_text2);
 
+
+
+    /**
+     * 「クリア」ボタンをクリックで選択画像もクリアする
+     */
+    clear.addEventListener('click', () => {
+        input_title.defaultValue = '';
+        input_text.defaultValue = '';
+        input_skill.defaultValue = '';
+        input_link1.defaultValue = '';
+        input_link_text1.defaultValue = '';
+        input_link2.defaultValue = '';
+        input_link_text2.defaultValue = '';
+        input_file.value = '';
+        preview.src = '';
+    });
 }

@@ -4,7 +4,7 @@ namespace MySite;
 
 class Works
 {
-    // worksの追加
+    // workの追加
     public static function addWork($pdo, $user_id, $title, $skill, $text, $img, $link1, $link2, $link_text1, $link_text2)
     {
         $sql = "INSERT INTO WORKS (user_id, title, skill, text, img, link1, link2, link_text1, link_text2) VALUES (:user_id, :title, :skill, :text, :img, :link1, :link2, :link_text1, :link_text2)";
@@ -22,6 +22,25 @@ class Works
         return (int)$pdo->lastInsertId();
     }
 
+    // workの更新
+    public static function
+    editWork($pdo, $id, $title, $skill, $text, $img, $link1, $link2, $link_text1, $link_text2)
+    {
+        $sql = "UPDATE WORKS SET title = :title, skill = :skill, text = :text, img = :img, link1=:link1, link2 = :link2, link_text1 = :link_text1, link_text2 = :link_text2 WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue('title', $title, \PDO::PARAM_STR);
+        $stmt->bindValue('skill', $skill, \PDO::PARAM_STR);
+        $stmt->bindValue('text', $text, \PDO::PARAM_STR);
+        $stmt->bindValue('img', $img, \PDO::PARAM_STR);
+        $stmt->bindValue('link1', $link1, \PDO::PARAM_STR);
+        $stmt->bindValue('link2', $link2, \PDO::PARAM_STR);
+        $stmt->bindValue('link_text1', $link_text1, \PDO::PARAM_STR);
+        $stmt->bindValue('link_text2', $link_text2, \PDO::PARAM_STR);
+        $stmt->bindValue('id', $id, \PDO::PARAM_INT);
+        $result = $stmt->execute();
+        return $result;
+    }
+
     // worksの全てのデータを取得
     public static function getWorksAll($pdo)
     {
@@ -37,7 +56,7 @@ class Works
     {
         $start_row = ($current_page - 1) * $items_per_page;
         $end_row = $start_row + $items_per_page;
-        $sql = "SELECT B.id, B.user_id, B.title, B.text, B.img, B.link1, B.link2, B.link_text1, B.link_text2
+        $sql = "SELECT B.id, B.user_id, B.title, B.text, B.skill, B.img, B.link1, B.link2, B.link_text1, B.link_text2
                 FROM (SELECT * ,
                             ROW_NUMBER() OVER (ORDER BY id DESC) RN
                             FROM WORKS) B
