@@ -169,7 +169,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                         <p>リンク① URL(100文字以内)：</p>
                         <p><span id="char_link1">0</span>/100</p>
                     </label>
-                    <input id="link1" type="url" name="link1" maxlength="100" value="<?= $item !== null ? $item->link1 : ''; ?>">
+                    <input id="link1" type="text" name="link1" maxlength="100" value="<?= $item !== null ? $item->link1 : ''; ?>">
                 </div>
                 <div class="input link_set">
                     <label for="link_text2">
@@ -181,7 +181,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                         <p>リンク② URL(100文字以内)：</p>
                         <p><span id="char_link2">0</span>/100</p>
                     </label>
-                    <input id="link2" type="url" name="link2" maxlength="100" value="<?= $item !== null ? $item->link2 : ''; ?>">
+                    <input id="link2" type="text" name="link2" maxlength="100" value="<?= $item !== null ? $item->link2 : ''; ?>">
                 </div>
             <?php endif; ?>
 
