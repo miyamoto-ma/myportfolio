@@ -1,3 +1,28 @@
+<?php
+require_once(__DIR__ . '/app/config.php');
+
+use MySite\Database;
+use MySite\Works;
+use MySite\Blog;
+use MySite\Page;
+use MySite\Utils;
+
+$pdo = Database::getPDOInstance();
+
+// Worksの最新記事の読み込み
+$works_in_page = 6;     // 読み込み数
+$works = Works::getWorksByPage($pdo, 1, $works_in_page);
+
+// Blogの最新記事のよみこみ
+$blogs_in_page = 10;    // 読み込み数
+$blogs = Blog::getBlogsByPage($pdo, 1, $blogs_in_page);
+
+print('works:<br>');
+var_dump($works);
+// print('blogs:<br>');
+// var_dump($blogs);
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -48,118 +73,22 @@
                 <h2 class="section_title">
                     <p>Works</p>
                 </h2>
-                <ul class="home_work_items">
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
+                <ul class="home_work_items" ontouchstart="">
+                    <?php foreach ($works as $work) : ?>
+                        <li class="home_work_item cube">
+                            <img class="cube_img" src="./upload/<?= $work["img"] ?>" alt="">
+                            <div class="over_text">
+                                <p class="title"><?= $work["title"]; ?></p>
+                                <p class="skill"><?= $work["skill"] ?></p>
+                                <?php if ($work["link1"] !== '') : ?>
+                                    <a href="<?= $work["link1"] ?>" target="_blank"><?= $work["link_text1"]; ?></a>
+                                <?php endif; ?>
+                                <?php if ($work["link2"] !== '') : ?>
+                                    <a href="<?= $work["link2"] ?>" target="_blank"><?= $work["link_text2"]; ?></a>
+                                <?php endif; ?>
                             </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_work_item cube">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy.jpg" alt="">
-                            <div class="h_work_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
                 <a class="to_works h_btn btn1 btn_anime_inout" href="./works.php">More</a>
             </div>
@@ -170,117 +99,16 @@
                 <h2 class="section_title">
                     <p>Blog</p>
                 </h2>
-                <ul id="blog_slider" class="home_blog ">
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
+                <ul id="blog_slider" class="home_blog " ontouchstart="">
+                    <?php foreach ($blogs as $blog) : ?>
+                        <li class="home_blog_item">
+                            <div class="blog_img" style="background-image: url('./upload/<?= $blog["img"] !== '' ? $blog["img"] : "dummy.jpg"; ?>')"></div>
+                            <div class="over_text">
+                                <p class="title"><?= $blog["title"]; ?></p>
+                                <a href="./blog_one.php?blogId=<?= $blog["id"]; ?>">ブログへ</a>
                             </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="home_blog_item">
-                        <a class="over_text" href="#">
-                            <img class="cube_img" src="./img/dummy2.jpg" alt="">
-                            <div class="h_blog_text">
-                                <p>
-                                    説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。説明文を入れる。
-                                </p>
-                            </div>
-                        </a>
-                    </li>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
                 <a class="to_blog h_btn btn1 btn_anime_inout" href="./blog.php">More</a>
             </div>

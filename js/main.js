@@ -7,7 +7,7 @@
     let slidesToShow_value = 5;
     function slides_count() {
         if (window_w <= 768) {
-            slidesToShow_value = 1;
+            slidesToShow_value = 2;
         } else if (window_w <= 1024) {
             slidesToShow_value = 3;
         }
@@ -90,5 +90,23 @@
     window.addEventListener('scroll', parallax, {passive: true});
 
 
+    /**
+     * 画像の幅を取得して高さを設定
+     */
+    let cubes = document.querySelectorAll('.cube');
+    function change_height() {
+        cubes.forEach(cube => {
+            let cube_w = cube.clientWidth;
+            cube.style.height = cube_w + "px";
+            const img = cube.children[0];
+            const img_w = img.clientWidth;
+            if (img_w < cube_w) {
+                img.style.width = "100%";
+                img.style.height = "auto";
+            }
+        });
+    }
+    window.addEventListener('DOMContentLoaded', change_height);
+    window.addEventListener('resize', change_height);
 
 }
