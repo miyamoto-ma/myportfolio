@@ -4,8 +4,6 @@ require_once(__DIR__ . '/app/config.php');
 use MySite\Database;
 use MySite\Works;
 use MySite\Blog;
-use MySite\Page;
-use MySite\Utils;
 
 $pdo = Database::getPDOInstance();
 
@@ -16,11 +14,6 @@ $works = Works::getWorksByPage($pdo, 1, $works_in_page);
 // Blogの最新記事のよみこみ
 $blogs_in_page = 10;    // 読み込み数
 $blogs = Blog::getBlogsByPage($pdo, 1, $blogs_in_page);
-
-print('works:<br>');
-var_dump($works);
-// print('blogs:<br>');
-// var_dump($blogs);
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +87,7 @@ var_dump($works);
             </div>
         </section>
 
-        <section class="home_blog section">
+        <section id="blog" class="home_blog section">
             <div class="home_blog_wrap wrap">
                 <h2 class="section_title">
                     <p>Blog</p>
@@ -105,6 +98,7 @@ var_dump($works);
                             <div class="blog_img" style="background-image: url('./upload/<?= $blog["img"] !== '' ? $blog["img"] : "dummy.jpg"; ?>')"></div>
                             <div class="over_text">
                                 <p class="title"><?= $blog["title"]; ?></p>
+                                <p class="text"><?= $blog["text"]; ?></p>
                                 <a href="./blog_one.php?blogId=<?= $blog["id"]; ?>">ブログへ</a>
                             </div>
                         </li>

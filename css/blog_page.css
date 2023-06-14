@@ -1,4 +1,9 @@
+html.hum_active {
+  overflow-y: hidden;
+}
+
 body {
+  font-family: "Merriweather", "Sawarabi Gothic", "Noto Sans JP", "Source Sans Pro", sans-serif, serif;
   color: #555;
 }
 
@@ -197,14 +202,6 @@ body {
 }
 .btn_anime_inout:active::after {
   animation-delay: .12s;
-}
-
-html.hum_active {
-  overflow-y: hidden;
-}
-
-body {
-  font-family: "Merriweather", "Sawarabi Gothic", "Noto Sans JP", "Source Sans Pro", sans-serif, serif;
 }
 
 .header {

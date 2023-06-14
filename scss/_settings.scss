@@ -121,7 +121,12 @@ $btn_h2: 45px;
 
 
 // 共通パーツ
+html.hum_active {
+    overflow-y: hidden;
+}
+
 body {
+    font-family: $font1;
     color: $main_color;
 }
 // h2タイトル

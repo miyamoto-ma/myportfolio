@@ -96,5 +96,3 @@ GitHubでレポジトリを作成するときにREADME.mdやライセンスを�
 	git push origin main
 
 
-
-        <img class="blog_img" src="./upload/<?= $blog["img"] !== '' ? $blog["img"] : "dummy.jpg"; ?>" alt="">

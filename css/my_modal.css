@@ -122,3 +122,6 @@ html.modal_html {
     display: block;
     cursor: auto;
 }
+.modal.active img:hover {
+    opacity: unset;
+}

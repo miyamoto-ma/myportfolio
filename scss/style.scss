@@ -227,6 +227,9 @@
                     &:hover{
                         .over_text {
                             opacity: 1;
+                            a {
+                                visibility: visible;
+                            }
                         }
                     }
                     @include middle {
@@ -272,7 +275,10 @@
                         .title {
                             font-size: $fs_s + 1;
                             margin-top: 1em;
-
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            overflow: hidden;
                             @include middle {
                                 font-size: $fs_m - 2;
                             }
@@ -281,13 +287,26 @@
                                 font-size: $fs_s - 1;
                             }
                         }
-                    }
-                    a {
-                        font-size: $fs_s;
-                        line-height: $fs_s + 5;
-                        color: $point_color9;
-                        @include small {
-                            font-size: $fs_s - 3;
+                        .text {
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            overflow: hidden;
+                        }
+                        a {
+                            line-height: $fs_s + 5;
+                            color: $point_color9;
+                            -o-transition: .3s all;
+                            -moz-transition: .3s all;
+                            -webkit-transition: .3s all;
+                            transition: .3s all;
+                            visibility: hidden;
+                        }
+                        .text, a {
+                            font-size: $fs_s;
+                            @include small {
+                                font-size: $fs_s - 3;
+                            }
                         }
                     }
                 }
