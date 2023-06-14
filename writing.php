@@ -46,8 +46,17 @@ if (filter_input(INPUT_GET, 'd_flag') === 'true') {
 $item = null;
 if ($base === 'blog' && isset($_SESSION['blog'])) {
     $item = unserialize($_SESSION['blog']);
+    $title = $item->title;
+    $text = $item->text;
 } elseif ($base === 'works' && isset($_SESSION['work'])) {
     $item = unserialize($_SESSION['work']);
+    $title = $item->title;
+    $text = $item->text;
+    $skill = $item->skill;
+    $link1 = $item->link1;
+    $link_text1 = $item->link_text1;
+    $link2 = $item->link2;
+    $link_text2 = $item->link_text2;
 }
 
 
@@ -65,6 +74,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
     }
 
     $img = '';
+    $img_result = null;
     if (mb_strlen($_FILES['img']['name']) > 0) {
         $filename = $_FILES['img']['name'];
         $upload_path = './upload/' . $filename;
@@ -72,42 +82,39 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
         if ($upload_result) {
             $img = Utils::h($filename);
         } else {
-            print '画像のアップロードに失敗しました。<br>';
-            print '<a href="' . $return_url . '">投稿画面へ</a>';
-            exit();
+            $img_result = '画像のアップロードに失敗しました。';
         }
     }
 
-
-
     // バリデート
     $result_arr = [];
-    $title_result = Validate::validate100BlankNG($title, 'タイトル');
-    $text_result = Validate::validate400BlankNG($text, '本文');
-    array_push($result_arr, $title_result, $text_result);
+    $title_result = Validate::validateBlankNG($title, 'タイトル', 100);
+    $text_result = Validate::validateBlankNG($text, '本文', 400);
+    array_push($result_arr, $title_result, $text_result, $img_result);
     if ($base === 'works') {
-        $skill_result = Validate::validate100BlankNG($skill, '使用スキル');
-        $link1_result = Validate::validate100BlankOK($link1, 'リンク1');
-        $link_text1_result = Validate::validate100BlankOK($link_text1, 'リンク1テキスト');
-        $link2_result = Validate::validate100BlankOK($link2, 'リンク2');
-        $link_text2_result = Validate::validate100BlankOK($link_text2, 'リンク2テキスト');
+        $skill_result = Validate::validateBlankNG($skill, '使用スキル', 100);
+        $link1_result = Validate::validateBlankOK($link1, 'リンク1', 100);
+        $link_text1_result = Validate::validateBlankOK($link_text1, 'リンク1テキスト', 100);
+        $link2_result = Validate::validateBlankOK($link2, 'リンク2', 100);
+        $link_text2_result = Validate::validateBlankOK($link_text2, 'リンク2テキスト', 100);
         array_push($result_arr, $skill_result, $link1_result, $link_text1_result, $link2_result, $link_text2_result);
     }
-    foreach ($result_arr as $result) {
-        Validate::validateResultProcessing($result, $return_url);
-    }
 
-    if ($base === 'blog') {
-        date_default_timezone_set('Asia/Tokyo');
-        $create_time = date('Y-m-d H:i:s');
-        $blog = new blogClass($title, $text, $img, $create_time);
-        $_SESSION['blog'] = serialize($blog);
-    } elseif ($base === 'works') {
-        $works = new worksClass($title, $text, $skill, $link1, $link_text1, $link2, $link_text2, $img);
-        $_SESSION['work'] = serialize($works);
+    // 全ての結果が空ならtrue（すべてのバリデートがOKの場合）
+    $last_result = Validate::validateResultProcessing($result_arr);
+    if ($last_result) {
+        if ($base === 'blog') {
+            date_default_timezone_set('Asia/Tokyo');
+            $create_time = date('Y-m-d H:i:s');
+            $blog = new blogClass($title, $text, $img, $create_time);
+            $_SESSION['blog'] = serialize($blog);
+        } elseif ($base === 'works') {
+            $works = new worksClass($title, $text, $skill, $link1, $link_text1, $link2, $link_text2, $img);
+            $_SESSION['work'] = serialize($works);
+        }
+        header('Location: confirm.php?base=' . $base . '&from=' . $from);
+        exit();
     }
-    header('Location: confirm.php?base=' . $base . '&from=' . $from);
-    exit();
 }
 
 ?>
@@ -139,7 +146,10 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <p>タイトル(必須: 100文字以内)：</p>
                     <p><span id="char_title">0</span>/100</p>
                 </label>
-                <input id="title" type="text" name="title" maxlength="100" required value="<?= $item !== null ? $item->title : ''; ?>">
+                <?php if (!empty($title_result)) : ?>
+                    <span class="err_msg"><?= $title_result; ?></span>
+                <?php endif; ?>
+                <input id="title" type="text" name="title" maxlength="100" required value="<?= !empty($title) ? $title : ''; ?>">
             </div>
             <?php if ($base === 'works') : ?>
                 <div class="input">
@@ -147,7 +157,10 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                         <p>使用スキル(必須: 100文字以内)：</p>
                         <p><span id="char_skill">0</span>/100</p>
                     </label>
-                    <input id="skill" type="text" name="skill" maxlength="100" required value="<?= $item !== null ? $item->skill : ''; ?>">
+                    <?php if (!empty($skill_result)) : ?>
+                        <span class="err_msg"><?= $skill_result; ?></span>
+                    <?php endif; ?>
+                    <input id="skill" type="text" name="skill" maxlength="100" required value="<?= !empty($skill) ? $skill : ''; ?>">
                 </div>
             <?php endif; ?>
             <div class="input">
@@ -155,7 +168,10 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <p>内容(必須: 400文字以内)：</p>
                     <p><span id="char_text">0</span>/400</p>
                 </label>
-                <textarea id="text" name="text" maxlength="400" required><?= $item !== null ? $item->text : ''; ?></textarea>
+                <?php if (!empty($text_result)) : ?>
+                    <span class="err_msg"><?= $text_result; ?></span>
+                <?php endif; ?>
+                <textarea id="text" name="text" maxlength="400" required><?= !empty($text) ? $text : ''; ?></textarea>
             </div>
 
             <?php if ($base === 'works') : ?>
@@ -164,29 +180,44 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                         <p>リンク① テキスト(100文字以内)：</p>
                         <p><span id="char_link_text1">0</span>/100</p>
                     </label>
-                    <input id="link_text1" type="text" name="link_text1" maxlength="100" value="<?= $item !== null ? $item->link_text1 : ''; ?>">
+                    <?php if (!empty($link_text1_result)) : ?>
+                        <span class="err_msg"><?= $link_text1_result; ?></span>
+                    <?php endif; ?>
+                    <input id="link_text1" type="text" name="link_text1" maxlength="100" value="<?= !empty($link_text1) ? $link_text1 : ''; ?>">
                     <label for="link1">
                         <p>リンク① URL(100文字以内)：</p>
                         <p><span id="char_link1">0</span>/100</p>
                     </label>
-                    <input id="link1" type="text" name="link1" maxlength="100" value="<?= $item !== null ? $item->link1 : ''; ?>">
+                    <?php if (!empty($link1_result)) : ?>
+                        <span class="err_msg"><?= $link1_result; ?></span>
+                    <?php endif; ?>
+                    <input id="link1" type="text" name="link1" maxlength="100" value="<?= !empty($link1) ? $link1 : ''; ?>">
                 </div>
                 <div class="input link_set">
                     <label for="link_text2">
                         <p>リンク② テキスト(100文字以内)：</p>
                         <p><span id="char_link_text2">0</span>/100</p>
                     </label>
-                    <input id="link_text2" type="text" name="link_text2" maxlength="100" value="<?= $item !== null ? $item->link_text2 : ''; ?>">
+                    <?php if (!empty($link_text2_result)) : ?>
+                        <span class="err_msg"><?= $link_text2_result; ?></span>
+                    <?php endif; ?>
+                    <input id="link_text2" type="text" name="link_text2" maxlength="100" value="<?= !empty($link_text2) ? $link_text2 : ''; ?>">
                     <label for="link2">
                         <p>リンク② URL(100文字以内)：</p>
                         <p><span id="char_link2">0</span>/100</p>
                     </label>
-                    <input id="link2" type="text" name="link2" maxlength="100" value="<?= $item !== null ? $item->link2 : ''; ?>">
+                    <?php if (!empty($link2_result)) : ?>
+                        <span class="err_msg"><?= $link2_result; ?></span>
+                    <?php endif; ?>
+                    <input id="link2" type="text" name="link2" maxlength="100" value="<?= !empty($link2) ? $link2 : ''; ?>">
                 </div>
             <?php endif; ?>
 
             <div class="img">
                 <span class="img_span">画像(<?= $base === 'blog' ? '任意' : '必須'; ?>)<br class="sp_br"><span class="img_ctn">(.jpg, .jpeg, .gif画像のみ(1MB以内))</span>：</span>
+                <?php if (!empty($img_result)) : ?>
+                    <span class="err_msg"><?= $img_result; ?></span>
+                <?php endif; ?>
                 <input id="file" type="file" name="img" accept=".jpg, .jpeg, .gif" <?= $base === 'works' ? 'required' : ''; ?>>
             </div>
             <div class="preview">

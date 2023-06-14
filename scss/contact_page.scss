@@ -28,6 +28,11 @@
                         color: $point_color5;
                     }
                 }
+                .err_msg {
+                    margin-left: 1em;
+                    margin-bottom: 10px;
+                    color: $point_color5;
+                }
                 input, textarea {
                     width: 70%;
                     padding: 10px 15px;

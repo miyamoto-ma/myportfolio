@@ -111,3 +111,13 @@
             }
     }
 }
+
+.err_msg {
+    display: block;
+    margin-left: 1em;
+    margin-bottom: 0.3em;
+    color: $point_color5;
+}
+.img .err_msg {
+    margin-top: .3em;
+}

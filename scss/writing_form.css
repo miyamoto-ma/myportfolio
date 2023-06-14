@@ -1,4 +1,9 @@
+html.hum_active {
+  overflow-y: hidden;
+}
+
 body {
+  font-family: "Merriweather", "Sawarabi Gothic", "Noto Sans JP", "Source Sans Pro", sans-serif, serif;
   color: #555;
 }
 
@@ -226,14 +231,6 @@ body {
 .btn_anime_inout:active::after {
   -webkit-animation-delay: 0.12s;
           animation-delay: 0.12s;
-}
-
-html.hum_active {
-  overflow-y: hidden;
-}
-
-body {
-  font-family: "Merriweather", "Sawarabi Gothic", "Noto Sans JP", "Source Sans Pro", sans-serif, serif;
 }
 
 .header {
@@ -624,5 +621,16 @@ body {
 .preview div img {
   width: 100%;
   margin: 0.5em 0 1.5em;
+}
+
+.err_msg {
+  display: block;
+  margin-left: 1em;
+  margin-bottom: 0.3em;
+  color: #ee8383;
+}
+
+.img .err_msg {
+  margin-top: 0.3em;
 }
 /*# sourceMappingURL=writing_form.css.map */

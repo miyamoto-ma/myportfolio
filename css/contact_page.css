@@ -537,6 +537,11 @@ body {
   margin-left: 10px;
   color: #ee8383;
 }
+.main .wrap .c_form .f_item .err_msg {
+  margin-left: 1em;
+  margin-bottom: 10px;
+  color: #ee8383;
+}
 .main .wrap .c_form .f_item input, .main .wrap .c_form .f_item textarea {
   width: 70%;
   padding: 10px 15px;
