@@ -95,4 +95,16 @@ GitHubでレポジトリを作成するときにREADME.mdやライセンスを�
 あとは
 	git push origin main
 
-https://github.com/miyamoto-ma/myportfolio.git
+
+「:=」は、MySQLにおける代入演算子です。これは、変数に値を代入するために使用されます。通常の等号（=）ではなく、代入演算子（:=）を使用することで、変数への値の割り当てが行われます。
+
+サーバー ⇒ Linux ⇒ 大文字と小文字を区別するらしい（Windowsはしない？）
+　⇒ SQL文でもきちんと区別して書かないとエラーになる。
+
+メール送信時、
+	「'\n'」とする⇒そのまま「\n」と表示される
+	「"\n"」とする⇒改行になる	...らしい。
+
+
+freemm_manabu
+PortMmEmarl0615

@@ -1,0 +1,13 @@
+.description {
+  margin-bottom: 2em;
+}
+
+.text p:nth-child(2) {
+  margin-top: 0.3em;
+  margin-left: 1em;
+}
+
+.btns {
+  margin-top: 3em;
+}
+/*# sourceMappingURL=contact_conf.css.map */

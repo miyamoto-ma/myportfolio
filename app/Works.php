@@ -44,7 +44,7 @@ class Works
     // worksの全てのデータを取得
     public static function getWorksAll($pdo)
     {
-        $sql = "SELECT id, user_id, title, skill, text, img, link1, link2, link_text1, link_text2 FROM WORKS ORDER BY id DESC";
+        $sql = "SELECT id, user_id, title, skill, text, img, link1, link2, link_text1, link_text2 FROM works ORDER BY id DESC";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $works = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -56,11 +56,18 @@ class Works
     {
         $start_row = ($current_page - 1) * $items_per_page;
         $end_row = $start_row + $items_per_page;
+        // $sql = "SELECT B.id, B.user_id, B.title, B.text, B.skill, B.img, B.link1, B.link2, B.link_text1, B.link_text2
+        //         FROM (SELECT * ,
+        //                     ROW_NUMBER() OVER (ORDER BY id DESC) RN
+        //                     FROM works) B
+        //                     WHERE B.RN > :start_row AND B.RN <= :end_row";
+        $pdo->query("SET @row_number := 0");
         $sql = "SELECT B.id, B.user_id, B.title, B.text, B.skill, B.img, B.link1, B.link2, B.link_text1, B.link_text2
-                FROM (SELECT * ,
-                            ROW_NUMBER() OVER (ORDER BY id DESC) RN
-                            FROM WORKS) B
-                            WHERE B.RN > :start_row AND B.RN <= :end_row";
+                FROM (
+                    SELECT * ,@row_number := @row_number + 1 AS RN
+                    FROM works ORDER BY id DESC
+                    ) AS B
+                    WHERE B.RN > :start_row AND B.RN <= :end_row";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue('start_row', $start_row, \PDO::PARAM_INT);
         $stmt->bindValue('end_row', $end_row, \PDO::PARAM_INT);
@@ -72,7 +79,7 @@ class Works
     // work1件分の情報を取得
     public static function getWork($pdo, $id)
     {
-        $sql = "SELECT id, user_id, title, skill, text, img, link1, link2, link_text1, link_text2 FROM WORKS WHERE id = :id";
+        $sql = "SELECT id, user_id, title, skill, text, img, link1, link2, link_text1, link_text2 FROM works WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue('id', $id, \PDO::PARAM_INT);
         $stmt->execute();
@@ -83,7 +90,7 @@ class Works
     // worksの総数を取得
     public static function getTotal($pdo)
     {
-        $sql = "SELECT COUNT(*) AS count FROM WORKS";
+        $sql = "SELECT COUNT(*) AS count FROM works";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $total = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -93,7 +100,7 @@ class Works
     // work1件分のユーザーIDを取得
     public static function getWorkUserId($pdo, $id)
     {
-        $sql = "SELECT user_id FROM WORKS WHERE id = :id";
+        $sql = "SELECT user_id FROM works WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue('id', $id, \PDO::PARAM_INT);
         $stmt->execute();
@@ -106,7 +113,7 @@ class Works
     // workの削除
     public static function deleteWork($pdo, $id)
     {
-        $sql = "DELETE FROM WORKS WHERE id = :id";
+        $sql = "DELETE FROM works WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue('id', $id, \PDO::PARAM_INT);
         $result = $stmt->execute();

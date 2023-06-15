@@ -7,6 +7,12 @@ use MySite\Validate;
 
 Token::createToken();
 
+// 戻るボタンで戻ってきた時のデータ取得
+if (isset($_SESSION["contact_data"])) {
+    $contact_data = $_SESSION["contact_data"];
+}
+
+
 if (filter_input(INPUT_GET, 'action') === 'confirm') {
     Token::validateToken();
     // フォームデータの取得

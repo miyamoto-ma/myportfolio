@@ -1,5 +1,7 @@
 <?php
 
+namespace MySite;
+
 // // テスト用のブログを追加するコード（使わないときはコメントアウトしておく）
 // require_once(__DIR__ . '/functions.php');
 
@@ -18,13 +20,16 @@
 // }
 
 
-
-// // ページネーションのブログが取得できたか確認
-// $pdo = getPDOInstance();
-// $blogs = getBlogsByPage($pdo, 1, 3);
-// foreach ($blogs as $blog) {
-//     var_dump($blog);
-// }
+require_once(__DIR__ . '/Database.php');
+require_once(__DIR__ . '/Blog.php');
+// ページネーションのブログが取得できたか確認
+$pdo = Database::getPDOInstance();
+var_dump($pdo);
+$blogs = Blog::getBlogsByPage($pdo, 1, 3);
+foreach ($blogs as $blog) {
+    print 'blog:<br>';
+    var_dump($blog);
+}
 
 // // ブログの総数が取得出来たか確認
 // $pdo = getPDOInstance();

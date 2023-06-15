@@ -55,7 +55,7 @@ if ($from === 'writing') {
     $action = 'update';
 }
 
-// セッションにitemがセットされていない場合
+// セッションにblogもしくはworkがセットされていない場合
 if (($base === 'blog' && !isset($_SESSION['blog'])) || ($base === 'works' && !isset($_SESSION['work']))) {
     print 'データが取得できませんでした。<br>';
     print '<a href="' . $back_url . '">戻る</a>';
@@ -149,7 +149,7 @@ if ($r_action !== null) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyPortfolioSite -Blog Login-</title>
+    <title>MyPortfolioSite -Confirm-</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
