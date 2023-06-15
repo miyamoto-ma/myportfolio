@@ -16,7 +16,7 @@
 
 
 
- $ cd c:\xampp\htdocs\ポートフォリオ2023
+ $ cd c:\xampp\htdocs\myportfolio2023
 
 
 Sass ⇒CSSへの変換
@@ -95,4 +95,4 @@ GitHubでレポジトリを作成するときにREADME.mdやライセンスを�
 あとは
 	git push origin main
 
-
+https://github.com/miyamoto-ma/myportfolio.git
