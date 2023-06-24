@@ -694,7 +694,7 @@ body {
   background-color: #e2faf6;
 }
 .main .works_wrap .works .work .contents a {
-  display: block;
+  display: inline-block;
   margin-top: .5em;
   color: #88bcb3;
 }

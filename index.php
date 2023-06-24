@@ -47,7 +47,13 @@ $blogs = Blog::getBlogsByPage($pdo, 1, $blogs_in_page);
                         <img src="./img/plant1.jpg" alt="">
                         <span class="parallax"></span>
                     </div>
-                    <p>自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。自己紹介テキスト。</p>
+                    <p>
+                        ようこそ、当サイトをご覧いただきまして、誠にありがとうございます。<br><br>
+                        当サイトは、ポートフォリオ用に作成しましたサイトです。<br><br>
+                        HTML, CSS, JavaScript, PHP, SQL(MariaDB)を使用し、リセットCSSとJavaScriptライブラリ以外は一からコーディングしています。<br><br>
+                        ネット上での公開となりますため、Aboutページの内容は簡易な紹介でございますが、応募の際の『履歴書』『職務経歴書』を併せてご確認いただけると幸いです。<br><br>
+                        何卒よろしくお願いいたします。
+                    </p>
                 </div>
 
                 <div class="h_about2 h_about">
@@ -55,7 +61,40 @@ $blogs = Blog::getBlogsByPage($pdo, 1, $blogs_in_page);
                         <img src="./img/plant2.jpg" alt="">
                         <span class="parallax"></span>
                     </div>
-                    <p>簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。簡単な説明文。</p>
+                    <table>
+                        <tr>
+                            <th>Home：</th>
+                            <td>
+                                このページです。<br>
+                                最新のWorksやBlogを抜粋して掲載しています。
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>About：</th>
+                            <td>
+                                自己紹介ページです。<br>
+                                簡単な紹介とスキルを掲載しています。
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Works：</th>
+                            <td>
+                                プログラミングを使用して作成したものを掲載しています。
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Blog：</th>
+                            <td>
+                                日々のプログラミングの気づきや進捗などを掲載したブログです。
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contact：</th>
+                            <td>
+                                お問い合わせのページです。
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <a class="to_about h_btn btn1 btn_anime_inout" href="./about.php">More</a>
             </div>
@@ -95,7 +134,7 @@ $blogs = Blog::getBlogsByPage($pdo, 1, $blogs_in_page);
                 <ul id="blog_slider" class="home_blog " ontouchstart="">
                     <?php foreach ($blogs as $blog) : ?>
                         <li class="home_blog_item">
-                            <div class="blog_img" style="background-image: url('./upload/<?= $blog["img"] !== '' ? $blog["img"] : "dummy.jpg"; ?>')"></div>
+                            <div class="blog_img" style="background-image: url('./upload/<?= $blog["img"] !== '' ? $blog["img"] : "dummy1.jpeg"; ?>')"></div>
                             <div class="over_text">
                                 <p class="title"><?= $blog["title"]; ?></p>
                                 <p class="text"><?= $blog["text"]; ?></p>

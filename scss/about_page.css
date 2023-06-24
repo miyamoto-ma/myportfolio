@@ -1,4 +1,9 @@
+html.hum_active {
+  overflow-y: hidden;
+}
+
 body {
+  font-family: "Merriweather", "Sawarabi Gothic", "Noto Sans JP", "Source Sans Pro", sans-serif, serif;
   color: #555;
 }
 
@@ -226,14 +231,6 @@ body {
 .btn_anime_inout:active::after {
   -webkit-animation-delay: 0.12s;
           animation-delay: 0.12s;
-}
-
-html.hum_active {
-  overflow-y: hidden;
-}
-
-body {
-  font-family: "Merriweather", "Sawarabi Gothic", "Noto Sans JP", "Source Sans Pro", sans-serif, serif;
 }
 
 .header {
@@ -514,7 +511,7 @@ body {
 }
 
 .main {
-  font-size: 20px;
+  font-size: 18px;
 }
 .main .about:last-child {
   margin-bottom: 15vw;
@@ -539,11 +536,12 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  box-shadow: inset 0 0 5px 5px white;
+  box-shadow: inset 0 0 10px 10px white;
 }
 .main .about_1_wrap .about_1_content .shadow img {
   width: 100%;
   border-radius: 50%;
+  border: 3px solid white;
 }
 @media (max-width: 768px) {
   .main .about_1_wrap .about_1_content .shadow {
@@ -557,7 +555,7 @@ body {
   width: 50%;
   padding: 3%;
   margin-left: 3%;
-  line-height: 1.3em;
+  line-height: 1.4em;
   box-sizing: border-box;
 }
 @media (max-width: 1024px) {

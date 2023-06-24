@@ -7,7 +7,7 @@ class Works
     // workの追加
     public static function addWork($pdo, $user_id, $title, $skill, $text, $img, $link1, $link2, $link_text1, $link_text2)
     {
-        $sql = "INSERT INTO WORKS (user_id, title, skill, text, img, link1, link2, link_text1, link_text2) VALUES (:user_id, :title, :skill, :text, :img, :link1, :link2, :link_text1, :link_text2)";
+        $sql = "INSERT INTO works (user_id, title, skill, text, img, link1, link2, link_text1, link_text2) VALUES (:user_id, :title, :skill, :text, :img, :link1, :link2, :link_text1, :link_text2)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue('user_id', $user_id, \PDO::PARAM_INT);
         $stmt->bindValue('title', $title, \PDO::PARAM_STR);
@@ -26,7 +26,7 @@ class Works
     public static function
     editWork($pdo, $id, $title, $skill, $text, $img, $link1, $link2, $link_text1, $link_text2)
     {
-        $sql = "UPDATE WORKS SET title = :title, skill = :skill, text = :text, img = :img, link1=:link1, link2 = :link2, link_text1 = :link_text1, link_text2 = :link_text2 WHERE id = :id";
+        $sql = "UPDATE works SET title = :title, skill = :skill, text = :text, img = :img, link1=:link1, link2 = :link2, link_text1 = :link_text1, link_text2 = :link_text2 WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue('title', $title, \PDO::PARAM_STR);
         $stmt->bindValue('skill', $skill, \PDO::PARAM_STR);

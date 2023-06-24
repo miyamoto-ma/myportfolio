@@ -96,12 +96,13 @@ $data = $page_ins->itemsByPage();
                                     <span><?= $work["skill"]; ?></span>
                                 </p>
                                 <p class="description">
-                                    <?= $work["text"]; ?>
+                                    <?= nl2br($work["text"]); ?>
                                 </p>
                                 <?php if ($work["link1"] !== '') : ?>
                                     <a href="<?= $work["link1"]; ?>" target="_blank"><?= $work["link_text1"]; ?></a>
                                 <?php endif; ?>
                                 <?php if ($work["link2"] !== '') : ?>
+                                    <br>
                                     <a href="<?= $work["link2"]; ?>" target="_blank"><?= $work["link_text2"]; ?></a>
                                 <?php endif; ?>
                                 <div class="blog_etc">

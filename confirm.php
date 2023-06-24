@@ -180,7 +180,7 @@ if ($r_action !== null) {
                 </div>
             <?php endif; ?>
             <div class="text">
-                <p><?= $text; ?></p>
+                <p><?= nl2br($text); ?></p>
             </div>
             <?php if ($base === 'works') : ?>
                 <?php if ($link1 !== '') : ?>

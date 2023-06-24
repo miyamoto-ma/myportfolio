@@ -7,10 +7,10 @@ use MySite\Validate;
 
 Token::createToken();
 
-// 戻るボタンで戻ってきた時のデータ取得
-if (isset($_SESSION["contact_data"])) {
-    $contact_data = $_SESSION["contact_data"];
-}
+// // 戻るボタンで戻ってきた時のデータ取得
+// if (isset($_SESSION["contact_data"])) {
+//     $contact_data = $_SESSION["contact_data"];
+// }
 
 
 if (filter_input(INPUT_GET, 'action') === 'confirm') {
@@ -91,7 +91,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <?php if (!empty($name_result)) : ?>
                         <span class="err_msg"><?= $name_result; ?></span>
                     <?php endif; ?>
-                    <input type="text" class="name" name="name" maxlength="100" required value="<?= !empty($contact_data["name"]) ? $contact_data["name"] : ''; ?>">
+                    <input type="text" class="name input_c" name="name" maxlength="100" required value="<?= !empty($contact_data["name"]) ? $contact_data["name"] : ''; ?>">
                 </div>
 
                 <div class="f_kana f_item">
@@ -102,7 +102,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <?php if (!empty($kana_result)) : ?>
                         <span class="err_msg"><?= $kana_result; ?></span>
                     <?php endif; ?>
-                    <input type="text" class="kana" name="kana" maxlength="100" required value="<?= !empty($contact_data["kana"]) ? $contact_data["kana"] : ''; ?>">
+                    <input type="text" class="kana input_c" name="kana" maxlength="100" required value="<?= !empty($contact_data["kana"]) ? $contact_data["kana"] : ''; ?>">
                 </div>
 
                 <div class="f_company f_item">
@@ -112,7 +112,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <?php if (!empty($company_result)) : ?>
                         <span class="err_msg"><?= $company_result; ?></span>
                     <?php endif; ?>
-                    <input type="text" class="company" name="company" maxlength="100" value="<?= !empty($contact_data["company"]) ? $contact_data["company"] : ''; ?>">
+                    <input type="text" class="company input_c" name="company" maxlength="100" value="<?= !empty($contact_data["company"]) ? $contact_data["company"] : ''; ?>">
                 </div>
 
                 <div class="f_mail f_item">
@@ -123,7 +123,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <?php if (!empty($mail_result)) : ?>
                         <span class="err_msg"><?= $mail_result; ?></span>
                     <?php endif; ?>
-                    <input type="email" class="mail" name="mail" maxlength="100" required value="<?= !empty($contact_data["mail"]) ? $contact_data["mail"] : ''; ?>">
+                    <input type="email" class="mail input_c" name="mail" maxlength="100" required value="<?= !empty($contact_data["mail"]) ? $contact_data["mail"] : ''; ?>">
                 </div>
 
                 <div class="f_tel f_item">
@@ -134,7 +134,7 @@ if (filter_input(INPUT_GET, 'action') === 'confirm') {
                     <?php if (!empty($tel_result)) : ?>
                         <span class="err_msg"><?= $tel_result; ?></span>
                     <?php endif; ?>
-                    <input type="tel" class="tel" name="tel" maxlength="30" required value="<?= !empty($contact_data["tel"]) ? $contact_data["tel"] : ''; ?>">
+                    <input type="tel" class="tel input_c" name="tel" maxlength="30" required value="<?= !empty($contact_data["tel"]) ? $contact_data["tel"] : ''; ?>">
                 </div>
 
                 <div class="f_contents f_item">

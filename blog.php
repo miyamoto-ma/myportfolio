@@ -93,7 +93,7 @@ $data = $page_ins->itemsByPage();
                                 </div>
                             <?php endif; ?>
                             <div class="blog_content">
-                                <?= $blog["text"]; ?>
+                                <?= nl2br($blog["text"]); ?>
                             </div>
                             <div class="blog_etc">
                                 <p class="date"><?= $blog["create_time"]; ?></p>

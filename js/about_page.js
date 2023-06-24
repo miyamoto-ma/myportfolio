@@ -7,7 +7,7 @@
     const shadow = document.getElementById('shadow');
     const img = shadow.children[0];
     function adjust_height() {
-        let img_height = img.clientHeight;
+        let img_height = img.offsetHeight;
         shadow.style.height = img_height + 'px';
     }
     window.addEventListener('DOMContentLoaded', () => { adjust_height(); });
@@ -27,7 +27,7 @@
             datasets: [
                 {
                     //グラフのデータ(上から時計回り)
-                    data: [3.5, 4, 3.5, 3, 2.5, 3],
+                    data: [4, 4, 4, 2.5, 3.5, 3.5],
                     //グラフ全体のラベル
                     label: "Skills",
                     //背景色

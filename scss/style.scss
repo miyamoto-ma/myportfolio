@@ -29,7 +29,7 @@
     .home_about {
         .home_about_wrap {
             .h_about {
-                margin-bottom: $space_80;
+                margin-bottom: $space_100;
                 display: flex;
                 justify-content: center;
                 gap: 5%;
@@ -74,19 +74,22 @@
                         right: -25px;
                     }
                 }
-                p {
+                p, table {
                     width: 50%;
                     line-height: 1.4em;
-                    font-size: $fs_m;
+                    font-size: $fs_m - 2;
                     @include middle {
                         font-size: $fs_m - 2;
                     }
                     @include small {
                         display: block;
-                        width: 90%;
+                        width: min(90%, 500px);
                         margin: 0 auto;
                         font-size: $fs_s;
                     }
+                }
+                td {
+                    padding-left: .5em;
                 }
             }
             .h_about2 {

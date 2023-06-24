@@ -1,4 +1,9 @@
+html.hum_active {
+  overflow-y: hidden;
+}
+
 body {
+  font-family: "Merriweather", "Sawarabi Gothic", "Noto Sans JP", "Source Sans Pro", sans-serif, serif;
   color: #555;
 }
 
@@ -226,14 +231,6 @@ body {
 .btn_anime_inout:active::after {
   -webkit-animation-delay: 0.12s;
           animation-delay: 0.12s;
-}
-
-html.hum_active {
-  overflow-y: hidden;
-}
-
-body {
-  font-family: "Merriweather", "Sawarabi Gothic", "Noto Sans JP", "Source Sans Pro", sans-serif, serif;
 }
 
 .header {
@@ -527,7 +524,7 @@ body {
 }
 
 .main .home_about .home_about_wrap .h_about {
-  margin-bottom: 80px;
+  margin-bottom: 100px;
   display: flex;
   justify-content: center;
   gap: 5%;
@@ -579,23 +576,26 @@ body {
 .main .home_about .home_about_wrap .h_about .h_img.h_img2 .parallax {
   right: -25px;
 }
-.main .home_about .home_about_wrap .h_about p {
+.main .home_about .home_about_wrap .h_about p, .main .home_about .home_about_wrap .h_about table {
   width: 50%;
   line-height: 1.4em;
-  font-size: 20px;
+  font-size: 18px;
 }
 @media (max-width: 1024px) {
-  .main .home_about .home_about_wrap .h_about p {
+  .main .home_about .home_about_wrap .h_about p, .main .home_about .home_about_wrap .h_about table {
     font-size: 18px;
   }
 }
 @media (max-width: 768px) {
-  .main .home_about .home_about_wrap .h_about p {
+  .main .home_about .home_about_wrap .h_about p, .main .home_about .home_about_wrap .h_about table {
     display: block;
-    width: 90%;
+    width: min(90%, 500px);
     margin: 0 auto;
     font-size: 15px;
   }
+}
+.main .home_about .home_about_wrap .h_about td {
+  padding-left: 0.5em;
 }
 .main .home_about .home_about_wrap .h_about2 {
   flex-direction: row-reverse;

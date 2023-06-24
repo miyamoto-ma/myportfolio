@@ -44,7 +44,9 @@ if (filter_input(INPUT_GET, 'action') === 'submit') {
         . "回答の準備が出来次第、メール(" . $mail . ")にて返信させていただきますので、今しばらくお待ち下さいませ。\n\n\n"
         . $sepa2 . "\n"
         . NAME . "(" . KANA . ")\n"
-        . "Email: " . EMAIL1 . "\n"
+        . "Email: " . EMAIL1 . "\n\n"
+        . "サイト名：" . SITENAME . "\n"
+        . "URL：" . SITEURL . "\n"
         . $sepa2;
 
     // 返信メールのパーツ
@@ -61,7 +63,9 @@ if (filter_input(INPUT_GET, 'action') === 'submit') {
         . "■ 名前：" . $name . "(" . $kana . ")" . "\n"
         . "■ Email：" . $mail . "\n"
         . "■ Tel：" . $tel . "\n"
-        . $sepa1 . "\n";
+        . $sepa1 . "\n\n"
+        . "サイト名：" . SITENAME . "\n"
+        . "URL：" . SITEURL;
 
     // 自分へのメールのパーツ
     $title = '【要確認！】問い合わせが入っています。';
