@@ -150,7 +150,7 @@ if (filter_input(INPUT_GET, 'action') === 'submit') {
                 <div class="btn btn1 h_btn btn_anime_inout">
                     <input type="submit" name="submit" value="送信">
                 </div>
-                <a class="btn btn1 h_btn btn_anime_inout" href="contact.php">戻る</a>
+                <a class="btn btn1 h_btn btn_anime_inout" href="contact.php?from=c_conf">戻る</a>
         </form>
     </div>
 </body>

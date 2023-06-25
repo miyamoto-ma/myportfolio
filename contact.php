@@ -8,9 +8,11 @@ use MySite\Validate;
 Token::createToken();
 
 // // 戻るボタンで戻ってきた時のデータ取得
-// if (isset($_SESSION["contact_data"])) {
-//     $contact_data = $_SESSION["contact_data"];
-// }
+if (isset($_SESSION["contact_data"]) && filter_input(INPUT_GET, 'from') === 'c_conf') {
+    $contact_data = $_SESSION["contact_data"];
+} else {
+    unset($_SESSION["contact_data"]);
+}
 
 
 if (filter_input(INPUT_GET, 'action') === 'confirm') {

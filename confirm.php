@@ -86,6 +86,8 @@ if ($from === 'writing' || $r_action === 'add') {
 } elseif ($from === 'edit' || $r_action === 'update') {
     if (filter_input(INPUT_GET, 'check') === 'on') {
         $img = $item->new_img;
+    } elseif (filter_input(INPUT_POST, 'img') !== null) {
+        $img = filter_input(INPUT_POST, 'img');
     } elseif (mb_strlen($item->img) > 0) {
         $img = $item->img;
     }
@@ -201,6 +203,9 @@ if ($r_action !== null) {
                 <div class="create_time">
                     <p><?= $create_time; ?></p>
                 </div>
+            <?php endif; ?>
+            <?php if (filter_input(INPUT_GET, 'check') === 'on') : ?>
+                <input type="hidden" name="img" value="<?= Utils::h($img); ?>">
             <?php endif; ?>
             <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']); ?>">
             <div class="btns">
